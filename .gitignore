@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# GCAI
+01_message.txt
+01_prompt.txt
+
