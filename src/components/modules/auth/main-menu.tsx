@@ -111,13 +111,8 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 			<div className="min-h-full w-2/3 flex items-center justify-center px-4">
 				<div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto w-full">
 					{tiles.map((t) => {
-						const isInicio = t.key === "inicio";
 						// Deshabilitar tiles si no hay turno activo, excepto "INICIO"
-						const disabled =
-							!isTurnActive &&
-							!isInicio &&
-							!t.key.includes("utilidades-disabled") &&
-							!t.key.includes("inicio");
+						const disabled = !isTurnActive && !t.key.includes("inicio");
 						return (
 							<MenuTile
 								key={t.key}
