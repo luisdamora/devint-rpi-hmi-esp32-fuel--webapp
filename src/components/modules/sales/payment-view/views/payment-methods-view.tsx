@@ -107,9 +107,10 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center px-2">
-				<div className="grid grid-cols-4 gap-4 w-full max-w-6xl">
+				{/* <div className="grid grid-cols-4 gap-4 w-full max-w-6xl"> */}
+				<div className="w-full max-w-6xl">
 					{/* Columna 1: Navegación lateral */}
-					<div className="col-span-1 flex flex-col gap-6 self-start pt-8">
+					{/* <div className="col-span-1 flex flex-col gap-6 self-start pt-8">
 						<SideTile
 							title="VENTAS"
 							icon={<DollarSign size={64} />}
@@ -120,12 +121,12 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 							icon={<Home size={64} />}
 							onClick={() => navigateTo("menu")}
 						/>
-					</div>
+					</div> */}
 
 					{/* Columnas 2-4: Métodos de pago */}
 					<div className="col-span-3 space-y-6 overflow-y-auto max-h-screen pb-8">
 						{/* Encabezado de la vista */}
-						<div className="text-center space-y-2">
+						{/* <div className="text-center space-y-2">
 							<h1 className="text-3xl font-bold text-gray-800">
 								Métodos de Pago
 							</h1>
@@ -133,7 +134,7 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 								Paso 2 de 2: Configure los métodos de pago y complete la
 								transacción
 							</p>
-						</div>
+						</div> */}
 
 						{/* Información del cliente (resumen) */}
 						<div className="bg-blue-50 rounded-lg p-4 border-2 border-blue-200">
@@ -141,19 +142,24 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 								<div className="flex-1">
 									<p className="text-sm text-gray-600">
 										<strong>Vehículo:</strong>{" "}
-										{sharedFormData?.placa || formData.placa || "No especificado"}
+										{sharedFormData?.placa ||
+											formData.placa ||
+											"No especificado"}
 									</p>
 									<p className="text-sm text-gray-600">
-										<strong>Modo:</strong> {sharedFormData?.mode || formData.mode}
+										<strong>Modo:</strong>{" "}
+										{sharedFormData?.mode || formData.mode}
 									</p>
 									{sharedFormData?.idFacturaElectronica && (
 										<p className="text-sm text-gray-600">
-											<strong>Factura:</strong> {sharedFormData.idFacturaElectronica}
+											<strong>Factura:</strong>{" "}
+											{sharedFormData.idFacturaElectronica}
 										</p>
 									)}
 									{sharedFormData?.idPuntosColombia && (
 										<p className="text-sm text-gray-600">
-											<strong>Puntos Colombia:</strong> {sharedFormData.idPuntosColombia}
+											<strong>Puntos Colombia:</strong>{" "}
+											{sharedFormData.idPuntosColombia}
 										</p>
 									)}
 									{sharedFormData?.hasCoupon && sharedFormData?.idPromocion && (
