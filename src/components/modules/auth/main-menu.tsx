@@ -10,13 +10,17 @@ import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { useMenuTheme } from "@/lib/hooks/use-ui-store-helpers";
 
 interface MainMenuProps {
 	turnActive?: boolean;
 }
 
-export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
+export const MainMenu: React.FC<MainMenuProps> = ({ turnActive: _deprecated }) => {
 	const { navigateTo } = useHMINavigation();
+	
+	// Obtener estado del store global
+	const { borderColor, isTurnActive } = useMenuTheme();
 
 	// Reusable Tile component
 	const MenuTile: React.FC<{
@@ -31,11 +35,11 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 			onClick={disabled ? undefined : onClick}
 			aria-label={ariaLabel ?? title}
 			className={
-				"group relative rounded-md border-2 p-3 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform select-none " +
+				"group relative rounded-md border-2 p-3 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200 select-none " +
 				"" +
 				(disabled ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02]")
 			}
-			style={{ borderColor: "#EF4444", backgroundColor: "transparent" }}
+			style={{ borderColor, backgroundColor: "transparent" }}
 			disabled={disabled}
 		>
 			<div
@@ -47,8 +51,8 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 				}}
 			>
 				<span
-					className="inline-block px-4"
-					style={{ backgroundColor: "#EF4444", borderRadius: 4 }}
+					className="inline-block px-4 transition-colors duration-200"
+					style={{ backgroundColor: borderColor, borderRadius: 4 }}
 				>
 					{title}
 				</span>
@@ -106,8 +110,9 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 				<div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto w-full">
 					{tiles.map((t) => {
 						const isInicio = t.key === "inicio";
+						// Deshabilitar tiles si no hay turno activo, excepto "INICIO"
 						const disabled =
-							!turnActive &&
+							!isTurnActive &&
 							!isInicio &&
 							!t.key.includes("utilidades-disabled") &&
 							!t.key.includes("inicio");
