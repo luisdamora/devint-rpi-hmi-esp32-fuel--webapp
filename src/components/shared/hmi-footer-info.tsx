@@ -7,6 +7,8 @@ interface HMIFooterInfoProps {
 	style?: React.CSSProperties;
 	/** Si es true, usa fondo primario del theme; si es false, sin fondo */
 	primaryBg?: boolean;
+	/** Color del texto */
+	textColor?: "white" | "black";
 }
 
 /**
@@ -18,6 +20,7 @@ export const HMIFooterInfo: React.FC<HMIFooterInfoProps> = ({
 	className,
 	style,
 	primaryBg = false,
+	textColor = "white",
 }) => {
 	const backgroundStyle: React.CSSProperties = primaryBg
 		? { backgroundColor: NEXUS_COLORS.background.main }
@@ -25,7 +28,8 @@ export const HMIFooterInfo: React.FC<HMIFooterInfoProps> = ({
 	// const textColor = primaryBg
 	// 	? NEXUS_COLORS.white
 	// 	: NEXUS_COLORS.background.dark;
-	const textColor = NEXUS_COLORS.white;
+	const textColorStyle =
+		textColor === "white" ? NEXUS_COLORS.white : NEXUS_COLORS.black;
 
 	return (
 		<div
@@ -34,7 +38,7 @@ export const HMIFooterInfo: React.FC<HMIFooterInfoProps> = ({
 		>
 			<div
 				className="flex items-center justify-center gap-8 text-sm"
-				style={{ color: textColor }}
+				style={{ color: textColorStyle }}
 			>
 				<span>✉ soporte@vpmnexus.com</span>
 				<span>🌐 www.vpmnexus.com</span>

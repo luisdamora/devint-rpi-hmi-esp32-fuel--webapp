@@ -55,7 +55,7 @@ export const SplashScreen: React.FC = () => {
 				{/* Fondo NO primario en splash */}
 				{/** Using shared HMIFooterInfo for consistency */}
 				{/* eslint-disable-next-line react/jsx-no-undef */}
-				<HMIFooterInfo primaryBg={false} />
+				<HMIFooterInfo primaryBg={false} textColor="black" />
 			</div>
 		</div>
 	);

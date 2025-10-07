@@ -1,3 +1,11 @@
+import {
+	ArrowDownCircle,
+	Calendar,
+	CreditCard,
+	Home,
+	Settings,
+	Star,
+} from "lucide-react";
 import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
 import { NEXUS_COLORS } from "@/lib/config/theme";
@@ -57,34 +65,39 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 		{
 			key: "turnos",
 			title: "TURNOS",
-			icon: "📅",
+			icon: <Calendar size={64} />,
 			action: () => navigateTo("close-turn"),
 		},
 		{
 			key: "contado",
 			title: "CONTADO",
-			icon: "⬇️",
+			icon: <ArrowDownCircle size={64} />,
 			action: () => navigateTo("keypad"),
 		},
 		{
 			key: "credito",
 			title: "CREDITO",
-			icon: "💳",
+			icon: <CreditCard size={64} />,
 			action: () => navigateTo("payment"),
 		},
 		{
 			key: "inicio",
 			title: "INICIO",
-			icon: "🏠",
+			icon: <Home size={64} />,
 			action: () => navigateTo("login"),
 		},
 		{
 			key: "fidelizacion",
 			title: "FIDELIZACION",
-			icon: "🅿️",
+			icon: <Star size={64} />,
 			action: () => navigateTo("loyalty"),
 		},
-		{ key: "utilidades", title: "UTILIDADES", icon: "⚙️", action: undefined },
+		{
+			key: "utilidades",
+			title: "UTILIDADES",
+			icon: <Settings size={64} />,
+			action: undefined,
+		},
 	] as const;
 
 	return (
