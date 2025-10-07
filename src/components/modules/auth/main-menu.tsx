@@ -1,4 +1,5 @@
 import React from "react";
+import { HMIContainer } from "@/components/layout/hmi-container";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { cn } from "@/lib/utils";
@@ -88,12 +89,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 	] as const;
 
 	return (
-		<div
-			className={cn(
-				"w-full h-full px-4",
-				`bg-[${NEXUS_COLORS.background.main}]`,
-			)}
-		>
+		<HMIContainer>
 			<div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
 				{tiles.map((t) => {
 					const isInicio = t.key === "inicio";
@@ -114,6 +110,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 					);
 				})}
 			</div>
-		</div>
+		</HMIContainer>
 	);
 };
