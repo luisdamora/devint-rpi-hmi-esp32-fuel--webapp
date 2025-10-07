@@ -3,23 +3,22 @@
  * Exporta el store y todas las utilidades necesarias
  */
 
-// Store principal
-export { useUIStore, uiStoreSelectors } from './ui-store/ui-store';
+// Constantes
+export { initialState, MENU_COLORS } from "./ui-store/state";
 
 // Tipos
 export type {
-	UIStore,
-	UIStoreState,
-	SessionState,
-	UIState,
-	TurnState,
-	SessionActions,
-	UIActions,
-	ResetActions,
 	Notification,
 	NotificationType,
 	PersistedState,
-} from './ui-store/types';
-
-// Constantes
-export { MENU_COLORS, initialState } from './ui-store/state';
+	ResetActions,
+	SessionActions,
+	SessionState,
+	TurnState,
+	UIActions,
+	UIState,
+	UIStore,
+	UIStoreState,
+} from "./ui-store/types";
+// Store principal
+export { uiStoreSelectors, useUIStore } from "./ui-store/ui-store";

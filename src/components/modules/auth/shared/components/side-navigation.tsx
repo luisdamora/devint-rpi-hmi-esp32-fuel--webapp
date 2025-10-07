@@ -1,7 +1,7 @@
-import React from "react";
 import { Calendar, Home } from "lucide-react";
-import { SideTile } from "./side-tile";
+import React from "react";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { SideTile } from "./side-tile";
 
 export const SideNavigation: React.FC = () => {
 	const { navigateTo } = useHMINavigation();

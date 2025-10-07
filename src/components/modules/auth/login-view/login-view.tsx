@@ -1,18 +1,13 @@
 import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
-import { SideNavigation } from "../shared/components/side-navigation";
 import { OperatorHeader } from "../shared/components/operator-header";
+import { SideNavigation } from "../shared/components/side-navigation";
 import { LoginForm } from "./components/login-form";
 import { useLoginForm } from "./hooks/use-login-form";
 
 export const LoginViewComponent: React.FC = () => {
-	const {
-		operatorId,
-		password,
-		setOperatorId,
-		setPassword,
-		handleSubmit,
-	} = useLoginForm();
+	const { operatorId, password, setOperatorId, setPassword, handleSubmit } =
+		useLoginForm();
 
 	return (
 		<HMIContainer>

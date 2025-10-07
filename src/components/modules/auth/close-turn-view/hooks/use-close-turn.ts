@@ -8,7 +8,7 @@ export const useCloseTurn = () => {
 	const handleCloseTurn = () => {
 		// Cerrar turno en el store global
 		closeTurn("Cierre manual desde vista de cierre de turno");
-		
+
 		// Navegar al menú principal
 		goToMenu();
 	};

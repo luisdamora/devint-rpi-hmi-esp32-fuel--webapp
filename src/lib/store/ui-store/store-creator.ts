@@ -3,14 +3,14 @@
  * StateCreator que combina estado inicial y acciones
  */
 
-import type { StateCreator } from 'zustand';
-import type { UIStore } from './types';
-import { initialState } from './state';
+import type { StateCreator } from "zustand";
 import {
+	createResetActions,
 	createSessionActions,
 	createUIActions,
-	createResetActions,
-} from './actions';
+} from "./actions";
+import { initialState } from "./state";
+import type { UIStore } from "./types";
 
 // ============================================================================
 // Store Creator
@@ -22,7 +22,7 @@ import {
  */
 export const createUIStoreSlice: StateCreator<
 	UIStore,
-	[['zustand/devtools', never], ['zustand/persist', unknown]],
+	[["zustand/devtools", never], ["zustand/persist", unknown]],
 	[],
 	UIStore
 > = (set, get, _store) => {

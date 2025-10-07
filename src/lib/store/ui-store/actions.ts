@@ -3,15 +3,15 @@
  * Definiciones de acciones del store
  */
 
-import type { StateCreator } from 'zustand';
+import type { StateCreator } from "zustand";
+import { initialState, MENU_COLORS } from "./state";
 import type {
-	UIStore,
+	NotificationType,
+	ResetActions,
 	SessionActions,
 	UIActions,
-	ResetActions,
-	NotificationType,
-} from './types';
-import { initialState, MENU_COLORS } from './state';
+	UIStore,
+} from "./types";
 
 // ============================================================================
 // Helper: Generate Session ID
@@ -36,7 +36,7 @@ export const createSessionActions = (
 			operatorName,
 			sessionId,
 		});
-		
+
 		// Auto-iniciar turno al hacer login
 		get().startTurn();
 	},
@@ -44,16 +44,16 @@ export const createSessionActions = (
 	logout: () => {
 		// Cerrar turno si está activo
 		if (get().isTurnActive) {
-			get().closeTurn('Cierre por logout');
+			get().closeTurn("Cierre por logout");
 		}
-		
+
 		set({
 			isAuthenticated: false,
 			operatorName: null,
 			sessionId: null,
 			isTurnActive: false,
 		});
-		
+
 		// Actualizar tema del menú
 		get().setMenuTheme(false);
 	},
@@ -65,7 +65,7 @@ export const createSessionActions = (
 			turnClosed: false,
 			closeTurnReason: null,
 		});
-		
+
 		// Actualizar tema del menú a activo
 		get().setMenuTheme(true);
 	},
@@ -74,15 +74,15 @@ export const createSessionActions = (
 		set({
 			isTurnActive: false,
 			turnClosed: true,
-			closeTurnReason: reason ?? 'Cierre manual',
+			closeTurnReason: reason ?? "Cierre manual",
 			lastTurnCloseTime: new Date(),
 		});
-		
+
 		// Actualizar tema del menú a inactivo
 		get().setMenuTheme(false);
-		
+
 		// Mostrar notificación de confirmación
-		get().showNotification('Turno cerrado correctamente', 'success');
+		get().showNotification("Turno cerrado correctamente", "success");
 	},
 });
 

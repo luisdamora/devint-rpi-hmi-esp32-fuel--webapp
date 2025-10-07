@@ -3,9 +3,9 @@
  * Hooks y utilidades para trabajar con el UI Store
  */
 
-import { useUIStore, uiStoreSelectors } from '@/lib/store/ui-store/ui-store';
-import { useCallback } from 'react';
-import type { NotificationType } from '@/lib/store/ui-store/types';
+import { useCallback } from "react";
+import type { NotificationType } from "@/lib/store/ui-store/types";
+import { uiStoreSelectors, useUIStore } from "@/lib/store/ui-store/ui-store";
 
 // ============================================================================
 // Re-export del store principal
@@ -67,29 +67,29 @@ export const useNotifications = () => {
 	const clearNotification = useUIStore((state) => state.clearNotification);
 
 	const notify = useCallback(
-		(message: string, type: NotificationType = 'info') => {
+		(message: string, type: NotificationType = "info") => {
 			showNotification(message, type);
 		},
 		[showNotification],
 	);
 
 	const success = useCallback(
-		(message: string) => notify(message, 'success'),
+		(message: string) => notify(message, "success"),
 		[notify],
 	);
 
 	const error = useCallback(
-		(message: string) => notify(message, 'error'),
+		(message: string) => notify(message, "error"),
 		[notify],
 	);
 
 	const info = useCallback(
-		(message: string) => notify(message, 'info'),
+		(message: string) => notify(message, "info"),
 		[notify],
 	);
 
 	const warning = useCallback(
-		(message: string) => notify(message, 'warning'),
+		(message: string) => notify(message, "warning"),
 		[notify],
 	);
 

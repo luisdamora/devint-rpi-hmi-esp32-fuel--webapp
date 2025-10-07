@@ -16,9 +16,11 @@ interface MainMenuProps {
 	turnActive?: boolean;
 }
 
-export const MainMenu: React.FC<MainMenuProps> = ({ turnActive: _deprecated }) => {
+export const MainMenu: React.FC<MainMenuProps> = ({
+	turnActive: _deprecated,
+}) => {
 	const { navigateTo } = useHMINavigation();
-	
+
 	// Obtener estado del store global
 	const { borderColor, isTurnActive } = useMenuTheme();
 

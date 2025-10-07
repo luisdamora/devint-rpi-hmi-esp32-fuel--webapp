@@ -3,15 +3,15 @@
  * Estado inicial del store global de UI
  */
 
-import type { UIStoreState } from './types';
+import type { UIStoreState } from "./types";
 
 // ============================================================================
 // Color Constants
 // ============================================================================
 
 export const MENU_COLORS = {
-	INACTIVE: '#EF4444', // Rojo - Turno inactivo
-	ACTIVE: '#22C55E',   // Verde - Turno activo
+	INACTIVE: "#EF4444", // Rojo - Turno inactivo
+	ACTIVE: "#22C55E", // Verde - Turno activo
 } as const;
 
 // ============================================================================

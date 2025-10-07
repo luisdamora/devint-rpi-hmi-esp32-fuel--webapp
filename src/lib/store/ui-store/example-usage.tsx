@@ -1,17 +1,17 @@
 /**
  * Ejemplos de Uso del UI Store
- * 
+ *
  * Este archivo muestra diferentes formas de usar el UI Store en componentes
  */
 
-import React from 'react';
-import { useUIStore, uiStoreSelectors } from './ui-store';
+import React from "react";
 import {
-	useSession,
+	useLoadingState,
 	useMenuTheme,
 	useNotifications,
-	useLoadingState,
-} from '@/lib/hooks/use-ui-store-helpers';
+	useSession,
+} from "@/lib/hooks/use-ui-store-helpers";
+import { uiStoreSelectors, useUIStore } from "./ui-store";
 
 // ============================================================================
 // Ejemplo 1: Uso directo del store
@@ -23,9 +23,9 @@ export const DirectStoreUsageExample: React.FC = () => {
 
 	return (
 		<div>
-			<p>Turno activo: {store.isTurnActive ? 'Sí' : 'No'}</p>
-			<p>Operador: {store.operatorName ?? 'Sin asignar'}</p>
-			<button type="button" onClick={() => store.login('Operador 1')}>
+			<p>Turno activo: {store.isTurnActive ? "Sí" : "No"}</p>
+			<p>Operador: {store.operatorName ?? "Sin asignar"}</p>
+			<button type="button" onClick={() => store.login("Operador 1")}>
 				Login
 			</button>
 			<button type="button" onClick={() => store.closeTurn()}>
@@ -48,8 +48,8 @@ export const OptimizedSelectorsExample: React.FC = () => {
 	return (
 		<div style={{ borderColor, padding: 16 }}>
 			<h3>Estado de Sesión</h3>
-			<p>Autenticado: {sessionInfo.isAuthenticated ? 'Sí' : 'No'}</p>
-			<p>Turno: {isTurnActive ? 'Activo' : 'Inactivo'}</p>
+			<p>Autenticado: {sessionInfo.isAuthenticated ? "Sí" : "No"}</p>
+			<p>Turno: {isTurnActive ? "Activo" : "Inactivo"}</p>
 			<p>Operador: {sessionInfo.operatorName}</p>
 		</div>
 	);
@@ -60,23 +60,29 @@ export const OptimizedSelectorsExample: React.FC = () => {
 // ============================================================================
 
 export const CustomHooksExample: React.FC = () => {
-	const { isAuthenticated, isTurnActive, operatorName, login, logout, closeTurn } =
-		useSession();
+	const {
+		isAuthenticated,
+		isTurnActive,
+		operatorName,
+		login,
+		logout,
+		closeTurn,
+	} = useSession();
 	const { borderColor } = useMenuTheme();
 	const { notify, success, error } = useNotifications();
 
 	const handleLogin = () => {
 		try {
-			login('Juan Pérez');
-			success('Sesión iniciada correctamente');
+			login("Juan Pérez");
+			success("Sesión iniciada correctamente");
 		} catch (err) {
-			error('Error al iniciar sesión');
+			error("Error al iniciar sesión");
 		}
 	};
 
 	const handleCloseTurn = () => {
-		closeTurn('Cierre manual');
-		notify('Turno cerrado', 'info');
+		closeTurn("Cierre manual");
+		notify("Turno cerrado", "info");
 	};
 
 	return (
@@ -90,7 +96,7 @@ export const CustomHooksExample: React.FC = () => {
 			) : (
 				<>
 					<p>Bienvenido, {operatorName}</p>
-					<p>Estado del turno: {isTurnActive ? 'Activo ✅' : 'Inactivo ❌'}</p>
+					<p>Estado del turno: {isTurnActive ? "Activo ✅" : "Inactivo ❌"}</p>
 
 					{isTurnActive && (
 						<button type="button" onClick={handleCloseTurn}>
@@ -112,7 +118,7 @@ export const CustomHooksExample: React.FC = () => {
 // ============================================================================
 
 export const LoginComponent: React.FC = () => {
-	const [operatorInput, setOperatorInput] = React.useState('');
+	const [operatorInput, setOperatorInput] = React.useState("");
 	const { login, isAuthenticated, operatorName } = useSession();
 	const { isLoading, setLoading } = useLoadingState();
 	const { success, error } = useNotifications();
@@ -121,7 +127,7 @@ export const LoginComponent: React.FC = () => {
 		e.preventDefault();
 
 		if (!operatorInput.trim()) {
-			error('Por favor ingrese un nombre de operador');
+			error("Por favor ingrese un nombre de operador");
 			return;
 		}
 
@@ -133,9 +139,9 @@ export const LoginComponent: React.FC = () => {
 
 			login(operatorInput);
 			success(`Bienvenido ${operatorInput}`);
-			setOperatorInput('');
+			setOperatorInput("");
 		} catch (err) {
-			error('Error al iniciar sesión');
+			error("Error al iniciar sesión");
 		} finally {
 			setLoading(false);
 		}
@@ -159,7 +165,7 @@ export const LoginComponent: React.FC = () => {
 				disabled={isLoading}
 			/>
 			<button type="submit" disabled={isLoading}>
-				{isLoading ? 'Iniciando...' : 'Iniciar Sesión'}
+				{isLoading ? "Iniciando..." : "Iniciar Sesión"}
 			</button>
 		</form>
 	);
@@ -173,13 +179,19 @@ export const DynamicMenuExample: React.FC = () => {
 	const { borderColor, isTurnActive } = useMenuTheme();
 
 	const menuItems = [
-		{ id: 'sales', label: 'Ventas', requiresTurn: true },
-		{ id: 'inventory', label: 'Inventario', requiresTurn: true },
-		{ id: 'settings', label: 'Configuración', requiresTurn: false },
+		{ id: "sales", label: "Ventas", requiresTurn: true },
+		{ id: "inventory", label: "Inventario", requiresTurn: true },
+		{ id: "settings", label: "Configuración", requiresTurn: false },
 	];
 
 	return (
-		<div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+		<div
+			style={{
+				display: "grid",
+				gridTemplateColumns: "repeat(3, 1fr)",
+				gap: 16,
+			}}
+		>
 			{menuItems.map((item) => {
 				const disabled = item.requiresTurn && !isTurnActive;
 
@@ -191,10 +203,10 @@ export const DynamicMenuExample: React.FC = () => {
 						style={{
 							borderColor,
 							borderWidth: 2,
-							borderStyle: 'solid',
+							borderStyle: "solid",
 							padding: 16,
 							opacity: disabled ? 0.5 : 1,
-							cursor: disabled ? 'not-allowed' : 'pointer',
+							cursor: disabled ? "not-allowed" : "pointer",
 						}}
 					>
 						{item.label}
@@ -210,23 +222,24 @@ export const DynamicMenuExample: React.FC = () => {
 // ============================================================================
 
 export const NotificationsExample: React.FC = () => {
-	const { notification, success, error, info, warning, clear } = useNotifications();
+	const { notification, success, error, info, warning, clear } =
+		useNotifications();
 
 	return (
 		<div>
 			<h3>Sistema de Notificaciones</h3>
 
-			<div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-				<button type="button" onClick={() => success('Operación exitosa')}>
+			<div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+				<button type="button" onClick={() => success("Operación exitosa")}>
 					Success
 				</button>
-				<button type="button" onClick={() => error('Ocurrió un error')}>
+				<button type="button" onClick={() => error("Ocurrió un error")}>
 					Error
 				</button>
-				<button type="button" onClick={() => info('Información general')}>
+				<button type="button" onClick={() => info("Información general")}>
 					Info
 				</button>
-				<button type="button" onClick={() => warning('Advertencia')}>
+				<button type="button" onClick={() => warning("Advertencia")}>
 					Warning
 				</button>
 			</div>
@@ -236,14 +249,14 @@ export const NotificationsExample: React.FC = () => {
 					style={{
 						padding: 16,
 						backgroundColor:
-							notification.type === 'success'
-								? '#22C55E'
-								: notification.type === 'error'
-									? '#EF4444'
-									: notification.type === 'warning'
-										? '#F59E0B'
-										: '#3B82F6',
-						color: 'white',
+							notification.type === "success"
+								? "#22C55E"
+								: notification.type === "error"
+									? "#EF4444"
+									: notification.type === "warning"
+										? "#F59E0B"
+										: "#3B82F6",
+						color: "white",
 						borderRadius: 4,
 					}}
 				>
@@ -268,18 +281,18 @@ export const NotificationsExample: React.FC = () => {
 export const imperativeStoreAccess = () => {
 	// Obtener estado actual
 	const currentState = useUIStore.getState();
-	console.log('Estado actual:', currentState);
+	console.log("Estado actual:", currentState);
 
 	// Ejecutar acciones
 	if (!currentState.isTurnActive) {
 		currentState.startTurn();
-		console.log('Turno iniciado');
+		console.log("Turno iniciado");
 	}
 
 	// Suscribirse a cambios
 	const unsubscribe = useUIStore.subscribe((state, prevState) => {
 		if (state.isTurnActive !== prevState.isTurnActive) {
-			console.log('Estado de turno cambió:', state.isTurnActive);
+			console.log("Estado de turno cambió:", state.isTurnActive);
 		}
 	});
 
@@ -295,11 +308,11 @@ export const DebugStoreComponent: React.FC = () => {
 	const store = useUIStore();
 
 	return (
-		<details style={{ padding: 16, border: '1px solid #ccc' }}>
-			<summary style={{ cursor: 'pointer', fontWeight: 'bold' }}>
+		<details style={{ padding: 16, border: "1px solid #ccc" }}>
+			<summary style={{ cursor: "pointer", fontWeight: "bold" }}>
 				🐛 Estado del Store (Debug)
 			</summary>
-			<pre style={{ fontSize: 12, overflow: 'auto' }}>
+			<pre style={{ fontSize: 12, overflow: "auto" }}>
 				{JSON.stringify(store, null, 2)}
 			</pre>
 			<button
