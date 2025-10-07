@@ -1,4 +1,4 @@
-import { ArrowLeft, DollarSign, Home, Save } from "lucide-react";
+import { ArrowLeft, DollarSign, Home } from "lucide-react";
 import React from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SideTile } from "@/components/modules/sales/cash-sale/components/side-tile";

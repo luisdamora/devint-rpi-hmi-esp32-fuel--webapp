@@ -1,9 +1,5 @@
-import { DollarSign, Home } from "lucide-react";
 import React, { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
-import { SideTile } from "@/components/modules/sales/cash-sale/components/side-tile";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import { ViewNavigation } from "./components/view-navigation";
 import { PaymentInfoView } from "./views/payment-info-view";
 import { PaymentMethodsView } from "./views/payment-methods-view";
 

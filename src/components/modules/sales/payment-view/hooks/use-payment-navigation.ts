@@ -29,7 +29,7 @@ export function usePaymentNavigation(initialData: PaymentFormData) {
 	
 	// Si la información básica está completa
 	const isInfoComplete = useCallback(() => {
-		return formData.placa.trim().length >= 6 && formData.placa.match(/^[A-Z]{3}[0-9]{3}$/);
+		return formData.placa.trim().length >= 6 && !!formData.placa.match(/^[A-Z]{3}[0-9]{3}$/);
 	}, [formData.placa]);
 	
 	// Si los métodos de pago están completos (solo para vista de métodos)

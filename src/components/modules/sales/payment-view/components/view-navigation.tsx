@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, CheckCircle, Circle } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
