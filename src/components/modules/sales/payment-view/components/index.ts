@@ -25,3 +25,5 @@ export type { PaymentModeSelectorProps } from "./payment-mode-selector";
 export { PaymentModeSelector } from "./payment-mode-selector";
 export type { SaveButtonProps } from "./save-button";
 export { SaveButton } from "./save-button";
+export type { ViewNavigationProps } from "./view-navigation";
+export { ViewNavigation } from "./view-navigation";
