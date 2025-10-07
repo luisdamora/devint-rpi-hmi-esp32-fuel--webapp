@@ -6,8 +6,14 @@ import { LoginForm } from "./components/login-form";
 import { useLoginForm } from "./hooks/use-login-form";
 
 export const LoginViewComponent: React.FC = () => {
-	const { operatorId, password, setOperatorId, setPassword, handleSubmit } =
-		useLoginForm();
+	const {
+		operatorId,
+		password,
+		setOperatorId,
+		setPassword,
+		handleSubmit,
+		isLoading,
+	} = useLoginForm();
 
 	return (
 		<HMIContainer>
@@ -26,6 +32,7 @@ export const LoginViewComponent: React.FC = () => {
 								onOperatorIdChange={setOperatorId}
 								onPasswordChange={setPassword}
 								onSubmit={handleSubmit}
+								isLoading={isLoading}
 							/>
 						</div>
 					</div>
