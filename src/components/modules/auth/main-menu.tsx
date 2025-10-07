@@ -1,5 +1,6 @@
 import {
 	ArrowDownCircle,
+	BanknoteArrowDown,
 	Calendar,
 	CreditCard,
 	Home,
@@ -54,7 +55,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 				</span>
 			</div>
 			<div className="flex items-center justify-center h-28">
-				<span className="text-6xl" aria-hidden>
+				<span className="text-6xl text-white" aria-hidden>
 					{icon}
 				</span>
 			</div>
@@ -71,7 +72,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 		{
 			key: "contado",
 			title: "CONTADO",
-			icon: <ArrowDownCircle size={64} />,
+			icon: <BanknoteArrowDown size={64} />,
 			action: () => navigateTo("keypad"),
 		},
 		{
