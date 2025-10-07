@@ -26,7 +26,7 @@ export const HMIContainer: React.FC<HMIContainerProps> = ({
 			style={{ backgroundColor: NEXUS_COLORS.background.main, ...style }}
 		>
 			<HMIHeader stationName="Nexus POS" logoAlt="Nexus POS" />
-			<div className="flex-1 min-h-0 w-full overflow-auto">{children}</div>
+			<div className="flex-1 min-h-0 w-full overflow-auto p-1">{children}</div>
 			<HMIFooterInfo primaryBg={true} />
 		</div>
 	);
