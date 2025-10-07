@@ -232,9 +232,7 @@ export const TouchSelectWithFixedDimensions: React.FC = () => {
 				useFixedDimensions={true}
 			/>
 			{selectedOption && (
-				<p className="text-white mt-4">
-					Selección actual: {selectedOption}
-				</p>
+				<p className="text-white mt-4">Selección actual: {selectedOption}</p>
 			)}
 			<p className="text-gray-400 mt-2 text-sm">
 				El modal tiene dimensiones máximas de 800x480px (HMI estándar)

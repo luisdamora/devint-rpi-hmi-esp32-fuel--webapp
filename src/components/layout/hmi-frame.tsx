@@ -24,7 +24,7 @@ export const HMIFrame: React.FC<HMIFrameProps> = ({ children, className }) => {
 			{/* HMI Frame - dimensiones fijas 800x480px */}
 			<div
 				className={cn(
-					"relative bg-white shadow-2xl overflow-hidden",
+					"relative bg-white shadow-2xl overflow-hidden border border-gray-200",
 					className,
 				)}
 				style={{
