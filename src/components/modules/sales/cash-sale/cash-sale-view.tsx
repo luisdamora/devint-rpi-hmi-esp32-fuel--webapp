@@ -10,7 +10,7 @@ import { SideTile } from "./components/side-tile";
 import { useCashSaleCalculator } from "./hooks/use-cash-sale-calculator";
 
 export const CashSaleViewComponent: React.FC = () => {
-	const { navigateTo, navigateBack } = useHMINavigation();
+	const { navigateTo } = useHMINavigation();
 	const [activeMode, setActiveMode] = useState<PaymentMode>("cash");
 	const { displayMoney, handleNumber, handleTripleZero, handleClear } =
 		useCashSaleCalculator();
@@ -55,19 +55,19 @@ export const CashSaleViewComponent: React.FC = () => {
 						<Keypad
 							onNumber={handleNumber}
 							onClear={handleClear}
-							onEnter={navigateBack}
+							onEnter={() => navigateTo("payment")}
 						/>
 						{/* TODO: Integración futura con PaymentView
-						    Cuando el usuario presione ENTER después de ingresar un monto:
-						    1. Validar que displayMoney > 0
-						    2. Navegar a payment-view con los datos de la venta:
-						       navigateTo("payment", {
-						         totalAmount: displayMoney,
-						         mode: activeMode
-						       });
-						    3. PaymentView procesará el pago y guardará la venta
-						    Esto reemplazará el actual navigateBack()
-						*/}
+									Cuando el usuario presione ENTER después de ingresar un monto:
+									1. Validar que displayMoney > 0
+									2. Navegar a payment-view con los datos de la venta:
+										 navigateTo("payment", {
+											 totalAmount: displayMoney,
+											 mode: activeMode
+										 });
+									3. PaymentView procesará el pago y guardará la venta
+									Esto reemplazará el actual navigateBack()
+							*/}
 					</div>
 				</div>
 			</div>

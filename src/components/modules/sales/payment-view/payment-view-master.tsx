@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { PaymentInfoView } from "./views/payment-info-view";
 import { PaymentMethodsView } from "./views/payment-methods-view";
 
