@@ -17,6 +17,7 @@ export const CashSaleViewComponent: React.FC = () => {
 
 	const handleModeChange = (mode: PaymentMode) => {
 		setActiveMode(mode);
+		handleClear();
 	};
 
 	const handleTripleZeroWithMode = (mode: PaymentMode) => {
