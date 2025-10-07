@@ -1,4 +1,8 @@
 import React from "react";
+import {
+	TouchSelect,
+	type TouchSelectOption,
+} from "@/components/shared/touch-select/touch-select";
 import { BUTTON_STYLES } from "@/lib/config/theme";
 
 interface CustomerFormProps {
@@ -33,69 +37,45 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 		onSubmit();
 	};
 
+	// Opciones de tipo de documento
+	const documentTypeOptions: TouchSelectOption[] = [
+		{
+			value: "CC",
+			label: "Cédula de Ciudadanía (CC)",
+			icon: "🆔",
+			description: "Documento de identidad para ciudadanos colombianos",
+		},
+		{
+			value: "NIT",
+			label: "NIT (Empresa)",
+			icon: "🏢",
+			description: "Número de Identificación Tributaria para empresas",
+		},
+		{
+			value: "CE",
+			label: "Cédula de Extranjería (CE)",
+			icon: "🌍",
+			description: "Documento para extranjeros residentes en Colombia",
+		},
+		{
+			value: "PAS",
+			label: "Pasaporte (PAS)",
+			icon: "📖",
+			description: "Documento de viaje internacional",
+		},
+	];
+
 	return (
 		<form onSubmit={handleSubmit} className="space-y-6">
 			{/* Tipo de Documento */}
-			<div>
-				<label
-					htmlFor="documentType"
-					className="block text-white font-semibold mb-2 text-sm uppercase tracking-wide"
-				>
-					Tipo de Documento:
-				</label>
-				<select
-					id="documentType"
-					value={documentType}
-					onChange={(e) => onDocumentTypeChange(e.target.value)}
-					className="w-full px-2 py-1 rounded-lg text-gray-900 font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white text-lg"
-					style={{
-						fontSize: "1.2rem",
-						minHeight: "70px",
-						WebkitAppearance: "none",
-						MozAppearance: "none",
-						appearance: "none",
-						cursor: "pointer",
-					}}
-				>
-					<option
-						value=""
-						disabled
-						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
-					>
-						Seleccione tipo de documento...
-					</option>
-					<option
-						value="CC"
-						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
-					>
-						🆔 Cédula de Ciudadanía (CC)
-					</option>
-					<option
-						value="NIT"
-						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
-					>
-						🏢 NIT (Empresa)
-					</option>
-					<option
-						value="CE"
-						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
-					>
-						🌍 Cédula de Extranjería (CE)
-					</option>
-					<option
-						value="TI"
-						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
-					>
-						👶 Tarjeta de Identidad (TI)
-					</option>
-					<option
-						value="PAS"
-						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
-					>
-						📖 Pasaporte (PAS)
-					</option>
-				</select>
-			</div>
+			<TouchSelect
+				value={documentType}
+				options={documentTypeOptions}
+				onChange={onDocumentTypeChange}
+				label="Tipo de Documento:"
+				placeholder="Seleccione tipo de documento..."
+				gridCols={2}
+			/>
 
 			{/* Número de Identificación y DV */}
 			<div className="flex gap-4">
