@@ -1,21 +1,8 @@
 import type {
-	LayoutConfig,
 	ModuleConfig,
 	NavigationItem,
 } from "@/lib/types/modules";
 
-/**
- * Default layout configuration for HMI system
- */
-export const DEFAULT_LAYOUT_CONFIG: LayoutConfig = {
-	theme: "dark",
-	primaryColor: "#2563eb",
-	secondaryColor: "#7c3aed",
-	showHeader: true,
-	showFooter: true,
-	headerHeight: "64px",
-	footerHeight: "48px",
-};
 
 /**
  * Module configurations
@@ -109,29 +96,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
 	},
 ];
 
-/**
- * Theme configurations
- */
-export const THEME_CONFIGS = {
-	light: {
-		background: "bg-gray-50",
-		surface: "bg-white",
-		text: "text-gray-900",
-		textSecondary: "text-gray-600",
-		border: "border-gray-200",
-		primary: "bg-blue-600",
-		primaryHover: "hover:bg-blue-700",
-	},
-	dark: {
-		background: "bg-gray-900",
-		surface: "bg-gray-800",
-		text: "text-white",
-		textSecondary: "text-gray-300",
-		border: "border-gray-700",
-		primary: "bg-blue-600",
-		primaryHover: "hover:bg-blue-700",
-	},
-};
 
 /**
  * Screen size configurations
@@ -176,9 +140,3 @@ export function getNavigationItems(moduleId?: string): NavigationItem[] {
 	return items.filter((item) => item.enabled).sort((a, b) => a.order - b.order);
 }
 
-/**
- * Get theme configuration
- */
-export function getThemeConfig(theme: "light" | "dark") {
-	return THEME_CONFIGS[theme];
-}

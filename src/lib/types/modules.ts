@@ -33,18 +33,6 @@ export interface ModuleConfig {
 	enabled: boolean;
 }
 
-/**
- * Layout configuration for HMI system
- */
-export interface LayoutConfig {
-	theme: "light" | "dark";
-	primaryColor: string;
-	secondaryColor: string;
-	showHeader: boolean;
-	showFooter: boolean;
-	headerHeight: string;
-	footerHeight: string;
-}
 
 /**
  * Navigation item for HMI system
@@ -76,7 +64,6 @@ export interface HMIState {
 export interface HMILayoutProps {
 	children: ReactNode;
 	currentView?: string;
-	configuration?: LayoutConfig;
 }
 
 /**
@@ -84,5 +71,4 @@ export interface HMILayoutProps {
  */
 export interface ViewManagerProps {
 	initialView?: string;
-	configuration?: LayoutConfig;
 }

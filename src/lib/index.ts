@@ -13,14 +13,11 @@ export { PaymentMethods } from "../components/modules/sales/payment-methods";
 // Layout Configuration
 export {
 	ANIMATION_CONFIGS,
-	DEFAULT_LAYOUT_CONFIG,
 	getModuleConfig,
 	getNavigationItems,
-	getThemeConfig,
 	MODULE_CONFIGS,
 	NAVIGATION_ITEMS,
 	SCREEN_CONFIGS,
-	THEME_CONFIGS,
 } from "./config/layout-config";
 // View Registry
 export {
@@ -34,7 +31,6 @@ export { useViewNavigation, ViewManager } from "./navigation/view-manager";
 export type {
 	HMILayoutProps,
 	HMIState,
-	LayoutConfig,
 	ModuleConfig,
 	NavigationItem,
 	ViewManagerProps,
