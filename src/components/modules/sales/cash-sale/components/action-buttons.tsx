@@ -12,14 +12,14 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 		<button
 			type="button"
 			className="text-center text-white font-semibold py-2 rounded-md"
-			style={{ backgroundColor: NEXUS_COLORS.status.green }}
+			style={{ backgroundColor: NEXUS_COLORS.background.light }}
 		>
 			$
 		</button>
 		<button
 			type="button"
 			className="text-center text-white font-semibold py-2 rounded-md"
-			style={{ backgroundColor: NEXUS_COLORS.status.orange }}
+			style={{ backgroundColor: NEXUS_COLORS.background.light }}
 		>
 			Vol.
 		</button>
@@ -27,7 +27,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 			type="button"
 			onClick={onTripleZero}
 			className="text-center text-white font-semibold py-2 rounded-md"
-			style={{ backgroundColor: NEXUS_COLORS.primary.blue }}
+			style={{ backgroundColor: NEXUS_COLORS.background.light }}
 		>
 			x $1.000
 		</button>

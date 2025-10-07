@@ -11,6 +11,7 @@ export const NEXUS_COLORS = {
 	background: {
 		main: "#3B4B5C", // Color de fondo principal del HMI (azul grisáceo oscuro)
 		dark: "#2C3E50", // Variante más oscura
+		light: "#4F5F7F", // Variante intermedia entre main y dark (azul grisáceo claro)
 	},
 	status: {
 		red: "#EF4444",
