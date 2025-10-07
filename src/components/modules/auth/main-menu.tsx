@@ -1,6 +1,7 @@
 import React from "react";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { cn } from "@/lib/utils";
 
 interface MainMenuProps {
 	turnActive?: boolean;
@@ -9,114 +10,109 @@ interface MainMenuProps {
 export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 	const { navigateTo } = useHMINavigation();
 
-	return (
-		<div
-			className="flex flex-col h-full"
-			style={{ backgroundColor: NEXUS_COLORS.background.main }}
+	// Reusable Tile component
+	const MenuTile: React.FC<{
+		title: string;
+		icon: React.ReactNode;
+		onClick?: () => void;
+		disabled?: boolean;
+		ariaLabel?: string;
+	}> = ({ title, icon, onClick, disabled, ariaLabel }) => (
+		<button
+			type="button"
+			onClick={disabled ? undefined : onClick}
+			aria-label={ariaLabel ?? title}
+			className={
+				"group relative rounded-md border-2 p-3 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform select-none " +
+				"" +
+				(disabled ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02]")
+			}
+			style={{ borderColor: "#EF4444", backgroundColor: "transparent" }}
+			disabled={disabled}
 		>
-			{/* Status Header */}
 			<div
-				className="px-4 py-3 text-white flex justify-between items-center"
+				className="absolute top-0 left-0 right-0 text-center font-semibold"
 				style={{
-					backgroundColor: turnActive
-						? NEXUS_COLORS.status.green
-						: NEXUS_COLORS.status.red,
+					transform: "translateY(-50%)",
+					color: NEXUS_COLORS.white,
+					backgroundColor: "transparent",
 				}}
 			>
-				<h1 className="font-bold" style={{ fontSize: "1.25rem" }}>
-					Nexus POS
-				</h1>
-				<div className="flex items-center space-x-2">
-					<span style={{ fontSize: "0.875rem" }}>Estado:</span>
-					<span className="font-semibold" style={{ fontSize: "0.875rem" }}>
-						{turnActive ? "Turno Activo" : "Turno Inactivo"}
-					</span>
-				</div>
+				<span
+					className="inline-block px-4"
+					style={{ backgroundColor: "#EF4444", borderRadius: 4 }}
+				>
+					{title}
+				</span>
 			</div>
+			<div className="flex items-center justify-center h-28">
+				<span className="text-6xl" aria-hidden>
+					{icon}
+				</span>
+			</div>
+		</button>
+	);
 
-			{/* Menu Grid */}
-			<div className="flex-1 p-4">
-				<div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
-					{turnActive ? (
-						<>
-							<button
-								type="button"
-								onClick={() => navigateTo("keypad")}
-								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
-								style={{
-									backgroundColor: NEXUS_COLORS.primary.blue,
-									color: NEXUS_COLORS.white,
-								}}
-							>
-								<div className="text-2xl mb-2">💰</div>
-								<span className="text-sm font-semibold">Ventas</span>
-							</button>
-							<button
-								type="button"
-								onClick={() => navigateTo("payment")}
-								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
-								style={{
-									backgroundColor: NEXUS_COLORS.primary.blue,
-									color: NEXUS_COLORS.white,
-								}}
-							>
-								<div className="text-2xl mb-2">💳</div>
-								<span className="text-sm font-semibold">Pagos</span>
-							</button>
-							<button
-								type="button"
-								onClick={() => navigateTo("loyalty")}
-								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
-								style={{
-									backgroundColor: NEXUS_COLORS.status.orange,
-									color: NEXUS_COLORS.white,
-								}}
-							>
-								<div className="text-2xl mb-2">⭐</div>
-								<span className="text-sm font-semibold">Puntos Colombia</span>
-							</button>
-							<button
-								type="button"
-								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105 opacity-60 cursor-not-allowed"
-								style={{
-									backgroundColor: NEXUS_COLORS.neutral.gray600,
-									color: NEXUS_COLORS.white,
-								}}
-								disabled
-							>
-								<div className="text-2xl mb-2">📊</div>
-								<span className="text-sm font-semibold">Reportes</span>
-							</button>
-							<button
-								type="button"
-								onClick={() => navigateTo("close-turn")}
-								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
-								style={{
-									backgroundColor: NEXUS_COLORS.status.red,
-									color: NEXUS_COLORS.white,
-								}}
-							>
-								<div className="text-2xl mb-2">🔒</div>
-								<span className="text-sm font-semibold">Cerrar Turno</span>
-							</button>
-						</>
-					) : (
-						<button
-							type="button"
-							onClick={() => navigateTo("login")}
-							className="rounded-lg p-6 flex flex-col items-center transition-all hover:scale-105 mx-auto"
-							style={{
-								backgroundColor: NEXUS_COLORS.status.green,
-								color: NEXUS_COLORS.white,
-							}}
-						>
-							<div className="text-3xl mb-3">🔑</div>
-							<span className="font-semibold" style={{ fontSize: "1rem" }}>
-								Iniciar Turno
-							</span>
-						</button>
-					)}
-				</div>
+	const tiles = [
+		{
+			key: "turnos",
+			title: "TURNOS",
+			icon: "📅",
+			action: () => navigateTo("close-turn"),
+		},
+		{
+			key: "contado",
+			title: "CONTADO",
+			icon: "⬇️",
+			action: () => navigateTo("keypad"),
+		},
+		{
+			key: "credito",
+			title: "CREDITO",
+			icon: "💳",
+			action: () => navigateTo("payment"),
+		},
+		{
+			key: "inicio",
+			title: "INICIO",
+			icon: "🏠",
+			action: () => navigateTo("login"),
+		},
+		{
+			key: "fidelizacion",
+			title: "FIDELIZACION",
+			icon: "🅿️",
+			action: () => navigateTo("loyalty"),
+		},
+		{ key: "utilidades", title: "UTILIDADES", icon: "⚙️", action: undefined },
+	] as const;
+
+	return (
+		<div
+			className={cn(
+				"w-full h-full px-4",
+				`bg-[${NEXUS_COLORS.background.main}]`,
+			)}
+		>
+			<div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
+				{tiles.map((t) => {
+					const isInicio = t.key === "inicio";
+					const disabled =
+						!turnActive &&
+						!isInicio &&
+						!t.key.includes("utilidades-disabled") &&
+						!t.key.includes("inicio");
+					return (
+						<MenuTile
+							key={t.key}
+							title={t.title}
+							icon={t.icon}
+							onClick={t.action}
+							disabled={disabled || !t.action}
+							ariaLabel={disabled ? `${t.title} (deshabilitado)` : t.title}
+						/>
+					);
+				})}
 			</div>
 		</div>
 	);
