@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import logo from "@/assets/images/logo.png";
+import { HMIFooterInfo } from "@/components/shared/hmi-footer-info";
+import { SplashLogo } from "@/components/shared/splash-logo";
 import { NEXUS_COLORS } from "@/lib/config/theme";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 export const SplashScreen: React.FC = () => {
-	const { goToMenu } = useHMINavigation();
-
 	// Fecha/hora en vivo (es-CO, formato dd/MM/yyyy hh:mm am/pm)
 	const [now, setNow] = React.useState<string>("");
 	useEffect(() => {
@@ -49,25 +47,15 @@ export const SplashScreen: React.FC = () => {
 
 			{/* Marca Nexus centrada (imagen) */}
 			<div className="flex items-center justify-center select-none px-6">
-				<img
-					src={logo}
-					alt="Nexus logo"
-					className="block w-full max-w-[720px]"
-					// style={{ filter: "drop-shadow(2px 2px 0 rgba(31,41,55,0.6))" }}
-				/>
+				<SplashLogo />
 			</div>
 
 			{/* Footer con contacto */}
-			<div className="absolute bottom-3 left-0 right-0 px-6">
-				<div
-					className="flex items-center justify-center gap-8 text-sm"
-					style={{ color: NEXUS_COLORS.background.dark }}
-				>
-					<span>✉ soporte@vpmnexus.com</span>
-					<span>🌐 www.vpmnexus.com</span>
-					<span>📞 +57-3184936241</span>
-					<span>📞 +57-3164475985</span>
-				</div>
+			<div className="absolute bottom-3 left-0 right-0">
+				{/* Fondo NO primario en splash */}
+				{/** Using shared HMIFooterInfo for consistency */}
+				{/* eslint-disable-next-line react/jsx-no-undef */}
+				<HMIFooterInfo primaryBg={false} />
 			</div>
 		</div>
 	);
