@@ -85,15 +85,7 @@ export const PaymentInfoView: React.FC = () => {
 						</div>
 
 						{/* Selector de modo de pago - posición prominente */}
-						<div className="bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200">
-							<h2 className="text-xl font-semibold text-gray-700 mb-4">
-								Modo de Pago
-							</h2>
-							<PaymentModeSelector
-								mode={formData.mode}
-								onModeChange={setMode}
-							/>
-						</div>
+						<PaymentModeSelector mode={formData.mode} onModeChange={setMode} />
 
 						{/* Campos de identificación */}
 						<div className="bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200">

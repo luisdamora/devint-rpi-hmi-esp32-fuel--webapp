@@ -49,15 +49,15 @@ export const PaymentModeSelector: React.FC<PaymentModeSelectorProps> = ({
 				onClick={() => onModeChange("CONTADO")}
 				disabled={disabled}
 				className={cn(
-					"min-h-[80px] rounded-lg font-bold text-xl transition-all duration-200",
-					"flex flex-col items-center justify-center gap-2 shadow-md",
+					"h-12 px-4 rounded-lg font-semibold text-lg transition-all duration-200",
+					"flex flex-row items-center justify-center gap-2 shadow-md",
 					"active:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
 					mode === "CONTADO"
 						? "bg-[#7ED321] text-white border-4 border-[#6BB91C]"
 						: "bg-white text-gray-600 border-2 border-gray-300 hover:bg-green-50 hover:border-green-400",
 				)}
 			>
-				<span className="text-3xl">💵</span>
+				<span className="text-2xl">💵</span>
 				<span>CONTADO</span>
 			</button>
 
@@ -67,15 +67,15 @@ export const PaymentModeSelector: React.FC<PaymentModeSelectorProps> = ({
 				onClick={() => onModeChange("CREDITO")}
 				disabled={disabled}
 				className={cn(
-					"min-h-[80px] rounded-lg font-bold text-xl transition-all duration-200",
-					"flex flex-col items-center justify-center gap-2 shadow-md",
+					"h-12 px-4 rounded-lg font-semibold text-lg transition-all duration-200",
+					"flex flex-row items-center justify-center gap-2 shadow-md",
 					"active:scale-95 disabled:cursor-not-allowed disabled:opacity-50",
 					mode === "CREDITO"
 						? "bg-[#D0021B] text-white border-4 border-[#B00117]"
 						: "bg-white text-gray-600 border-2 border-gray-300 hover:bg-red-50 hover:border-red-400",
 				)}
 			>
-				<span className="text-3xl">💳</span>
+				<span className="text-2xl">💳</span>
 				<span>CRÉDITO</span>
 			</button>
 		</div>

@@ -75,9 +75,9 @@ export const PaymentViewMaster: React.FC = () => {
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center px-2">
-				<div className=" w-full max-w-6xl">
-					{/* Columna 1: Navegación lateral */}
-					{/* <div className="col-span-1 flex flex-col gap-6 self-start pt-8">
+				{/* <div className=" w-full max-w-6xl"> */}
+				{/* Columna 1: Navegación lateral */}
+				{/* <div className="col-span-1 flex flex-col gap-6 self-start pt-8">
 						<SideTile
 							title="VENTAS"
 							icon={<DollarSign size={64} />}
@@ -90,10 +90,10 @@ export const PaymentViewMaster: React.FC = () => {
 						/>
 					</div> */}
 
-					{/* Columnas 2-4: Contenido principal con navegación */}
-					{/* <div className="col-span-3 space-y-4 overflow-hidden"> */}
-					{/* Navegación entre vistas */}
-					{/* <ViewNavigation
+				{/* Columnas 2-4: Contenido principal con navegación */}
+				{/* <div className="col-span-3 space-y-4 overflow-hidden"> */}
+				{/* Navegación entre vistas */}
+				{/* <ViewNavigation
 							currentView={currentView}
 							canProceed={canProceed}
 							isCurrentViewComplete={isCurrentViewComplete}
@@ -103,12 +103,12 @@ export const PaymentViewMaster: React.FC = () => {
 							isLastView={currentView === 2}
 						/> */}
 
-					{/* Vista actual */}
-					{/* <div className="flex-1 overflow-hidden"> */}
-					{currentView === 1 ? <PaymentInfoView /> : <PaymentMethodsView />}
-					{/* </div> */}
-					{/* </div> */}
-				</div>
+				{/* Vista actual */}
+				{/* <div className="flex-1 overflow-hidden"> */}
+				{currentView === 1 ? <PaymentInfoView /> : <PaymentMethodsView />}
+				{/* </div> */}
+				{/* </div> */}
+				{/* </div> */}
 			</div>
 		</HMIContainer>
 	);
