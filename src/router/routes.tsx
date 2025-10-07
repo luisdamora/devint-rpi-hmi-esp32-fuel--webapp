@@ -1,4 +1,9 @@
-import { createBrowserRouter, Link, Navigate } from "react-router";
+import {
+	createBrowserRouter,
+	Link,
+	Navigate,
+	type RouteObject,
+} from "react-router";
 import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view";
 import { LoginViewComponent } from "@/components/modules/auth/login-view";
 import { MainMenu } from "@/components/modules/auth/main-menu";
@@ -11,7 +16,7 @@ import { PaymentMethods } from "@/components/modules/sales/payment-methods";
 import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
-export const router = createBrowserRouter([
+export const routes: RouteObject[] = [
 	{
 		path: "/",
 		element: <HMIRoute />,
@@ -70,4 +75,6 @@ export const router = createBrowserRouter([
 			</PublicRoute>
 		),
 	},
-]);
+];
+
+export const router = createBrowserRouter(routes);

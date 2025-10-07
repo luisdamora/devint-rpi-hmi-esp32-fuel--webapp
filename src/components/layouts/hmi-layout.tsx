@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from "@/lib/config/layout-dimensions";
 import { NEXUS_THEME_CONFIG } from "@/lib/config/theme";
 import type { HMILayoutProps } from "@/lib/types/modules";
@@ -94,6 +95,28 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 						Caprinosol Cloud
 					</span>
 				</div>
+
+				{/* Footer Nav - links a hijos de routes.tsx */}
+				<nav className="hidden md:flex items-center gap-3">
+					{[
+						{ to: "/splash", label: "Splash" },
+						{ to: "/menu", label: "Menú" },
+						{ to: "/login", label: "Login" },
+						{ to: "/keypad", label: "Teclado" },
+						{ to: "/payment", label: "Pago" },
+						{ to: "/loyalty", label: "Puntos" },
+						{ to: "/close-turn", label: "Cerrar Turno" },
+					].map((item) => (
+						<Link
+							key={item.to}
+							to={item.to}
+							className="text-xs px-2 py-1 rounded hover:underline"
+							style={{ color: NEXUS_THEME_CONFIG.textSecondary }}
+						>
+							{item.label}
+						</Link>
+					))}
+				</nav>
 
 				<div className="flex items-center space-x-3">
 					<div className="text-xs">
