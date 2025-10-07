@@ -1,4 +1,5 @@
 import React from "react";
+import logoPuntosColombia from "@/assets/images/puntos-colombia.png";
 
 interface IconPuntosColombiaProps {
 	size?: number;
@@ -11,7 +12,7 @@ export const IconPuntosColombia: React.FC<IconPuntosColombiaProps> = ({
 }) => {
 	return (
 		<img
-			src="/src/assets/images/puntos-colombia.png"
+			src={logoPuntosColombia}
 			alt="Puntos Colombia"
 			width={size}
 			height={size}
