@@ -1,5 +1,6 @@
-import { BanknoteArrowDown, CreditCard, Settings, Star } from "lucide-react";
+import { BanknoteArrowDown, CreditCard, Settings } from "lucide-react";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { IconPuntosColombia } from "./icon-puntos-colombia";
 import type { MenuTilesData } from "./types";
 
 /**
@@ -25,7 +26,7 @@ export const useMenuTilesData = (): MenuTilesData => {
 		{
 			key: "fidelizacion",
 			title: "FIDELIZACION",
-			icon: <Star size={64} />,
+			icon: <IconPuntosColombia size={64} />,
 			action: () => navigateTo("loyalty"),
 		},
 		{
