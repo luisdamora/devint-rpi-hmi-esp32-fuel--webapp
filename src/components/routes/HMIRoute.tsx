@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router";
-import { HMIFrame } from "../layout/hmi-frame";
+import { HMIFrame } from "../layouts/hmi-frame";
 import { HMILayout } from "../layouts/hmi-layout";
 
 /**

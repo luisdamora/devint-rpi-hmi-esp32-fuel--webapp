@@ -1,5 +1,5 @@
 import React from "react";
-import { HMIContainer } from "@/components/layout/hmi-container";
+import { HMIContainer } from "@/components/layouts/hmi-container";
 import { OperatorHeader } from "../shared/components/operator-header";
 import { SideNavigation } from "../shared/components/side-navigation";
 import { CloseTurnButton } from "./components/close-turn-button";

@@ -1,6 +1,6 @@
 import { Home, UserPlus } from "lucide-react";
 import React from "react";
-import { HMIContainer } from "@/components/layout/hmi-container";
+import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SideTile } from "@/components/modules/sales/cash-sale/components/side-tile";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";

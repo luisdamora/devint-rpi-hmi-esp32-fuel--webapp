@@ -1,6 +1,6 @@
 import { BanknoteArrowDown, Home } from "lucide-react";
 import React from "react";
-import { HMIContainer } from "@/components/layout/hmi-container";
+import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { ActionButtons } from "./components/action-buttons";
 import { AmountDisplay } from "./components/amount-display";

@@ -1,5 +1,5 @@
 import React from "react";
-import { HMIContainer } from "@/components/layout/hmi-container";
+import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useMenuTheme } from "@/lib/hooks/use-ui-store-helpers";
 import { AuthTile } from "./auth-tile";
 import { useMenuTilesData } from "./menu-data";
