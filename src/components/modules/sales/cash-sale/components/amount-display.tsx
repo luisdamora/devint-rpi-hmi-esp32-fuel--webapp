@@ -4,10 +4,12 @@ import { NEXUS_COLORS } from "@/lib/config/theme";
 
 interface AmountDisplayProps {
 	displayMoney: () => string;
+	mode: "cash" | "volume";
 }
 
 export const AmountDisplay: React.FC<AmountDisplayProps> = ({
 	displayMoney,
+	mode,
 }) => (
 	<div className="mb-3 text-center">
 		<div className="flex gap-3 justify-center mt-2">
@@ -18,7 +20,7 @@ export const AmountDisplay: React.FC<AmountDisplayProps> = ({
 					color: NEXUS_COLORS.white,
 				}}
 			>
-				$ {displayMoney()}
+				{mode === "cash" ? `$ ${displayMoney()}` : `${displayMoney()} Gal.`}
 			</div>
 			<button
 				type="button"

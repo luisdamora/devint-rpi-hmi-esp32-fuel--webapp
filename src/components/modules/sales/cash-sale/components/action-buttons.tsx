@@ -6,20 +6,22 @@ import { BUTTON_STYLES, BUTTON_VARIANTS } from "@/lib/config/theme";
 export type PaymentMode = "cash" | "volume";
 
 interface ActionButtonsProps {
+	mode: PaymentMode;
+	onModeChange: (mode: PaymentMode) => void;
 	onTripleZero: (mode: PaymentMode) => void;
 }
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({
+	mode,
+	onModeChange,
 	onTripleZero,
 }) => {
-	const [activeMode, setActiveMode] = useState<PaymentMode>("cash");
-
-	const handleModeToggle = (mode: PaymentMode) => {
-		setActiveMode(mode);
+	const handleModeToggle = (newMode: PaymentMode) => {
+		onModeChange(newMode);
 	};
 
 	const handleTripleZeroClick = () => {
-		onTripleZero(activeMode);
+		onTripleZero(mode);
 	};
 
 	return (
@@ -29,7 +31,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 				type="button"
 				onClick={() => handleModeToggle("cash")}
 				className={`flex items-center justify-center transition-all duration-200 ${
-					activeMode === "cash"
+					mode === "cash"
 						? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg ring-2 ring-blue-400"
 						: "bg-gray-600 hover:bg-gray-700 text-gray-300"
 				} py-3 px-4 rounded-lg font-semibold active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500`}
@@ -42,7 +44,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 				type="button"
 				onClick={() => handleModeToggle("volume")}
 				className={`flex items-center justify-center transition-all duration-200 ${
-					activeMode === "volume"
+					mode === "volume"
 						? "bg-green-600 hover:bg-green-700 text-white shadow-lg ring-2 ring-green-400"
 						: "bg-gray-600 hover:bg-gray-700 text-gray-300"
 				} py-3 px-4 rounded-lg font-semibold active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-500`}
@@ -57,7 +59,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 				onClick={handleTripleZeroClick}
 				className={`${BUTTON_STYLES.primary} flex items-center justify-center`}
 			>
-				{activeMode === "cash" ? "x $1.000" : ","}
+				{mode === "cash" ? "x $1.000" : ","}
 			</button>
 		</div>
 	);

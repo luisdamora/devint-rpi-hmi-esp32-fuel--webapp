@@ -1,7 +1,8 @@
 import { BanknoteArrowDown, Home } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import type { PaymentMode } from "./components/action-buttons";
 import { ActionButtons } from "./components/action-buttons";
 import { AmountDisplay } from "./components/amount-display";
 import { Keypad } from "./components/keypad";
@@ -10,12 +11,15 @@ import { useCashSaleCalculator } from "./hooks/use-cash-sale-calculator";
 
 export const CashSaleViewComponent: React.FC = () => {
 	const { navigateTo, navigateBack } = useHMINavigation();
+	const [activeMode, setActiveMode] = useState<PaymentMode>("cash");
 	const { displayMoney, handleNumber, handleTripleZero, handleClear } =
 		useCashSaleCalculator();
 
-	const handleTripleZeroWithMode = (
-		mode: import("./components/action-buttons").PaymentMode,
-	) => {
+	const handleModeChange = (mode: PaymentMode) => {
+		setActiveMode(mode);
+	};
+
+	const handleTripleZeroWithMode = (mode: PaymentMode) => {
 		handleTripleZero(mode);
 	};
 
@@ -39,9 +43,13 @@ export const CashSaleViewComponent: React.FC = () => {
 
 					{/* Centro: preset y keypad */}
 					<div className="col-span-3">
-						<AmountDisplay displayMoney={displayMoney} />
+						<AmountDisplay displayMoney={displayMoney} mode={activeMode} />
 
-						<ActionButtons onTripleZero={handleTripleZeroWithMode} />
+						<ActionButtons
+							mode={activeMode}
+							onModeChange={handleModeChange}
+							onTripleZero={handleTripleZeroWithMode}
+						/>
 
 						<Keypad
 							onNumber={handleNumber}
