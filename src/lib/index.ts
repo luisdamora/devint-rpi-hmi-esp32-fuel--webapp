@@ -2,13 +2,12 @@
 
 // Components
 export { HMILayout } from "../components/layouts/hmi-layout";
-export { CloseTurnViewComponent } from "../components/modules/auth/close-turn-view";
-export { LoginViewComponent } from "../components/modules/auth/login-view";
+export { CloseTurnViewComponent } from "../components/modules/auth/close-turn-view/close-turn-view";
+export { LoginViewComponent } from "../components/modules/auth/login-view/login-view";
 export { MainMenu } from "../components/modules/auth/main-menu";
 // Module Components
 export { SplashScreen } from "../components/modules/auth/splash-screen";
 export { PointsView } from "../components/modules/loyalty/points-view";
-export { KeypadViewComponent } from "../components/modules/sales/keypad-view";
 export { PaymentMethods } from "../components/modules/sales/payment-methods";
 // Layout Configuration
 export {
