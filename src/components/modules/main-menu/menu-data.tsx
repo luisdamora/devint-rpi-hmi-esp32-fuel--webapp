@@ -1,33 +1,24 @@
-import { BanknoteArrowDown, CreditCard, Settings, Star } from "lucide-react";
+import {
+	BanknoteArrowDown,
+	CreditCard,
+	LogIn,
+	LogOut,
+	Settings,
+	Star,
+} from "lucide-react";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { useSession } from "@/lib/hooks/use-ui-store-helpers";
 import type { MenuTilesData } from "./types";
-
-/**
- * Hook personalizado para obtener la función de navegación
- * Esto permite separar la lógica de navegación de los datos de configuración
- */
-const useMenuNavigation = () => {
-	const { navigateTo } = useHMINavigation();
-
-	return {
-		navigateTo,
-	};
-};
 
 /**
  * Datos de configuración de los tiles del menú principal
  * Cada tile representa una acción disponible en el menú
  */
 export const useMenuTilesData = (): MenuTilesData => {
-	const { navigateTo } = useMenuNavigation();
+	const { navigateTo, goToLogin } = useHMINavigation();
+	const { isTurnActive, logout } = useSession();
 
 	return [
-		// {
-		// 	key: "turnos",
-		// 	title: "TURNOS",
-		// 	icon: <Calendar size={64} />,
-		// 	action: () => navigateTo("close-turn"),
-		// },
 		{
 			key: "contado",
 			title: "CONTADO",
@@ -40,12 +31,6 @@ export const useMenuTilesData = (): MenuTilesData => {
 			icon: <CreditCard size={64} />,
 			action: () => navigateTo("payment"),
 		},
-		// {
-		// 	key: "inicio",
-		// 	title: "INICIO",
-		// 	icon: <Home size={64} />,
-		// 	action: () => navigateTo("login"),
-		// },
 		{
 			key: "fidelizacion",
 			title: "FIDELIZACION",
@@ -57,6 +42,12 @@ export const useMenuTilesData = (): MenuTilesData => {
 			title: "UTILIDADES",
 			icon: <Settings size={64} />,
 			action: undefined, // Sin acción definida por ahora
+		},
+		{
+			key: "auth",
+			title: isTurnActive ? "CERRAR SESIÓN" : "INICIAR SESIÓN",
+			icon: isTurnActive ? <LogOut size={64} /> : <LogIn size={64} />,
+			action: isTurnActive ? logout : () => goToLogin(),
 		},
 	] as const;
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
 import { useMenuTheme } from "@/lib/hooks/use-ui-store-helpers";
-import { MenuTile } from "./menu-tile";
 import { useMenuTilesData } from "./menu-data";
+import { MenuTile } from "./menu-tile";
 import type { MainMenuProps } from "./types";
 
 /**
@@ -21,10 +21,13 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 	return (
 		<HMIContainer>
 			<div className="min-h-full w-full flex items-center justify-center px-4">
-				<div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto w-2/3">
+				<div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto w-3/4">
 					{tiles.map((tile) => {
 						// Deshabilitar tiles si no hay turno activo, excepto algunos casos específicos
-						const disabled = !isTurnActive && !tile.key.includes("inicio");
+						const disabled =
+							!isTurnActive &&
+							!tile.key.includes("inicio") &&
+							tile.key !== "auth";
 
 						return (
 							<MenuTile
