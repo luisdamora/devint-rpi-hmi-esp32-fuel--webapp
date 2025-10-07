@@ -39,12 +39,7 @@ export interface MenuTileData {
 /**
  * Claves válidas para los tiles del menú
  */
-export type MenuTileKey =
-	| "contado"
-	| "credito"
-	| "fidelizacion"
-	| "utilidades"
-	| "auth";
+export type MenuTileKey = "contado" | "credito" | "fidelizacion" | "utilidades";
 
 /**
  * Tipo para el array de tiles del menú
