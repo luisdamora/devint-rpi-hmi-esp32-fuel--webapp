@@ -7,26 +7,21 @@ This document describes the modular structure of the authentication module compo
 ```
 auth/
 ├── login-view/
-│   ├── index.tsx                    # Main LoginView component
+│   ├── login-view.tsx               # Main LoginView component
 │   ├── components/
-│   │   ├── index.ts                 # Components barrel export
 │   │   └── login-form.tsx           # Login form with inputs and submit button
 │   └── hooks/
-│       ├── index.ts                 # Hooks barrel export
 │       └── use-login-form.ts        # Custom hook for form state and logic
 │
 ├── close-turn-view/
-│   ├── index.tsx                    # Main CloseTurnView component
+│   ├── close-turn-view.tsx          # Main CloseTurnView component
 │   ├── components/
-│   │   ├── index.ts                 # Components barrel export
 │   │   └── close-turn-button.tsx   # Close turn action button
 │   └── hooks/
-│       ├── index.ts                 # Hooks barrel export
 │       └── use-close-turn.ts        # Custom hook for close turn logic
 │
 └── shared/
     └── components/
-        ├── index.ts                 # Shared components barrel export
         ├── side-tile.tsx            # Reusable side navigation tile
         ├── operator-header.tsx      # Operator information header
         └── side-navigation.tsx      # Side navigation with tiles
@@ -36,7 +31,7 @@ auth/
 
 ### Login View Module
 
-#### `LoginViewComponent` (index.tsx)
+#### `LoginViewComponent` (login-view.tsx)
 - **Purpose**: Main container for the login view
 - **Responsibilities**: 
   - Layout composition
@@ -71,7 +66,7 @@ auth/
 
 ### Close Turn View Module
 
-#### `CloseTurnViewComponent` (index.tsx)
+#### `CloseTurnViewComponent` (close-turn-view.tsx)
 - **Purpose**: Main container for the close turn view
 - **Responsibilities**: 
   - Layout composition
@@ -120,21 +115,21 @@ auth/
   - Render navigation tiles (TURNOS, INICIO)
   - Handle navigation between views
 
-## Import Patterns
+## Import Patterns (Direct imports, no barrels)
 
-Thanks to barrel exports (index.ts files), imports are clean and organized:
-
-```typescript
+```ts
 // Main view components
-import { LoginViewComponent } from "@/components/modules/auth/login-view";
-import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view";
+import { LoginViewComponent } from "@/components/modules/auth/login-view/login-view";
+import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view/close-turn-view";
 
 // Within a module
-import { LoginForm } from "./components";
-import { useLoginForm } from "./hooks";
+import { LoginForm } from "./components/login-form";
+import { useLoginForm } from "./hooks/use-login-form";
 
 // Shared components
-import { SideNavigation, OperatorHeader, SideTile } from "../shared/components";
+import { SideNavigation } from "../shared/components/side-navigation";
+import { OperatorHeader } from "../shared/components/operator-header";
+import { SideTile } from "../shared/components/side-tile";
 ```
 
 ## Benefits of This Structure
@@ -144,7 +139,7 @@ import { SideNavigation, OperatorHeader, SideTile } from "../shared/components";
 3. **Testability**: Hooks and components can be tested independently
 4. **Maintainability**: Changes are localized to specific files
 5. **Scalability**: Easy to add new features without modifying existing code
-6. **Clean Imports**: Barrel exports make imports more readable
+6. **Explicit Imports**: Direct, explicit import paths (sin barrels) según las reglas del proyecto
 
 ## Future Enhancements
 

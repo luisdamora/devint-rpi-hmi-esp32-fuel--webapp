@@ -1,8 +1,9 @@
 import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
-import { SideNavigation, OperatorHeader } from "../shared/components";
-import { LoginForm } from "./components";
-import { useLoginForm } from "./hooks";
+import { SideNavigation } from "../shared/components/side-navigation";
+import { OperatorHeader } from "../shared/components/operator-header";
+import { LoginForm } from "./components/login-form";
+import { useLoginForm } from "./hooks/use-login-form";
 
 export const LoginViewComponent: React.FC = () => {
 	const {

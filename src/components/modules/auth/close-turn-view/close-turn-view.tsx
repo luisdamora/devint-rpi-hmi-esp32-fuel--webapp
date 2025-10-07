@@ -1,8 +1,9 @@
 import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
-import { SideNavigation, OperatorHeader } from "../shared/components";
-import { CloseTurnButton } from "./components";
-import { useCloseTurn } from "./hooks";
+import { SideNavigation } from "../shared/components/side-navigation";
+import { OperatorHeader } from "../shared/components/operator-header";
+import { CloseTurnButton } from "./components/close-turn-button";
+import { useCloseTurn } from "./hooks/use-close-turn";
 
 export const CloseTurnViewComponent: React.FC = () => {
 	const { handleCloseTurn } = useCloseTurn();
