@@ -1,63 +1,16 @@
 import { createBrowserRouter, Link, Navigate } from "react-router";
+import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view";
+import { LoginViewComponent } from "@/components/modules/auth/login-view";
+import { MainMenu } from "@/components/modules/auth/main-menu";
+
+// HMI View Components
+import { SplashScreen } from "@/components/modules/auth/splash-screen";
+import { PointsView } from "@/components/modules/loyalty/points-view";
+import { KeypadViewComponent } from "@/components/modules/sales/keypad-view";
+import { PaymentMethods } from "@/components/modules/sales/payment-methods";
 import { AdminRoute } from "@/components/routes/AdminRoute";
 import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
-
-// Páginas de ejemplo (se pueden crear después si es necesario)
-const HomePage = () => (
-	<PublicRoute title="Bienvenido a Nexus POS">
-		<div className="text-center">
-			<h2 className="text-xl font-semibold mb-4">Seleccione una opción</h2>
-			<div className="space-y-3">
-				<Link
-					to="/hmi"
-					className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors text-center"
-				>
-					🚱 Iniciar Sistema HMI
-				</Link>
-				<Link
-					to="/admin"
-					className="block w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-lg transition-colors text-center"
-				>
-					⚙️ Panel Administrativo
-				</Link>
-			</div>
-		</div>
-	</PublicRoute>
-);
-
-const LoginPage = () => (
-	<PublicRoute title="Iniciar Sesión">
-		<form className="space-y-4">
-			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
-					Usuario
-				</label>
-				<input
-					type="text"
-					className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-					placeholder="Ingrese su usuario"
-				/>
-			</div>
-			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
-					Contraseña
-				</label>
-				<input
-					type="password"
-					className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-					placeholder="Ingrese su contraseña"
-				/>
-			</div>
-			<button
-				type="submit"
-				className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-			>
-				Iniciar Sesión
-			</button>
-		</form>
-	</PublicRoute>
-);
 
 const AdminDashboard = () => (
 	<AdminRoute>
@@ -94,14 +47,20 @@ const SettingsPage = () => (
 					<div className="space-y-4">
 						<div className="flex items-center justify-between">
 							<span>Modo Mantenimiento</span>
-							<button className="bg-gray-200 relative inline-flex h-6 w-11 items-center rounded-full">
-								<span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1"></span>
+							<button
+								type="button"
+								className="bg-gray-200 relative inline-flex h-6 w-11 items-center rounded-full"
+							>
+								<span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-1" />
 							</button>
 						</div>
 						<div className="flex items-center justify-between">
 							<span>Notificaciones</span>
-							<button className="bg-blue-600 relative inline-flex h-6 w-11 items-center rounded-full">
-								<span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6"></span>
+							<button
+								type="button"
+								className="bg-blue-600 relative inline-flex h-6 w-11 items-center rounded-full"
+							>
+								<span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6" />
 							</button>
 						</div>
 					</div>
@@ -114,47 +73,39 @@ const SettingsPage = () => (
 export const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Navigate to="/home" replace />,
-	},
-	{
-		path: "/home",
-		element: <HomePage />,
-	},
-	{
-		path: "/login",
-		element: <LoginPage />,
-	},
-	{
-		path: "/hmi",
 		element: <HMIRoute />,
 		children: [
 			{
+				index: true,
+				element: <Navigate to="/splash" replace />,
+			},
+			{
 				path: "splash",
-				element: <HMIRoute initialView="splash-screen" />,
+				element: <SplashScreen />,
 			},
 			{
 				path: "menu",
-				element: <HMIRoute initialView="main-menu" />,
+				element: <MainMenu />,
 			},
 			{
 				path: "login",
-				element: <HMIRoute initialView="login" />,
+				element: <LoginViewComponent />,
 			},
 			{
 				path: "keypad",
-				element: <HMIRoute initialView="keypad" />,
+				element: <KeypadViewComponent />,
 			},
 			{
 				path: "payment",
-				element: <HMIRoute initialView="payment-methods" />,
+				element: <PaymentMethods />,
 			},
 			{
 				path: "loyalty",
-				element: <HMIRoute initialView="loyalty" />,
+				element: <PointsView />,
 			},
 			{
 				path: "close-turn",
-				element: <HMIRoute initialView="close-turn" />,
+				element: <CloseTurnViewComponent />,
 			},
 		],
 	},
@@ -177,7 +128,7 @@ export const router = createBrowserRouter([
 						La página que está buscando no existe o ha sido movida.
 					</p>
 					<Link
-						to="/home"
+						to="/splash"
 						className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
 					>
 						Volver al Inicio

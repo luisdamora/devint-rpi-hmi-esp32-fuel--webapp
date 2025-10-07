@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 interface KeypadViewProps {
 	mode?: "money" | "volume";
@@ -7,6 +8,7 @@ interface KeypadViewProps {
 export const KeypadViewComponent: React.FC<KeypadViewProps> = ({
 	mode = "money",
 }) => {
+	const { navigateBack } = useHMINavigation();
 	const [value, setValue] = useState("0");
 	const [isDecimal, setIsDecimal] = useState(false);
 
@@ -49,7 +51,11 @@ export const KeypadViewComponent: React.FC<KeypadViewProps> = ({
 					<h1 className="text-xl font-bold">
 						{mode === "money" ? "Ingreso de Monto" : "Ingreso de Volumen"}
 					</h1>
-					<button type="button" className="text-white hover:text-gray-200">
+					<button
+						type="button"
+						onClick={navigateBack}
+						className="text-white hover:text-gray-200"
+					>
 						← Atrás
 					</button>
 				</div>
@@ -125,6 +131,7 @@ export const KeypadViewComponent: React.FC<KeypadViewProps> = ({
 				<div className="flex space-x-4">
 					<button
 						type="button"
+						onClick={navigateBack}
 						className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors"
 					>
 						Cancelar

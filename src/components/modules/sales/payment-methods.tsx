@@ -1,6 +1,8 @@
 import React from "react";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 export const PaymentMethods: React.FC = () => {
+	const { navigateBack } = useHMINavigation();
 	const methods = [
 		{ id: "cash", name: "Efectivo", icon: "💵", color: "green" },
 		{ id: "card", name: "Tarjeta", icon: "💳", color: "blue" },
@@ -16,7 +18,11 @@ export const PaymentMethods: React.FC = () => {
 			<div className="bg-blue-600 text-white px-6 py-4">
 				<div className="flex justify-between items-center">
 					<h1 className="text-xl font-bold">Métodos de Pago</h1>
-					<button type="button" className="text-white hover:text-gray-200">
+					<button
+						type="button"
+						onClick={navigateBack}
+						className="text-white hover:text-gray-200"
+					>
 						← Atrás
 					</button>
 				</div>

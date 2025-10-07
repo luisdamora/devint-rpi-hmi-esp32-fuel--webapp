@@ -1,20 +1,13 @@
 import React from "react";
 import { NEXUS_COLORS } from "@/lib/config/theme";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 interface MainMenuProps {
 	turnActive?: boolean;
-	navigateTo?: (viewId: string) => void;
 }
 
-export const MainMenu: React.FC<MainMenuProps> = ({
-	turnActive = false,
-	navigateTo,
-}) => {
-	const handleNavigation = (viewId: string) => {
-		if (navigateTo) {
-			navigateTo(viewId);
-		}
-	};
+export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
+	const { navigateTo } = useHMINavigation();
 
 	return (
 		<div
@@ -48,7 +41,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 						<>
 							<button
 								type="button"
-								onClick={() => handleNavigation("keypad")}
+								onClick={() => navigateTo("keypad")}
 								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
 								style={{
 									backgroundColor: NEXUS_COLORS.primary.blue,
@@ -60,7 +53,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 							</button>
 							<button
 								type="button"
-								onClick={() => handleNavigation("payment-methods")}
+								onClick={() => navigateTo("payment")}
 								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
 								style={{
 									backgroundColor: NEXUS_COLORS.primary.blue,
@@ -72,7 +65,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 							</button>
 							<button
 								type="button"
-								onClick={() => handleNavigation("loyalty")}
+								onClick={() => navigateTo("loyalty")}
 								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
 								style={{
 									backgroundColor: NEXUS_COLORS.status.orange,
@@ -96,7 +89,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 							</button>
 							<button
 								type="button"
-								onClick={() => handleNavigation("close-turn")}
+								onClick={() => navigateTo("close-turn")}
 								className="rounded-lg p-4 flex flex-col items-center transition-all hover:scale-105"
 								style={{
 									backgroundColor: NEXUS_COLORS.status.red,
@@ -110,7 +103,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 					) : (
 						<button
 							type="button"
-							onClick={() => handleNavigation("login")}
+							onClick={() => navigateTo("login")}
 							className="rounded-lg p-6 flex flex-col items-center transition-all hover:scale-105 mx-auto"
 							style={{
 								backgroundColor: NEXUS_COLORS.status.green,

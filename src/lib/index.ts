@@ -27,13 +27,13 @@ export {
 	getViewsByModule,
 	VIEW_REGISTRY,
 } from "./config/view-registry";
-export { useViewNavigation, ViewManager } from "./navigation/view-manager";
+// Navigation hook
+export { useHMINavigation } from "./hooks/use-hmi-navigation";
 export type {
 	HMILayoutProps,
 	HMIState,
 	ModuleConfig,
 	NavigationItem,
-	ViewManagerProps,
 	ViewRegistryItem,
 	ViewState,
 } from "./types/modules";

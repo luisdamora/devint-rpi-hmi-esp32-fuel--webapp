@@ -1,6 +1,14 @@
 import React from "react";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 export const CloseTurnViewComponent: React.FC = () => {
+	const { navigateBack, goToMenu } = useHMINavigation();
+
+	const handleCloseTurn = () => {
+		// Logic to close turn
+		goToMenu();
+	};
+
 	return (
 		<div className="flex items-center justify-center h-screen bg-gradient-to-br from-red-900 to-red-600">
 			<div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-2xl">
@@ -40,12 +48,14 @@ export const CloseTurnViewComponent: React.FC = () => {
 				<div className="flex space-x-4">
 					<button
 						type="button"
+						onClick={handleCloseTurn}
 						className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
 					>
 						Cerrar Turno
 					</button>
 					<button
 						type="button"
+						onClick={navigateBack}
 						className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-4 rounded-lg transition-colors"
 					>
 						Cancelar

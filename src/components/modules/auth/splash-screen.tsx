@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NEXUS_COLORS } from "@/lib/config/theme";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 export const SplashScreen: React.FC = () => {
+	const { goToMenu } = useHMINavigation();
+
+	// Auto-redirect to menu after 3 seconds
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			goToMenu();
+		}, 3000);
+
+		return () => clearTimeout(timer);
+	}, [goToMenu]);
+
 	return (
 		<div
 			className="flex flex-col items-center justify-center h-full"

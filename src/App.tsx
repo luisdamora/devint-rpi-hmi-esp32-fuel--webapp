@@ -1,15 +1,9 @@
-import { HMIFrame } from "./components/layout/hmi-frame";
-import { ViewManager } from "./lib/navigation/view-manager";
+import { RouterProvider } from "react-router";
+import { router } from "./router/routes";
 import "./App.css";
 
 function App() {
-	return (
-		<div className="App">
-			<HMIFrame>
-				<ViewManager />
-			</HMIFrame>
-		</div>
-	);
+	return <RouterProvider router={router} />;
 }
 
 export default App;

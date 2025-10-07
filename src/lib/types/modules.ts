@@ -64,10 +64,3 @@ export interface HMILayoutProps {
 	children: ReactNode;
 	currentView?: string;
 }
-
-/**
- * Props for View Manager component
- */
-export interface ViewManagerProps {
-	initialView?: string;
-}
