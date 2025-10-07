@@ -20,11 +20,12 @@ export const HMIFooterInfo: React.FC<HMIFooterInfoProps> = ({
 	primaryBg = false,
 }) => {
 	const backgroundStyle: React.CSSProperties = primaryBg
-		? { backgroundColor: NEXUS_COLORS.primary.blue }
+		? { backgroundColor: NEXUS_COLORS.background.main }
 		: {};
-	const textColor = primaryBg
-		? NEXUS_COLORS.white
-		: NEXUS_COLORS.background.dark;
+	// const textColor = primaryBg
+	// 	? NEXUS_COLORS.white
+	// 	: NEXUS_COLORS.background.dark;
+	const textColor = NEXUS_COLORS.white;
 
 	return (
 		<div
