@@ -1,0 +1,40 @@
+import React from "react";
+import { HMIContainer } from "@/components/layout/hmi-container";
+import { SideNavigation, OperatorHeader } from "../shared/components";
+import { LoginForm } from "./components";
+import { useLoginForm } from "./hooks";
+
+export const LoginViewComponent: React.FC = () => {
+	const {
+		operatorId,
+		password,
+		setOperatorId,
+		setPassword,
+		handleSubmit,
+	} = useLoginForm();
+
+	return (
+		<HMIContainer>
+			<div className="w-full h-full flex items-center justify-center px-2">
+				<div className="grid grid-cols-4 gap-4 w-full max-w-6xl">
+					{/* Left side navigation */}
+					<SideNavigation />
+
+					{/* Center login form */}
+					<div className="col-span-3">
+						<div className="mx-auto max-w-2xl">
+							<OperatorHeader />
+							<LoginForm
+								operatorId={operatorId}
+								password={password}
+								onOperatorIdChange={setOperatorId}
+								onPasswordChange={setPassword}
+								onSubmit={handleSubmit}
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</HMIContainer>
+	);
+};

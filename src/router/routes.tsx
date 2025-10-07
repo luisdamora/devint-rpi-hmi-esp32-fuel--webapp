@@ -4,8 +4,8 @@ import {
 	Navigate,
 	type RouteObject,
 } from "react-router";
-import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view";
-import { LoginViewComponent } from "@/components/modules/auth/login-view";
+import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view/index";
+import { LoginViewComponent } from "@/components/modules/auth/login-view/index";
 import { MainMenu } from "@/components/modules/auth/main-menu";
 
 // HMI View Components
