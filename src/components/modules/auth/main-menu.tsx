@@ -6,7 +6,10 @@ interface MainMenuProps {
 	navigateTo?: (viewId: string) => void;
 }
 
-export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false, navigateTo }) => {
+export const MainMenu: React.FC<MainMenuProps> = ({
+	turnActive = false,
+	navigateTo,
+}) => {
 	const handleNavigation = (viewId: string) => {
 		if (navigateTo) {
 			navigateTo(viewId);
@@ -27,18 +30,12 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false, navigate
 						: NEXUS_COLORS.status.red,
 				}}
 			>
-				<h1
-					className="font-bold"
-					style={{ fontSize: "1.25rem" }}
-				>
+				<h1 className="font-bold" style={{ fontSize: "1.25rem" }}>
 					Nexus POS
 				</h1>
 				<div className="flex items-center space-x-2">
 					<span style={{ fontSize: "0.875rem" }}>Estado:</span>
-					<span
-						className="font-semibold"
-						style={{ fontSize: "0.875rem" }}
-					>
+					<span className="font-semibold" style={{ fontSize: "0.875rem" }}>
 						{turnActive ? "Turno Activo" : "Turno Inactivo"}
 					</span>
 				</div>

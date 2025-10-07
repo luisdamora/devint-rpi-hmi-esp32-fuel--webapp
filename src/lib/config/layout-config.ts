@@ -1,8 +1,4 @@
-import type {
-	ModuleConfig,
-	NavigationItem,
-} from "@/lib/types/modules";
-
+import type { ModuleConfig, NavigationItem } from "@/lib/types/modules";
 
 /**
  * Module configurations
@@ -96,7 +92,6 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
 	},
 ];
 
-
 /**
  * Screen size configurations
  */
@@ -139,4 +134,3 @@ export function getNavigationItems(moduleId?: string): NavigationItem[] {
 
 	return items.filter((item) => item.enabled).sort((a, b) => a.order - b.order);
 }
-

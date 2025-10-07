@@ -33,7 +33,6 @@ export interface ModuleConfig {
 	enabled: boolean;
 }
 
-
 /**
  * Navigation item for HMI system
  */

@@ -1,6 +1,6 @@
 import React from "react";
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from "@/lib/config/layout-dimensions";
 import { NEXUS_THEME_CONFIG } from "@/lib/config/theme";
-import { HEADER_HEIGHT, FOOTER_HEIGHT } from "@/lib/config/layout-dimensions";
 import type { HMILayoutProps } from "@/lib/types/modules";
 
 export const HMILayout: React.FC<HMILayoutProps> = ({
@@ -28,7 +28,10 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 					>
 						<span className="text-white font-bold text-sm">POS</span>
 					</div>
-					<h1 className="text-sm font-semibold" style={{ color: NEXUS_THEME_CONFIG.text }}>
+					<h1
+						className="text-sm font-semibold"
+						style={{ color: NEXUS_THEME_CONFIG.text }}
+					>
 						Nexus POS
 					</h1>
 				</div>
@@ -44,7 +47,10 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 							className="w-2 h-2 rounded-full animate-pulse"
 							style={{ backgroundColor: NEXUS_THEME_CONFIG.success }}
 						></div>
-						<span className="text-xs" style={{ color: NEXUS_THEME_CONFIG.text }}>
+						<span
+							className="text-xs"
+							style={{ color: NEXUS_THEME_CONFIG.text }}
+						>
 							Activo
 						</span>
 					</div>

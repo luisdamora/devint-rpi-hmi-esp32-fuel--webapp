@@ -1,6 +1,6 @@
-import { createBrowserRouter, Navigate, Link } from "react-router";
-import { HMIRoute } from "@/components/routes/HMIRoute";
+import { createBrowserRouter, Link, Navigate } from "react-router";
 import { AdminRoute } from "@/components/routes/AdminRoute";
+import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
 // Páginas de ejemplo (se pueden crear después si es necesario)
