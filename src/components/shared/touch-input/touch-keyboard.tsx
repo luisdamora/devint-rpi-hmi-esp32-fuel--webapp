@@ -38,7 +38,10 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 						key={key}
 						type="button"
 						onClick={() => handleKeyPress(key)}
-						className={cn(TOUCH_INPUT_CLASSES.key, TOUCH_INPUT_CLASSES.keyNormal)}
+						className={cn(
+							TOUCH_INPUT_CLASSES.key,
+							TOUCH_INPUT_CLASSES.keyNormal,
+						)}
 						style={keyStyle}
 					>
 						{key}
@@ -47,10 +50,7 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 				<button
 					type="button"
 					onClick={onBackspace}
-					className={cn(
-						TOUCH_INPUT_CLASSES.key,
-						TOUCH_INPUT_CLASSES.keyAction,
-					)}
+					className={cn(TOUCH_INPUT_CLASSES.key, TOUCH_INPUT_CLASSES.keyAction)}
 					style={{ ...keyStyle, minWidth: "90px" }}
 					title="Borrar"
 				>
@@ -65,7 +65,10 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 						key={key}
 						type="button"
 						onClick={() => handleKeyPress(key)}
-						className={cn(TOUCH_INPUT_CLASSES.key, TOUCH_INPUT_CLASSES.keyNormal)}
+						className={cn(
+							TOUCH_INPUT_CLASSES.key,
+							TOUCH_INPUT_CLASSES.keyNormal,
+						)}
 						style={keyStyle}
 					>
 						{isUppercase ? key.toUpperCase() : key}
@@ -94,7 +97,10 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 						key={key}
 						type="button"
 						onClick={() => handleKeyPress(key)}
-						className={cn(TOUCH_INPUT_CLASSES.key, TOUCH_INPUT_CLASSES.keyNormal)}
+						className={cn(
+							TOUCH_INPUT_CLASSES.key,
+							TOUCH_INPUT_CLASSES.keyNormal,
+						)}
 						style={keyStyle}
 					>
 						{isUppercase ? key.toUpperCase() : key}
@@ -109,7 +115,10 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 						key={key}
 						type="button"
 						onClick={() => handleKeyPress(key)}
-						className={cn(TOUCH_INPUT_CLASSES.key, TOUCH_INPUT_CLASSES.keyNormal)}
+						className={cn(
+							TOUCH_INPUT_CLASSES.key,
+							TOUCH_INPUT_CLASSES.keyNormal,
+						)}
 						style={keyStyle}
 					>
 						{isUppercase && /[a-z]/.test(key) ? key.toUpperCase() : key}
