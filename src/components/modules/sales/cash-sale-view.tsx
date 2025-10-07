@@ -137,12 +137,14 @@ export const CashSaleViewComponent: React.FC = () => {
 							>
 								Vol.
 							</button>
-							<div
+							<button
+								type="button"
+								onClick={handleTripleZero}
 								className="text-center text-white font-semibold py-2 rounded-md"
 								style={{ backgroundColor: NEXUS_COLORS.background.dark }}
 							>
 								x $1.000
-							</div>
+							</button>
 						</div>
 
 						{/* Keypad */}
