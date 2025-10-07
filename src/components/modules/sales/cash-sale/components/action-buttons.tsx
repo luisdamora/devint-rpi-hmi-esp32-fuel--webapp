@@ -1,7 +1,7 @@
 import { Droplet, HandCoins } from "lucide-react";
 
-import React, { useState } from "react";
-import { BUTTON_STYLES, BUTTON_VARIANTS } from "@/lib/config/theme";
+import React from "react";
+import { BUTTON_STYLES } from "@/lib/config/theme";
 
 export type PaymentMode = "cash" | "volume";
 
