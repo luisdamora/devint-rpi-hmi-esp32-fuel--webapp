@@ -6,7 +6,7 @@ import {
 } from "react-router";
 import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view/close-turn-view";
 import { LoginViewComponent } from "@/components/modules/auth/login-view/login-view";
-import { MainMenu } from "@/components/modules/auth/main-menu";
+import { MainMenu } from "@/components/modules/main-menu";
 
 // HMI View Components
 import { SplashScreen } from "@/components/modules/auth/splash-screen";
