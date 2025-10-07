@@ -1,13 +1,10 @@
 import React from "react";
 import { Link } from "react-router";
-import { FOOTER_HEIGHT, HEADER_HEIGHT } from "@/lib/config/layout-dimensions";
+import { FOOTER_HEIGHT } from "@/lib/config/layout-dimensions";
 import { NEXUS_THEME_CONFIG } from "@/lib/config/theme";
 import type { HMILayoutProps } from "@/lib/types/modules";
 
-export const HMILayout: React.FC<HMILayoutProps> = ({
-	children,
-	currentView,
-}) => {
+export const HMILayout: React.FC<HMILayoutProps> = ({ children }) => {
 	return (
 		<div
 			className="flex flex-col h-full min-h-screen"
