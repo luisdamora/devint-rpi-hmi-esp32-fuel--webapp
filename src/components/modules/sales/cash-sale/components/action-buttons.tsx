@@ -11,12 +11,15 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 	onTripleZero,
 }) => (
 	<div className="grid grid-cols-3 gap-3 max-w-xl mx-auto mb-4">
+		{/* Cobro por dinero */}
 		<button
 			type="button"
 			className={`${BUTTON_STYLES.primary} flex items-center justify-center`}
 		>
 			<HandCoins className="w-6 h-6 mr-2" />$
 		</button>
+
+		{/* Cobro por volument  */}
 		<button
 			type="button"
 			className={`${BUTTON_STYLES.primary} flex items-center justify-center`}
@@ -24,6 +27,8 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 			<Droplet className="w-6 h-6 mr-2" />
 			Vol.
 		</button>
+
+		{/* Opcion segun tipo de cobro */}
 		<button
 			type="button"
 			onClick={onTripleZero}
