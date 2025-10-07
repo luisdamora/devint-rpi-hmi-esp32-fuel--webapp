@@ -13,6 +13,12 @@ export const CashSaleViewComponent: React.FC = () => {
 	const { displayMoney, handleNumber, handleTripleZero, handleClear } =
 		useCashSaleCalculator();
 
+	const handleTripleZeroWithMode = (
+		mode: import("./components/action-buttons").PaymentMode,
+	) => {
+		handleTripleZero(mode);
+	};
+
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center px-2">
@@ -35,7 +41,7 @@ export const CashSaleViewComponent: React.FC = () => {
 					<div className="col-span-3">
 						<AmountDisplay displayMoney={displayMoney} />
 
-						<ActionButtons onTripleZero={handleTripleZero} />
+						<ActionButtons onTripleZero={handleTripleZeroWithMode} />
 
 						<Keypad
 							onNumber={handleNumber}
