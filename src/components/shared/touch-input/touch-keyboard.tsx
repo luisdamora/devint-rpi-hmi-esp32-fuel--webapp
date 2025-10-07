@@ -3,6 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import {
 	KEYBOARD_LAYOUT,
+	NUMERIC_KEYBOARD_LAYOUT,
 	TOUCH_INPUT_CLASSES,
 	TOUCH_INPUT_SIZES,
 } from "./constants";
@@ -17,6 +18,7 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 	onSpace,
 	onToggleCase,
 	isUppercase,
+	mode = "full",
 }) => {
 	const handleKeyPress = (key: string) => {
 		const finalKey = isUppercase ? key.toUpperCase() : key;
@@ -29,6 +31,98 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 		fontSize: TOUCH_INPUT_SIZES.keyboardKeyFontSize,
 	};
 
+	// Renderizar teclado numérico
+	if (mode === "numeric") {
+		return (
+			<div className={TOUCH_INPUT_CLASSES.keyboardContainer}>
+				{/* Fila 1: 1-3 */}
+				<div className={TOUCH_INPUT_CLASSES.keyboardRow}>
+					{NUMERIC_KEYBOARD_LAYOUT.row1.map((key) => (
+						<button
+							key={key}
+							type="button"
+							onClick={() => handleKeyPress(key)}
+							className={cn(
+								TOUCH_INPUT_CLASSES.key,
+								TOUCH_INPUT_CLASSES.keyNormal,
+							)}
+							style={{ ...keyStyle, minWidth: "120px", minHeight: "80px" }}
+						>
+							{key}
+						</button>
+					))}
+				</div>
+
+				{/* Fila 2: 4-6 */}
+				<div className={TOUCH_INPUT_CLASSES.keyboardRow}>
+					{NUMERIC_KEYBOARD_LAYOUT.row2.map((key) => (
+						<button
+							key={key}
+							type="button"
+							onClick={() => handleKeyPress(key)}
+							className={cn(
+								TOUCH_INPUT_CLASSES.key,
+								TOUCH_INPUT_CLASSES.keyNormal,
+							)}
+							style={{ ...keyStyle, minWidth: "120px", minHeight: "80px" }}
+						>
+							{key}
+						</button>
+					))}
+				</div>
+
+				{/* Fila 3: 7-9 */}
+				<div className={TOUCH_INPUT_CLASSES.keyboardRow}>
+					{NUMERIC_KEYBOARD_LAYOUT.row3.map((key) => (
+						<button
+							key={key}
+							type="button"
+							onClick={() => handleKeyPress(key)}
+							className={cn(
+								TOUCH_INPUT_CLASSES.key,
+								TOUCH_INPUT_CLASSES.keyNormal,
+							)}
+							style={{ ...keyStyle, minWidth: "120px", minHeight: "80px" }}
+						>
+							{key}
+						</button>
+					))}
+				</div>
+
+				{/* Fila 4: - y 0 con backspace */}
+				<div className={TOUCH_INPUT_CLASSES.keyboardRow}>
+					{NUMERIC_KEYBOARD_LAYOUT.row4.map((key) => (
+						<button
+							key={key}
+							type="button"
+							onClick={() => handleKeyPress(key)}
+							className={cn(
+								TOUCH_INPUT_CLASSES.key,
+								TOUCH_INPUT_CLASSES.keyNormal,
+							)}
+							style={{ ...keyStyle, minWidth: "120px", minHeight: "80px" }}
+						>
+							{key}
+						</button>
+					))}
+					<button
+						type="button"
+						onClick={onBackspace}
+						className={cn(
+							TOUCH_INPUT_CLASSES.key,
+							TOUCH_INPUT_CLASSES.keyAction,
+						)}
+						style={{ ...keyStyle, minWidth: "120px", minHeight: "80px" }}
+						title="Borrar"
+					>
+						<Delete size={24} className="inline" />
+					</button>
+				</div>
+			</div>
+		);
+	}
+
+	// Renderizar teclado completo QWERTY
 	return (
 		<div className={TOUCH_INPUT_CLASSES.keyboardContainer}>
 			{/* Fila 1: Números */}

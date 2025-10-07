@@ -121,6 +121,7 @@ interface TouchInputProps {
   required?: boolean;
   id?: string;
   useFixedDimensions?: boolean;
+  keyboardMode?: "full" | "numeric";  // Modo del teclado
 }
 ```
 
@@ -128,11 +129,20 @@ interface TouchInputProps {
 
 ### Layout del Teclado
 ```typescript
+// Teclado completo QWERTY
 KEYBOARD_LAYOUT = {
   row1: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
   row2: ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   row3: ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ñ"],
   row4: ["z", "x", "c", "v", "b", "n", "m", "@", ".", "-"],
+}
+
+// Teclado numérico
+NUMERIC_KEYBOARD_LAYOUT = {
+  row1: ["1", "2", "3"],
+  row2: ["4", "5", "6"],
+  row3: ["7", "8", "9"],
+  row4: ["-", "0"],
 }
 ```
 
@@ -193,6 +203,21 @@ const [formData, setFormData] = useState({
   id="name"
 />
 ```
+
+### Ejemplo con Teclado Numérico
+```tsx
+const [code, setCode] = useState("");
+
+<TouchInput
+  value={code}
+  onChange={setCode}
+  label="Código:"
+  placeholder="Ingrese código..."
+  maxLength={20}
+  keyboardMode="numeric"
+/>
+```
+Teclado solo con números (0-9) y guion (-)
 
 ## 🎨 Dimensiones del Modal
 
@@ -331,7 +356,7 @@ const handleNameChange = (value: string) => {
 
 ## 🔮 Mejoras Futuras
 
-- [ ] Teclado numérico especializado
+- [x] Teclado numérico especializado
 - [ ] Más layouts (AZERTY, DVORAK)
 - [ ] Autocompletado / Sugerencias
 - [ ] Voz a texto

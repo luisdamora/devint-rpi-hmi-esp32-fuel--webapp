@@ -19,6 +19,7 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 	onClose,
 	onConfirm,
 	useFixedDimensions = false,
+	keyboardMode = "full",
 }) => {
 	// Handlers del teclado
 	const handleKeyPress = (key: string) => {
@@ -113,6 +114,7 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 					onClear={handleClear}
 					isUppercase={isUppercase}
 					onToggleCase={() => setIsUppercase(!isUppercase)}
+					mode={keyboardMode}
 				/>
 
 				{/* Botones de acción */}

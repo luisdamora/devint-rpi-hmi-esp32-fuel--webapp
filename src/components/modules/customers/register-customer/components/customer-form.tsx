@@ -59,9 +59,10 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					placeholder="Ingrese el número"
 					maxLength={10}
 					id="documentNumber"
+					keyboardMode="numeric"
 					useFixedDimensions
 				/>
-				<TouchInput
+				{/* <TouchInput
 					className="w-24"
 					value={verificationDigit}
 					onChange={onVerificationDigitChange}
@@ -70,7 +71,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					maxLength={1}
 					id="verificationDigit"
 					useFixedDimensions
-				/>
+				/> */}
 			</div>
 
 			{/* Nombre / Razón Social */}

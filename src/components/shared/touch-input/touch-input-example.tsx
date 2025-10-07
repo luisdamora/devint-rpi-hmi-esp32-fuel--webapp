@@ -157,3 +157,32 @@ export const TouchInputWithFixedDimensions: React.FC = () => {
 		</div>
 	);
 };
+
+/**
+ * Ejemplo con teclado numérico
+ */
+export const TouchInputNumericKeyboard: React.FC = () => {
+	const [numericValue, setNumericValue] = useState("");
+
+	return (
+		<div className="p-8">
+			<h2 className="text-white text-xl font-bold mb-4">
+				TouchInput con Teclado Numérico
+			</h2>
+			<TouchInput
+				value={numericValue}
+				onChange={setNumericValue}
+				label="Código Numérico:"
+				placeholder="Ingrese código..."
+				maxLength={20}
+				keyboardMode="numeric"
+			/>
+			<p className="text-gray-400 mt-4 text-sm">
+				Teclado solo números (0-9) y guion (-)
+			</p>
+			<div className="mt-4 p-4 bg-gray-800 rounded-lg">
+				<p className="text-gray-300">Valor: {numericValue || "(vacío)"}</p>
+			</div>
+		</div>
+	);
+};

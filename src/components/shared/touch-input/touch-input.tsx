@@ -33,17 +33,10 @@ export const TouchInput: React.FC<TouchInputProps> = ({
 	maxLength,
 	id,
 	useFixedDimensions = false,
+	keyboardMode = "full",
 }) => {
-	const {
-		isOpen,
-		tempValue,
-		isUppercase,
-		handleOpen,
-		handleClose,
-		handleConfirm,
-		handleTempChange,
-		toggleCase,
-	} = useTouchInput(value, onChange, disabled);
+	const { isOpen, tempValue, handleOpen, handleClose, handleConfirm, handleTempChange } =
+		useTouchInput(value, onChange, disabled);
 
 	return (
 		<>
@@ -69,6 +62,7 @@ export const TouchInput: React.FC<TouchInputProps> = ({
 				onClose={handleClose}
 				onConfirm={handleConfirm}
 				useFixedDimensions={useFixedDimensions}
+				keyboardMode={keyboardMode}
 			/>
 		</>
 	);

@@ -28,6 +28,8 @@ export interface TouchInputProps {
 	id?: string;
 	/** Usar dimensiones fijas del layout HMI (800x480px) */
 	useFixedDimensions?: boolean;
+	/** Modo del teclado: completo o solo numérico con guion */
+	keyboardMode?: "full" | "numeric";
 }
 
 /**
@@ -76,6 +78,8 @@ export interface TouchInputModalProps {
 	onConfirm: () => void;
 	/** Usar dimensiones fijas HMI */
 	useFixedDimensions?: boolean;
+	/** Modo del teclado */
+	keyboardMode?: "full" | "numeric";
 }
 
 /**
@@ -94,6 +98,8 @@ export interface TouchKeyboardProps {
 	isUppercase: boolean;
 	/** Callback al cambiar mayúsculas */
 	onToggleCase: () => void;
+	/** Modo del teclado */
+	mode?: "full" | "numeric";
 }
 
 /**
