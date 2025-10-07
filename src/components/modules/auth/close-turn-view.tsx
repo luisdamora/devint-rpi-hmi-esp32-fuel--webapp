@@ -1,67 +1,94 @@
+import { Calendar, Home } from "lucide-react";
 import React from "react";
+import { HMIContainer } from "@/components/layout/hmi-container";
+import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 export const CloseTurnViewComponent: React.FC = () => {
-	const { navigateBack, goToMenu } = useHMINavigation();
+	const { navigateTo, goToMenu } = useHMINavigation();
+
+	// Local tile (same visual language as MainMenu)
+	const SideTile: React.FC<{
+		title: string;
+		icon: React.ReactNode;
+		onClick?: () => void;
+		ariaLabel?: string;
+	}> = ({ title, icon, onClick, ariaLabel }) => (
+		<button
+			type="button"
+			onClick={onClick}
+			aria-label={ariaLabel ?? title}
+			className="group relative rounded-md border-2 p-3 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform hover:scale-[1.02] select-none"
+			style={{ borderColor: "#EF4444", backgroundColor: "transparent" }}
+		>
+			<div
+				className="absolute top-0 left-0 right-0 text-center font-semibold"
+				style={{ transform: "translateY(-50%)", color: NEXUS_COLORS.white }}
+			>
+				<span
+					className="inline-block px-4"
+					style={{ backgroundColor: "#EF4444", borderRadius: 4 }}
+				>
+					{title}
+				</span>
+			</div>
+			<div className="flex items-center justify-center h-28">
+				<span className="text-6xl text-white" aria-hidden>
+					{icon}
+				</span>
+			</div>
+		</button>
+	);
 
 	const handleCloseTurn = () => {
-		// Logic to close turn
+		// TODO: Logic to close turn
 		goToMenu();
 	};
 
 	return (
-		<div className="flex items-center justify-center h-screen bg-gradient-to-br from-red-900 to-red-600">
-			<div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-2xl">
-				<div className="text-center mb-8">
-					<div className="w-20 h-20 mx-auto bg-red-600 rounded-full flex items-center justify-center mb-4">
-						<span className="text-white text-3xl">🔒</span>
+		<HMIContainer>
+			<div className="w-full h-full flex items-center justify-center px-2">
+				<div className="grid grid-cols-4 gap-4 w-full max-w-6xl">
+					{/* Left side tiles */}
+					<div className="col-span-1 flex flex-col gap-6 self-start pt-8">
+						<SideTile
+							title="TURNOS"
+							icon={<Calendar size={64} />}
+							onClick={() => navigateTo("close-turn")}
+						/>
+						<SideTile
+							title="INICIO"
+							icon={<Home size={64} />}
+							onClick={() => navigateTo("menu")}
+						/>
 					</div>
-					<h2 className="text-2xl font-bold text-gray-800">Cerrar Turno</h2>
-					<p className="text-gray-600 mt-2">Resumen del turno actual</p>
-				</div>
 
-				{/* Turn Summary */}
-				<div className="bg-gray-50 rounded-lg p-6 mb-6">
-					<h3 className="font-semibold text-lg mb-4">Resumen de Ventas</h3>
-					<div className="space-y-3">
-						<div className="flex justify-between">
-							<span className="text-gray-600">Ventas Totales:</span>
-							<span className="font-semibold">$45,230.50</span>
-						</div>
-						<div className="flex justify-between">
-							<span className="text-gray-600">Transacciones:</span>
-							<span className="font-semibold">127</span>
-						</div>
-						<div className="flex justify-between">
-							<span className="text-gray-600">Promedio:</span>
-							<span className="font-semibold">$356.15</span>
-						</div>
-						<hr className="my-3" />
-						<div className="flex justify-between text-lg">
-							<span className="font-semibold">Total:</span>
-							<span className="font-bold text-green-600">$45,230.50</span>
+					{/* Center close turn button */}
+					<div className="col-span-3">
+						<div className="mx-auto max-w-2xl">
+							<div className="text-center mb-8">
+								<h3 className="text-white font-semibold tracking-wide">
+									VENDEDOR
+								</h3>
+								<p className="text-white text-xl font-bold">
+									SEBASTIAN RESTREPO BUSTAMANTE
+								</p>
+							</div>
+
+							<div className="flex items-center justify-center">
+								<button
+									type="button"
+									onClick={handleCloseTurn}
+									className="w-full max-w-lg font-bold py-6 rounded-md text-white text-3xl transition-transform hover:scale-[1.02]"
+									style={{ backgroundColor: "#EF4444" }}
+								>
+									CERRAR TURNO
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				{/* Action Buttons */}
-				<div className="flex space-x-4">
-					<button
-						type="button"
-						onClick={handleCloseTurn}
-						className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
-					>
-						Cerrar Turno
-					</button>
-					<button
-						type="button"
-						onClick={navigateBack}
-						className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-4 rounded-lg transition-colors"
-					>
-						Cancelar
-					</button>
 				</div>
 			</div>
-		</div>
+		</HMIContainer>
 	);
 };
