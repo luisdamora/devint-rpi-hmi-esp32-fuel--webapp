@@ -75,42 +75,39 @@ export const PaymentMethodsGrid: React.FC<PaymentMethodsGridProps> = ({
 	const isComplete = distribution.isComplete;
 
 	return (
-		<div className="space-y-6">
-			{/* Panel de información de distribución */}
+		<div className="space-y-3">
+			{/* Panel de información de distribución - Más compacto */}
 			<div
 				className={cn(
-					"border-2 rounded-lg p-4 transition-colors",
+					"border-2 rounded-lg p-2 transition-colors",
 					isComplete
 						? "bg-green-50 border-green-400"
 						: "bg-yellow-50 border-yellow-400",
 				)}
 			>
-				<h3 className="text-lg font-bold text-gray-700 mb-3">
-					Distribución de Pagos
-				</h3>
-				<div className="grid grid-cols-3 gap-4 text-center">
+				<div className="grid grid-cols-3 gap-2 text-center">
 					{/* Total */}
-					<div className="space-y-1">
-						<p className="text-sm text-gray-600 font-medium">Total</p>
-						<p className="text-xl font-bold text-gray-800">
+					<div className="space-y-0.5">
+						<p className="text-xs text-gray-600 font-medium">Total</p>
+						<p className="text-lg font-bold text-gray-800">
 							{formatCurrency(totalAmount)}
 						</p>
 					</div>
 
 					{/* Asignado */}
-					<div className="space-y-1">
-						<p className="text-sm text-gray-600 font-medium">Asignado</p>
-						<p className="text-xl font-bold text-blue-600">
+					<div className="space-y-0.5">
+						<p className="text-xs text-gray-600 font-medium">Asignado</p>
+						<p className="text-lg font-bold text-blue-600">
 							{formatCurrency(distribution.assigned)}
 						</p>
 					</div>
 
 					{/* Restante */}
-					<div className="space-y-1">
-						<p className="text-sm text-gray-600 font-medium">Restante</p>
+					<div className="space-y-0.5">
+						<p className="text-xs text-gray-600 font-medium">Restante</p>
 						<p
 							className={cn(
-								"text-xl font-bold",
+								"text-lg font-bold",
 								distribution.remaining === 0
 									? "text-green-600"
 									: "text-red-600",
@@ -121,28 +118,28 @@ export const PaymentMethodsGrid: React.FC<PaymentMethodsGridProps> = ({
 					</div>
 				</div>
 
-				{/* Mensaje de validación */}
+				{/* Mensaje de validación - Más compacto */}
 				{!isComplete && (
-					<div className="mt-3 pt-3 border-t border-yellow-300">
-						<p className="text-sm text-yellow-800 text-center">
+					<div className="mt-1.5 pt-1.5 border-t border-yellow-300">
+						<p className="text-xs text-yellow-800 text-center">
 							⚠️{" "}
 							{validationErrors.distribution ||
-								"Complete la distribución de montos para continuar"}
+								"Complete la distribución de montos"}
 						</p>
 					</div>
 				)}
 
 				{isComplete && (
-					<div className="mt-3 pt-3 border-t border-green-300">
-						<p className="text-sm text-green-800 text-center flex items-center justify-center gap-2">
+					<div className="mt-1.5 pt-1.5 border-t border-green-300">
+						<p className="text-xs text-green-800 text-center">
 							✓ Distribución completa
 						</p>
 					</div>
 				)}
 			</div>
 
-			{/* Grid de métodos de pago */}
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+			{/* Grid de métodos de pago - Más compacto */}
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
 				{methods.map((method, index) => (
 					<PaymentMethodCard
 						key={method.id}
@@ -158,39 +155,39 @@ export const PaymentMethodsGrid: React.FC<PaymentMethodsGridProps> = ({
 				))}
 			</div>
 
-			{/* Botón agregar método */}
+			{/* Botón agregar método - Más compacto */}
 			{canAddMore && (
 				<div className="flex justify-center">
 					<button
 						type="button"
 						onClick={onAddMethod}
 						className={cn(
-							"flex items-center gap-2 px-6 py-3 rounded-lg",
+							"flex items-center gap-1 px-4 py-2 rounded-lg",
 							"border-2 border-dashed border-gray-400",
-							"text-gray-600 font-semibold",
+							"text-gray-600 font-medium text-sm",
 							"hover:bg-gray-50 hover:border-gray-600",
 							"active:scale-95 transition-all duration-200",
 						)}
 					>
-						<Plus size={20} />
-						<span>Agregar Método de Pago</span>
+						<Plus size={16} />
+						<span>Agregar Método</span>
 					</button>
 				</div>
 			)}
 
-			{/* Mensaje si ya hay 3 métodos */}
+			{/* Mensaje si ya hay 3 métodos - Más compacto */}
 			{!canAddMore && (
 				<div className="text-center">
-					<p className="text-sm text-gray-500">
-						Máximo de métodos de pago alcanzado (3)
+					<p className="text-xs text-gray-500">
+						Máximo de métodos alcanzado (3)
 					</p>
 				</div>
 			)}
 
-			{/* Errores generales de métodos de pago */}
+			{/* Errores generales de métodos de pago - Más compacto */}
 			{validationErrors.paymentMethods && (
-				<div className="border-2 border-red-300 bg-red-50 rounded-lg p-4">
-					<p className="text-sm text-red-700 text-center">
+				<div className="border-2 border-red-300 bg-red-50 rounded-lg p-2">
+					<p className="text-xs text-red-700 text-center">
 						⚠️ {validationErrors.paymentMethods}
 					</p>
 				</div>
