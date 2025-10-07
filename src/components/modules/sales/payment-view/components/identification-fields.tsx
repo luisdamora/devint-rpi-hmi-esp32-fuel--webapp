@@ -88,6 +88,7 @@ export const IdentificationFields: React.FC<IdentificationFieldsProps> = ({
 						maxLength={6}
 						keyboardMode="full"
 						disabled={false}
+						useFixedDimensions
 					/>
 					{validationErrors.placa && (
 						<p className="text-sm text-red-500 px-2">
@@ -106,6 +107,7 @@ export const IdentificationFields: React.FC<IdentificationFieldsProps> = ({
 						keyboardMode="numeric"
 						disabled={isCredito}
 						className={cn(isCredito && "opacity-60")}
+						useFixedDimensions
 					/>
 					{validationErrors.idFacturaElectronica && (
 						<p className="text-sm text-red-500 px-2">
@@ -124,6 +126,7 @@ export const IdentificationFields: React.FC<IdentificationFieldsProps> = ({
 						keyboardMode="numeric"
 						disabled={isCredito}
 						className={cn(isCredito && "opacity-60")}
+						useFixedDimensions
 					/>
 					{validationErrors.idPuntosColombia && (
 						<p className="text-sm text-red-500 px-2">
@@ -131,47 +134,45 @@ export const IdentificationFields: React.FC<IdentificationFieldsProps> = ({
 						</p>
 					)}
 				</div>
+				{/* Checkbox CUPÓN */}
+				<label className="flex items-center gap-3 cursor-pointer select-none">
+					<input
+						type="checkbox"
+						checked={hasCoupon}
+						onChange={(e) => onHasCouponChange(e.target.checked)}
+						className={cn(
+							"w-6 h-6 rounded border-2 border-gray-300",
+							"focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+							"cursor-pointer transition-colors",
+							hasCoupon && "bg-blue-500 border-blue-500",
+						)}
+					/>
+					<span className="text-lg font-semibold text-white">
+						¿Aplicar cupón de descuento?
+					</span>
+				</label>
 			</div>
 
 			{/* Sección de CUPÓN - Solo visible en modo CONTADO */}
-			{!isCredito && (
+			{!isCredito && hasCoupon && (
 				<div className="space-y-3 border-t pt-4">
-					{/* Checkbox CUPÓN */}
-					<label className="flex items-center gap-3 cursor-pointer select-none">
-						<input
-							type="checkbox"
-							checked={hasCoupon}
-							onChange={(e) => onHasCouponChange(e.target.checked)}
-							className={cn(
-								"w-6 h-6 rounded border-2 border-gray-300",
-								"focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
-								"cursor-pointer transition-colors",
-								hasCoupon && "bg-blue-500 border-blue-500",
-							)}
-						/>
-						<span className="text-lg font-semibold text-gray-700">
-							¿Aplicar cupón de descuento?
-						</span>
-					</label>
-
 					{/* Campo ID PROMOCION - Solo visible si hasCoupon=true */}
-					{hasCoupon && (
-						<div className="space-y-1 pl-9">
-							<TouchInput
-								value={idPromocion}
-								onChange={onIdPromocionChange}
-								label="ID PROMOCIÓN *"
-								placeholder="Mínimo 8 dígitos"
-								keyboardMode="numeric"
-								maxLength={20}
-							/>
-							{validationErrors.idPromocion && (
-								<p className="text-sm text-red-500 px-2">
-									{validationErrors.idPromocion}
-								</p>
-							)}
-						</div>
-					)}
+					<div className="space-y-1 pl-9">
+						<TouchInput
+							value={idPromocion}
+							onChange={onIdPromocionChange}
+							label="ID PROMOCIÓN *"
+							placeholder="Mínimo 8 dígitos"
+							keyboardMode="numeric"
+							maxLength={20}
+							useFixedDimensions
+						/>
+						{validationErrors.idPromocion && (
+							<p className="text-sm text-red-500 px-2">
+								{validationErrors.idPromocion}
+							</p>
+						)}
+					</div>
 				</div>
 			)}
 		</div>

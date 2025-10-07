@@ -75,23 +75,23 @@ export const PaymentInfoView: React.FC = () => {
 					{/* Columnas 2-4: Información del cliente */}
 					<div className="col-span-3 space-y-6 overflow-y-auto max-h-screen pb-8">
 						{/* Encabezado de la vista */}
-						<div className="text-center space-y-2">
+						{/* <div className="text-center space-y-2">
 							<h1 className="text-3xl font-bold text-gray-800">
 								Información del Cliente
 							</h1>
 							<p className="text-lg text-gray-600">
 								Paso 1 de 2: Complete los datos del vehículo y cliente
 							</p>
-						</div>
+						</div> */}
 
 						{/* Selector de modo de pago - posición prominente */}
 						<PaymentModeSelector mode={formData.mode} onModeChange={setMode} />
 
 						{/* Campos de identificación */}
-						<div className="bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200">
-							<h2 className="text-xl font-semibold text-gray-700 mb-4">
+						<div className="rounded-lg px-4 py-2 shadow-sm border-2 border-gray-200">
+							{/* <h2 className="text-xl font-semibold text-gray-700 mb-4">
 								Datos del Vehículo
-							</h2>
+							</h2> */}
 							<IdentificationFields
 								mode={formData.mode}
 								placa={formData.placa}
@@ -109,13 +109,13 @@ export const PaymentInfoView: React.FC = () => {
 						</div>
 
 						{/* Navegación hacia métodos de pago */}
-						<div className="flex justify-center pt-4">
+						<div className="flex justify-center">
 							<button
 								type="button"
 								onClick={handleProceedToPayment}
 								disabled={!canProceedToPayment()}
 								className={`
-									flex items-center gap-3 px-8 py-4 rounded-lg font-bold text-lg
+									flex items-center gap-3 px-8 py-2 rounded-lg font-bold text-lg
 									transition-all duration-200 active:scale-95
 									${
 										canProceedToPayment()
@@ -135,11 +135,11 @@ export const PaymentInfoView: React.FC = () => {
 						</div>
 
 						{/* Información de progreso */}
-						<div className="text-center">
+						{/* <div className="text-center">
 							<p className="text-sm text-gray-500">
 								Complete la información básica para proceder con el pago
 							</p>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>
