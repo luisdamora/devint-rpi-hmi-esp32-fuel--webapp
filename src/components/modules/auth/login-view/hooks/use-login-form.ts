@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import {
-	useSession,
-	useNotifications,
 	useLoadingState,
+	useNotifications,
+	useSession,
 } from "@/lib/hooks/use-ui-store-helpers";
 
 export const useLoginForm = () => {
@@ -12,8 +12,8 @@ export const useLoginForm = () => {
 	const { success, error } = useNotifications();
 	const { isLoading, setLoading } = useLoadingState();
 
-	const [operatorId, setOperatorId] = useState("");
-	const [password, setPassword] = useState("");
+	const [operatorId, setOperatorId] = useState("001");
+	const [password, setPassword] = useState("1234");
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
