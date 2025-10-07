@@ -47,7 +47,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					id="documentType"
 					value={documentType}
 					onChange={(e) => onDocumentTypeChange(e.target.value)}
-					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
 					style={{ fontSize: "1.1rem" }}
 				>
 					<option value="">Seleccione...</option>
@@ -73,7 +73,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 						type="text"
 						value={documentNumber}
 						onChange={(e) => onDocumentNumberChange(e.target.value)}
-						className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+						className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
 						style={{ fontSize: "1.1rem" }}
 						placeholder="Ingrese el número"
 					/>
@@ -111,7 +111,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					type="text"
 					value={name}
 					onChange={(e) => onNameChange(e.target.value)}
-					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
 					style={{ fontSize: "1.1rem" }}
 					placeholder="Ingrese el nombre completo"
 				/>
@@ -130,7 +130,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					type="email"
 					value={email}
 					onChange={(e) => onEmailChange(e.target.value)}
-					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
 					style={{ fontSize: "1.1rem" }}
 					placeholder="correo@ejemplo.com"
 				/>
@@ -141,7 +141,11 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 				<button
 					type="submit"
 					className={BUTTON_STYLES.success}
-					style={{ minWidth: "300px", fontSize: "1.25rem", padding: "1rem 2rem" }}
+					style={{
+						minWidth: "300px",
+						fontSize: "1.25rem",
+						padding: "1rem 2rem",
+					}}
 				>
 					REGISTRAR
 				</button>
