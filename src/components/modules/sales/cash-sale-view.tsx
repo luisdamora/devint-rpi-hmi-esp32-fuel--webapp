@@ -162,7 +162,7 @@ export const CashSaleViewComponent: React.FC = () => {
 								className="py-5 rounded-md text-white font-semibold"
 								style={{ backgroundColor: NEXUS_COLORS.status.red }}
 							>
-								Clear
+								Borrar
 							</button>
 							<button
 								type="button"
