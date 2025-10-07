@@ -1,3 +1,4 @@
+import { BanknoteArrowDown } from "lucide-react";
 import React from "react";
 import { BUTTON_STYLES } from "@/lib/config/theme";
 
@@ -10,9 +11,10 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 }) => (
 	<div className="grid grid-cols-3 gap-3 max-w-xl mx-auto mb-4">
 		<button type="button" className={BUTTON_STYLES.primary}>
-			$
+			<BanknoteArrowDown className="w-4 h-4 mr-1" />$
 		</button>
 		<button type="button" className={BUTTON_STYLES.primary}>
+			<BanknoteArrowDown className="w-4 h-4 mr-1" />
 			Vol.
 		</button>
 		<button
