@@ -1,5 +1,5 @@
+import { ChevronDown, X } from "lucide-react";
 import React, { useState } from "react";
-import { X, ChevronDown } from "lucide-react";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { cn } from "@/lib/utils";
 
@@ -68,17 +68,19 @@ export const TouchSelect: React.FC<TouchSelectProps> = ({
 					disabled={disabled}
 					className={cn(
 						"w-full px-6 py-4 rounded-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white text-left flex items-center justify-between transition-all",
-						disabled && "opacity-50 cursor-not-allowed"
+						disabled && "opacity-50 cursor-not-allowed",
 					)}
 					style={{
 						fontSize: "1.2rem",
 						minHeight: "70px",
 					}}
 				>
-					<span className={cn(
-						"flex items-center gap-3",
-						!selectedOption && "text-gray-400"
-					)}>
+					<span
+						className={cn(
+							"flex items-center gap-3",
+							!selectedOption && "text-gray-400",
+						)}
+					>
 						{selectedOption?.icon && (
 							<span className="text-2xl">{selectedOption.icon}</span>
 						)}
@@ -124,7 +126,7 @@ export const TouchSelect: React.FC<TouchSelectProps> = ({
 											"p-6 rounded-lg font-semibold text-left transition-all focus:outline-none focus:ring-4 focus:ring-blue-500",
 											value === option.value
 												? "bg-green-600 text-white border-4 border-green-400"
-												: "bg-white text-gray-900 hover:bg-gray-100 active:bg-gray-200"
+												: "bg-white text-gray-900 hover:bg-gray-100 active:bg-gray-200",
 										)}
 										style={{
 											minHeight: "100px",
@@ -138,16 +140,16 @@ export const TouchSelect: React.FC<TouchSelectProps> = ({
 												</span>
 											)}
 											<div className="flex-1">
-												<div className="font-bold text-xl">
-													{option.label}
-												</div>
+												<div className="font-bold text-xl">{option.label}</div>
 												{option.description && (
-													<div className={cn(
-														"text-sm mt-1",
-														value === option.value
-															? "text-green-100"
-															: "text-gray-600"
-													)}>
+													<div
+														className={cn(
+															"text-sm mt-1",
+															value === option.value
+																? "text-green-100"
+																: "text-gray-600",
+														)}
+													>
 														{option.description}
 													</div>
 												)}

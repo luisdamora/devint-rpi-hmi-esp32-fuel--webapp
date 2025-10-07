@@ -4,6 +4,7 @@ import {
 	type TouchSelectOption,
 } from "@/components/shared/touch-select/touch-select";
 import { BUTTON_STYLES } from "@/lib/config/theme";
+import { documentTypeOptions } from "../types/document-type-options";
 
 interface CustomerFormProps {
 	documentType: string;
@@ -36,34 +37,6 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 		e.preventDefault();
 		onSubmit();
 	};
-
-	// Opciones de tipo de documento
-	const documentTypeOptions: TouchSelectOption[] = [
-		{
-			value: "CC",
-			label: "Cédula de Ciudadanía (CC)",
-			icon: "🆔",
-			description: "Documento de identidad para ciudadanos colombianos",
-		},
-		{
-			value: "NIT",
-			label: "NIT (Empresa)",
-			icon: "🏢",
-			description: "Número de Identificación Tributaria para empresas",
-		},
-		{
-			value: "CE",
-			label: "Cédula de Extranjería (CE)",
-			icon: "🌍",
-			description: "Documento para extranjeros residentes en Colombia",
-		},
-		{
-			value: "PAS",
-			label: "Pasaporte (PAS)",
-			icon: "📖",
-			description: "Documento de viaje internacional",
-		},
-	];
 
 	return (
 		<form onSubmit={handleSubmit} className="space-y-6">
