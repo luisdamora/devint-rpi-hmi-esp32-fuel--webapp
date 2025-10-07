@@ -1,11 +1,4 @@
-import {
-	BanknoteArrowDown,
-	Calendar,
-	CreditCard,
-	Home,
-	Settings,
-	Star,
-} from "lucide-react";
+import { BanknoteArrowDown, CreditCard, Settings, Star } from "lucide-react";
 import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
 import { NEXUS_COLORS } from "@/lib/config/theme";
@@ -108,8 +101,8 @@ export const MainMenu: React.FC<MainMenuProps> = ({
 
 	return (
 		<HMIContainer>
-			<div className="min-h-full w-2/3 flex items-center justify-center px-4">
-				<div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto w-full">
+			<div className="min-h-full w-full flex items-center justify-center px-4">
+				<div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto w-2/3 ">
 					{tiles.map((t) => {
 						// Deshabilitar tiles si no hay turno activo, excepto "INICIO"
 						const disabled = !isTurnActive && !t.key.includes("inicio");
