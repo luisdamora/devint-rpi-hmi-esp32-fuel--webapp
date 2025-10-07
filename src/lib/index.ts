@@ -1,46 +1,43 @@
 // Types
-export type {
-  ViewRegistryItem,
-  ViewState,
-  ModuleConfig,
-  LayoutConfig,
-  NavigationItem,
-  HMIState,
-  HMILayoutProps,
-  ViewManagerProps,
-} from "./types/modules";
-
-// View Registry
-export {
-  VIEW_REGISTRY,
-  getViewById,
-  getViewsByModule,
-  getAllModules,
-  getNavigationViews,
-} from "./config/view-registry";
-
-// Layout Configuration
-export {
-  DEFAULT_LAYOUT_CONFIG,
-  MODULE_CONFIGS,
-  NAVIGATION_ITEMS,
-  THEME_CONFIGS,
-  SCREEN_CONFIGS,
-  ANIMATION_CONFIGS,
-  getModuleConfig,
-  getNavigationItems,
-  getThemeConfig,
-} from "./config/layout-config";
 
 // Components
 export { HMILayout } from "../components/layouts/hmi-layout";
-export { ViewManager, useViewNavigation } from "./navigation/view-manager";
-
+export { CloseTurnViewComponent } from "../components/modules/auth/close-turn-view";
+export { LoginViewComponent } from "../components/modules/auth/login-view";
+export { MainMenu } from "../components/modules/auth/main-menu";
 // Module Components
 export { SplashScreen } from "../components/modules/auth/splash-screen";
-export { MainMenu } from "../components/modules/auth/main-menu";
-export { LoginViewComponent } from "../components/modules/auth/login-view";
-export { CloseTurnViewComponent } from "../components/modules/auth/close-turn-view";
+export { PointsView } from "../components/modules/loyalty/points-view";
 export { KeypadViewComponent } from "../components/modules/sales/keypad-view";
 export { PaymentMethods } from "../components/modules/sales/payment-methods";
-export { PointsView } from "../components/modules/loyalty/points-view";
+// Layout Configuration
+export {
+	ANIMATION_CONFIGS,
+	DEFAULT_LAYOUT_CONFIG,
+	getModuleConfig,
+	getNavigationItems,
+	getThemeConfig,
+	MODULE_CONFIGS,
+	NAVIGATION_ITEMS,
+	SCREEN_CONFIGS,
+	THEME_CONFIGS,
+} from "./config/layout-config";
+// View Registry
+export {
+	getAllModules,
+	getNavigationViews,
+	getViewById,
+	getViewsByModule,
+	VIEW_REGISTRY,
+} from "./config/view-registry";
+export { useViewNavigation, ViewManager } from "./navigation/view-manager";
+export type {
+	HMILayoutProps,
+	HMIState,
+	LayoutConfig,
+	ModuleConfig,
+	NavigationItem,
+	ViewManagerProps,
+	ViewRegistryItem,
+	ViewState,
+} from "./types/modules";

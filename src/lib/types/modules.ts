@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 
 /**
  * Represents a visual state of a view
@@ -18,7 +18,7 @@ export interface ViewRegistryItem {
 	description: string;
 	module: string;
 	states: ViewState[];
-	component: React.ComponentType<any>;
+	component: ComponentType<any>;
 }
 
 /**
