@@ -7,6 +7,36 @@ import { IdentificationFields, PaymentModeSelector } from "../components";
 import { usePaymentForm } from "../hooks";
 
 /**
+ * Props adicionales para integración con PaymentViewMaster
+ */
+export interface PaymentInfoViewProps {
+	/** Callback para proceder a métodos de pago */
+	onProceedToPayment?: () => void;
+	/** Datos compartidos desde el componente padre */
+	sharedFormData?: {
+		mode: "CONTADO" | "CREDITO";
+		placa: string;
+		idFacturaElectronica: string;
+		idPuntosColombia: string;
+		hasCoupon: boolean;
+		idPromocion: string;
+	};
+	/** Callback para actualizar datos compartidos */
+	onUpdateSharedData?: (
+		updates: Partial<{
+			mode: "CONTADO" | "CREDITO";
+			placa: string;
+			idFacturaElectronica: string;
+			idPuntosColombia: string;
+			hasCoupon: boolean;
+			idPromocion: string;
+		}>,
+	) => void;
+	/** Total amount prop */
+	totalAmount?: number;
+}
+
+/**
  * PaymentInfoView - Primera vista: Información del cliente y modo de pago
  *
  * Esta vista se enfoca exclusivamente en recopilar la información del cliente
@@ -23,11 +53,13 @@ import { usePaymentForm } from "../hooks";
  * <PaymentInfoView />
  * ```
  */
-export const PaymentInfoView: React.FC = () => {
+export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
+	onProceedToPayment,
+	sharedFormData,
+	onUpdateSharedData,
+	totalAmount = 100000, // $100,000 COP
+}) => {
 	const { navigateTo } = useHMINavigation();
-
-	// TODO: Obtener totalAmount desde props, context o state global
-	const MOCK_TOTAL = 100000; // $100,000 COP
 
 	// Hook principal que orquesta todo el estado del formulario
 	const {
@@ -39,7 +71,7 @@ export const PaymentInfoView: React.FC = () => {
 		setIdPuntosColombia,
 		setHasCoupon,
 		setIdPromocion,
-	} = usePaymentForm(MOCK_TOTAL);
+	} = usePaymentForm(totalAmount);
 
 	// Validar que tenemos información básica antes de continuar
 	const canProceedToPayment = () => {
@@ -52,9 +84,19 @@ export const PaymentInfoView: React.FC = () => {
 
 	// Navegar a métodos de pago si la información está completa
 	const handleProceedToPayment = () => {
-		if (canProceedToPayment()) {
-			// TODO: Navegar a vista de métodos de pago
-			console.log("✅ Procediendo a métodos de pago con datos:", formData);
+		if (canProceedToPayment() && onProceedToPayment) {
+			// Sincronizar datos internos con datos compartidos antes de proceder
+			if (sharedFormData && onUpdateSharedData) {
+				onUpdateSharedData({
+					mode: formData.mode,
+					placa: formData.placa,
+					idFacturaElectronica: formData.idFacturaElectronica,
+					idPuntosColombia: formData.idPuntosColombia,
+					hasCoupon: formData.hasCoupon,
+					idPromocion: formData.idPromocion,
+				});
+			}
+			onProceedToPayment();
 		}
 	};
 

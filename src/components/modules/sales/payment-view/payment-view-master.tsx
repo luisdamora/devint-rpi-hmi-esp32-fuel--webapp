@@ -105,7 +105,15 @@ export const PaymentViewMaster: React.FC = () => {
 
 				{/* Vista actual */}
 				{/* <div className="flex-1 overflow-hidden"> */}
-				{currentView === 1 ? <PaymentInfoView /> : <PaymentMethodsView />}
+				{currentView === 1 ? (
+					<PaymentInfoView
+						onProceedToPayment={handleNext}
+						sharedFormData={sharedFormData}
+						onUpdateSharedData={updateSharedData}
+					/>
+				) : (
+					<PaymentMethodsView />
+				)}
 				{/* </div> */}
 				{/* </div> */}
 				{/* </div> */}
