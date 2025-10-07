@@ -31,7 +31,11 @@ export const TouchSelectModal: React.FC<TouchSelectModalProps> = ({
 	return (
 		<div
 			className={TOUCH_SELECT_CLASSES.modalOverlay}
-			style={{ backgroundColor: NEXUS_COLORS.background.main }}
+			style={{
+				backgroundColor: useFixedDimensions
+					? "black"
+					: NEXUS_COLORS.background.main,
+			}}
 		>
 			<div
 				className={TOUCH_SELECT_CLASSES.modalContainer}
@@ -40,6 +44,9 @@ export const TouchSelectModal: React.FC<TouchSelectModalProps> = ({
 						? {
 								maxWidth: `${LAYOUT_DIMENSIONS.WIDTH}px`,
 								maxHeight: `${LAYOUT_DIMENSIONS.HEIGHT}px`,
+								backgroundColor: NEXUS_COLORS.background.main,
+								borderRadius: "3px",
+								border: "1px solid #ccc",
 							}
 						: undefined
 				}
