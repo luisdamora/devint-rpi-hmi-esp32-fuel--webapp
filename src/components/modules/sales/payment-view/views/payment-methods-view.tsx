@@ -107,7 +107,7 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center px-2">
-				<div className="grid grid-cols-6 gap-4 w-full max-w-6xl">
+				<div className="grid grid-cols-6 gap-4 w-full overflow-y-hidden max-w-6xl">
 					{/* <div className="w-full max-w-6xl"> */}
 					{/* Columna 1: Navegación lateral */}
 					<div className="col-span-1 flex flex-col gap-6 self-start pt-8">
