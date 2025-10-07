@@ -11,6 +11,38 @@ import {
 import { usePaymentForm } from "../hooks";
 
 /**
+ * Props adicionales para integración con PaymentViewMaster
+ */
+export interface PaymentMethodsViewProps {
+	/** Callback para volver a la vista anterior */
+	onBackToInfo?: () => void;
+	/** Datos compartidos desde el componente padre */
+	sharedFormData?: {
+		mode: "CONTADO" | "CREDITO";
+		placa: string;
+		idFacturaElectronica: string;
+		idPuntosColombia: string;
+		hasCoupon: boolean;
+		idPromocion: string;
+	};
+	/** Callback para actualizar datos compartidos */
+	onUpdateSharedData?: (
+		updates: Partial<{
+			mode: "CONTADO" | "CREDITO";
+			placa: string;
+			idFacturaElectronica: string;
+			idPuntosColombia: string;
+			hasCoupon: boolean;
+			idPromocion: string;
+		}>,
+	) => void;
+	/** Callback para manejar guardado exitoso */
+	onSaveSuccess?: () => void;
+	/** Total amount prop */
+	totalAmount?: number;
+}
+
+/**
  * PaymentMethodsView - Segunda vista: Métodos de pago y finalización
  *
  * Esta vista se enfoca exclusivamente en la gestión de métodos de pago
@@ -27,7 +59,13 @@ import { usePaymentForm } from "../hooks";
  * <PaymentMethodsView />
  * ```
  */
-export const PaymentMethodsView: React.FC = () => {
+export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
+	onBackToInfo,
+	sharedFormData,
+	onUpdateSharedData,
+	onSaveSuccess,
+	totalAmount = 100000, // $100,000 COP
+}) => {
 	const { navigateTo } = useHMINavigation();
 
 	// TODO: Obtener totalAmount desde props, context o state global
@@ -44,18 +82,26 @@ export const PaymentMethodsView: React.FC = () => {
 		removeMethod,
 		addMethod,
 		handleSubmit,
-	} = usePaymentForm(MOCK_TOTAL);
+	} = usePaymentForm(totalAmount);
 
-	// TODO: Implementar handleSaveSuccess para integración con API
-	const handleSaveSuccess = () => {
-		console.log("✅ Pago guardado exitosamente:", formData);
-		navigateTo("payment-confirmation");
+	// Navegar de vuelta a información del cliente usando el callback del padre
+	const handleBackToInfo = () => {
+		if (onBackToInfo) {
+			onBackToInfo();
+		} else {
+			// TODO: Navegar a vista de información del cliente
+			console.log("⬅️ Volviendo a información del cliente");
+		}
 	};
 
-	// Navegar de vuelta a información del cliente
-	const handleBackToInfo = () => {
-		// TODO: Navegar a vista de información del cliente
-		console.log("⬅️ Volviendo a información del cliente");
+	// Manejar guardado exitoso usando el callback del padre
+	const handleSaveSuccess = () => {
+		if (onSaveSuccess) {
+			onSaveSuccess();
+		} else {
+			console.log("✅ Pago guardado exitosamente:", formData);
+			navigateTo("payment-confirmation");
+		}
 	};
 
 	return (
@@ -95,11 +141,26 @@ export const PaymentMethodsView: React.FC = () => {
 								<div className="flex-1">
 									<p className="text-sm text-gray-600">
 										<strong>Vehículo:</strong>{" "}
-										{formData.placa || "No especificado"}
+										{sharedFormData?.placa || formData.placa || "No especificado"}
 									</p>
 									<p className="text-sm text-gray-600">
-										<strong>Modo:</strong> {formData.mode}
+										<strong>Modo:</strong> {sharedFormData?.mode || formData.mode}
 									</p>
+									{sharedFormData?.idFacturaElectronica && (
+										<p className="text-sm text-gray-600">
+											<strong>Factura:</strong> {sharedFormData.idFacturaElectronica}
+										</p>
+									)}
+									{sharedFormData?.idPuntosColombia && (
+										<p className="text-sm text-gray-600">
+											<strong>Puntos Colombia:</strong> {sharedFormData.idPuntosColombia}
+										</p>
+									)}
+									{sharedFormData?.hasCoupon && sharedFormData?.idPromocion && (
+										<p className="text-sm text-gray-600">
+											<strong>Cupón:</strong> {sharedFormData.idPromocion}
+										</p>
+									)}
 								</div>
 								<button
 									type="button"
@@ -118,13 +179,19 @@ export const PaymentMethodsView: React.FC = () => {
 								Modo de Pago Actual
 							</h2>
 							<PaymentModeSelector
-								mode={formData.mode}
-								onModeChange={setMode}
+								mode={sharedFormData?.mode || formData.mode}
+								onModeChange={(mode) => {
+									// Sincronizar cambio de modo con datos compartidos
+									if (onUpdateSharedData) {
+										onUpdateSharedData({ mode });
+									}
+									setMode(mode);
+								}}
 							/>
 						</div>
 
 						{/* Grid de métodos de pago (solo en modo CONTADO) */}
-						{formData.mode === "CONTADO" && (
+						{(sharedFormData?.mode || formData.mode) === "CONTADO" && (
 							<div className="bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200">
 								<h2 className="text-xl font-semibold text-gray-700 mb-4">
 									Métodos de Pago
@@ -142,7 +209,7 @@ export const PaymentMethodsView: React.FC = () => {
 						)}
 
 						{/* Información adicional para modo CRÉDITO */}
-						{formData.mode === "CREDITO" && (
+						{(sharedFormData?.mode || formData.mode) === "CREDITO" && (
 							<div className="bg-green-50 rounded-lg p-4 border-2 border-green-200">
 								<h3 className="text-lg font-semibold text-green-800 mb-2">
 									Pago a Crédito
@@ -159,7 +226,21 @@ export const PaymentMethodsView: React.FC = () => {
 							<SaveButton
 								isValid={validation.isValid}
 								isComplete={distribution.isComplete}
-								onSave={handleSubmit}
+								onSave={() => {
+									// Sincronizar datos internos con datos compartidos antes de guardar
+									if (sharedFormData && onUpdateSharedData) {
+										onUpdateSharedData({
+											mode: formData.mode,
+											placa: formData.placa,
+											idFacturaElectronica: formData.idFacturaElectronica,
+											idPuntosColombia: formData.idPuntosColombia,
+											hasCoupon: formData.hasCoupon,
+											idPromocion: formData.idPromocion,
+										});
+									}
+									handleSubmit();
+									handleSaveSuccess();
+								}}
 							/>
 						</div>
 

@@ -15,3 +15,7 @@
 
 export { PaymentInfoView } from "./payment-info-view";
 export { PaymentMethodsView } from "./payment-methods-view";
+
+// Exportar tipos para facilitar el uso en otros componentes
+export type { PaymentInfoViewProps } from "./payment-info-view";
+export type { PaymentMethodsViewProps } from "./payment-methods-view";

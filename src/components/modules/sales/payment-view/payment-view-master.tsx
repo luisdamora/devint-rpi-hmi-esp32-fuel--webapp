@@ -112,7 +112,12 @@ export const PaymentViewMaster: React.FC = () => {
 						onUpdateSharedData={updateSharedData}
 					/>
 				) : (
-					<PaymentMethodsView />
+					<PaymentMethodsView
+						onBackToInfo={handlePrevious}
+						sharedFormData={sharedFormData}
+						onUpdateSharedData={updateSharedData}
+						onSaveSuccess={handleSave}
+					/>
 				)}
 				{/* </div> */}
 				{/* </div> */}
