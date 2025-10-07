@@ -60,24 +60,28 @@ export const ViewNavigation: React.FC<ViewNavigationProps> = ({
 			<div className="flex items-center gap-4">
 				{/* Paso 1: Información del cliente */}
 				<div className="flex items-center gap-2">
-					<div className={cn(
-						"w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
-						currentView === 1 
-							? "bg-blue-500 text-white" 
-							: isCurrentViewComplete 
-								? "bg-green-500 text-white" 
-								: "bg-gray-300 text-gray-600"
-					)}>
+					<div
+						className={cn(
+							"w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
+							currentView === 1
+								? "bg-blue-500 text-white"
+								: isCurrentViewComplete
+									? "bg-green-500 text-white"
+									: "bg-gray-300 text-gray-600",
+						)}
+					>
 						{isCurrentViewComplete && currentView !== 1 ? (
 							<CheckCircle size={16} />
 						) : (
 							"1"
 						)}
 					</div>
-					<span className={cn(
-						"text-sm font-medium",
-						currentView === 1 ? "text-blue-600" : "text-gray-600"
-					)}>
+					<span
+						className={cn(
+							"text-sm font-medium",
+							currentView === 1 ? "text-blue-600" : "text-gray-600",
+						)}
+					>
 						Información del Cliente
 					</span>
 				</div>
@@ -87,24 +91,28 @@ export const ViewNavigation: React.FC<ViewNavigationProps> = ({
 
 				{/* Paso 2: Métodos de pago */}
 				<div className="flex items-center gap-2">
-					<div className={cn(
-						"w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
-						currentView === 2 
-							? "bg-blue-500 text-white" 
-							: isCurrentViewComplete 
-								? "bg-green-500 text-white" 
-								: "bg-gray-300 text-gray-600"
-					)}>
+					<div
+						className={cn(
+							"w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
+							currentView === 2
+								? "bg-blue-500 text-white"
+								: isCurrentViewComplete
+									? "bg-green-500 text-white"
+									: "bg-gray-300 text-gray-600",
+						)}
+					>
 						{isCurrentViewComplete && currentView !== 2 ? (
 							<CheckCircle size={16} />
 						) : (
 							"2"
 						)}
 					</div>
-					<span className={cn(
-						"text-sm font-medium",
-						currentView === 2 ? "text-blue-600" : "text-gray-600"
-					)}>
+					<span
+						className={cn(
+							"text-sm font-medium",
+							currentView === 2 ? "text-blue-600" : "text-gray-600",
+						)}
+					>
 						Métodos de Pago
 					</span>
 				</div>
@@ -134,7 +142,7 @@ export const ViewNavigation: React.FC<ViewNavigationProps> = ({
 							"flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-lg transition-all duration-200",
 							canProceed
 								? "bg-green-500 hover:bg-green-600 text-white shadow-lg active:scale-95"
-								: "bg-gray-300 text-gray-500 cursor-not-allowed"
+								: "bg-gray-300 text-gray-500 cursor-not-allowed",
 						)}
 					>
 						<span>Guardar Pago</span>
@@ -149,7 +157,7 @@ export const ViewNavigation: React.FC<ViewNavigationProps> = ({
 							"flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-lg transition-all duration-200",
 							canProceed
 								? "bg-blue-500 hover:bg-blue-600 text-white shadow-lg active:scale-95"
-								: "bg-gray-300 text-gray-500 cursor-not-allowed"
+								: "bg-gray-300 text-gray-500 cursor-not-allowed",
 						)}
 					>
 						<span>Siguiente</span>

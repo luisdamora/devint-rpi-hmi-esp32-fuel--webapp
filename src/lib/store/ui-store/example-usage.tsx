@@ -140,7 +140,7 @@ export const LoginComponent: React.FC = () => {
 			login(operatorInput);
 			success(`Bienvenido ${operatorInput}`);
 			setOperatorInput("");
-		} catch (err) {
+		} catch (_err) {
 			error("Error al iniciar sesión");
 		} finally {
 			setLoading(false);
