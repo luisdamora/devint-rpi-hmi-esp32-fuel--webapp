@@ -8,7 +8,7 @@ export { LoginViewComponent } from "../components/modules/auth/login-view/login-
 export { SplashScreen } from "../components/modules/auth/splash-screen";
 export { PointsView } from "../components/modules/loyalty/points-view";
 export { MainMenu } from "../components/modules/main-menu/main-menu";
-export { PaymentMethods } from "../components/modules/sales/payment-methods";
+export { PaymentView } from "../components/modules/sales/payment-view";
 // Layout Configuration
 export {
 	ANIMATION_CONFIGS,

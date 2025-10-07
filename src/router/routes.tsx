@@ -11,7 +11,7 @@ import { SplashScreen } from "@/components/modules/auth/splash-screen";
 import { PointsView } from "@/components/modules/loyalty/points-view";
 import { MainMenu } from "@/components/modules/main-menu/main-menu";
 import { CashSaleViewComponent } from "@/components/modules/sales/cash-sale/cash-sale-view";
-import { PaymentMethods } from "@/components/modules/sales/payment-methods";
+import { PaymentView } from "@/components/modules/sales/payment-view";
 import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
@@ -42,7 +42,7 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: "payment",
-				element: <PaymentMethods />,
+				element: <PaymentView />,
 			},
 			{
 				path: "loyalty",

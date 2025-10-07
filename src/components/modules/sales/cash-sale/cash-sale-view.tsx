@@ -57,6 +57,17 @@ export const CashSaleViewComponent: React.FC = () => {
 							onClear={handleClear}
 							onEnter={navigateBack}
 						/>
+						{/* TODO: Integración futura con PaymentView
+						    Cuando el usuario presione ENTER después de ingresar un monto:
+						    1. Validar que displayMoney > 0
+						    2. Navegar a payment-view con los datos de la venta:
+						       navigateTo("payment", {
+						         totalAmount: displayMoney,
+						         mode: activeMode
+						       });
+						    3. PaymentView procesará el pago y guardará la venta
+						    Esto reemplazará el actual navigateBack()
+						*/}
 					</div>
 				</div>
 			</div>

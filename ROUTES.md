@@ -12,8 +12,8 @@
 /hmi/splash               → HMI: Splash screen
 /hmi/menu                 → HMI: Menú principal
 /hmi/login                → HMI: Login de turno
-/hmi/keypad               → HMI: Teclado numérico
-/hmi/payment              → HMI: Métodos de pago
+/hmi/cash-sale            → HMI: Venta de contado
+/hmi/payment              → HMI: Vista de procesamiento de pago
 /hmi/loyalty              → HMI: Puntos Colombia
 /hmi/close-turn           → HMI: Cerrar turno
 /admin                    → Panel administrativo
@@ -118,3 +118,72 @@ El sistema está listo para usar. Visita http://localhost:5174/ para:
 2. Probar el sistema HMI (800x480px)
 3. Navegar por el panel administrativo
 4. Verificar URLs específicas de cada vista
+
+---
+
+## `/payment` - Vista de Procesamiento de Pago
+
+**Componente**: `PaymentView`
+**Ubicación**: `src/components/modules/sales/payment-view/payment-view.tsx`
+**Ruta**: `/payment`
+**Tipo**: Protegida (HMIRoute)
+
+### Descripción
+Vista completa para procesar pagos en modo CONTADO o CRÉDITO, con soporte para múltiples métodos de pago.
+
+### Características
+- ✅ Selector de modo de pago (CONTADO/CRÉDITO)
+- ✅ Campos de identificación (Placa, Cédula, Código Cliente)
+- ✅ Distribución de monto entre métodos de pago
+- ✅ Validación en tiempo real
+- ✅ Integración con TouchInput/TouchSelect
+- ✅ Arquitectura modular completa
+
+### Flujo de Usuario
+1. Usuario selecciona modo de pago (CONTADO o CRÉDITO)
+2. Ingresa datos de identificación según el modo:
+   - **CONTADO**: Placa (opcional)
+   - **CRÉDITO**: Placa, Cédula, Código Cliente
+3. En modo CONTADO: distribuye el pago entre métodos disponibles:
+   - Tarjeta débito
+   - Tarjeta crédito
+   - Efectivo
+   - Otro método
+4. Valida que el total distribuido sea correcto
+5. Guarda la venta
+
+### Props Futuras (Backend Integration)
+```typescript
+interface PaymentViewProps {
+  totalAmount?: number;      // Monto total de la venta
+  ventaId?: string;          // ID de la venta a procesar
+  onSuccess?: () => void;    // Callback al completar el pago
+  onCancel?: () => void;     // Callback al cancelar
+}
+```
+
+### Navegación
+```typescript
+// Desde cualquier componente con useHMINavigation:
+const { navigateTo } = useHMINavigation();
+
+// Navegar a payment view
+navigateTo("payment");
+
+// TODO: En el futuro, pasar datos de la venta
+// navigateTo("payment", { totalAmount, ventaId });
+```
+
+### Estado Actual
+- ✅ **Interfaz UI**: Completamente implementada
+- ✅ **Lógica de validación**: Funcional
+- ✅ **Distribución de montos**: Operativa
+- ⏳ **Integración Backend**: Pendiente
+- ⏳ **Guardado de venta**: Mock implementado
+
+### Arquitectura
+Consulta [`docs/payment-view-architecture.md`](docs/payment-view-architecture.md) para detalles completos de:
+- Estructura de componentes
+- Hooks personalizados
+- Tipos y validaciones
+- Patrones de diseño utilizados
