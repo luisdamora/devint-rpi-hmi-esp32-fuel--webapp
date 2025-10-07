@@ -5,16 +5,13 @@ export const LoginViewComponent: React.FC = () => {
 	const [password, setPassword] = useState("");
 
 	return (
-		<div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-900 to-blue-600">
+		<div className="flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600">
 			<div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
 				<div className="text-center mb-8">
 					<div className="w-20 h-20 mx-auto bg-blue-900 rounded-full flex items-center justify-center mb-4">
 						<span className="text-white text-2xl font-bold">POS</span>
 					</div>
 					<h2 className="text-2xl font-bold text-gray-800">Iniciar Turno</h2>
-					<p className="text-gray-600 mt-2">
-						Ingrese sus credenciales para comenzar
-					</p>
 				</div>
 
 				<form className="space-y-6">
