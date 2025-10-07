@@ -8,7 +8,6 @@ import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-vie
 import { LoginViewComponent } from "@/components/modules/auth/login-view/login-view";
 // HMI View Components
 import { SplashScreen } from "@/components/modules/auth/splash-screen";
-import { RegisterCustomerViewComponent } from "@/components/modules/customers/register-customer/register-customer-view";
 import { PointsView } from "@/components/modules/loyalty/points-view";
 import { MainMenu } from "@/components/modules/main-menu/main-menu";
 import { CashSaleViewComponent } from "@/components/modules/sales/cash-sale/cash-sale-view";
@@ -52,10 +51,6 @@ export const routes: RouteObject[] = [
 			{
 				path: "close-turn",
 				element: <CloseTurnViewComponent />,
-			},
-			{
-				path: "register-customer",
-				element: <RegisterCustomerViewComponent />,
 			},
 		],
 	},
