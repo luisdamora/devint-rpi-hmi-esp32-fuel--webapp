@@ -10,6 +10,7 @@ import { MainMenu } from "@/components/modules/auth/main-menu";
 
 // HMI View Components
 import { SplashScreen } from "@/components/modules/auth/splash-screen";
+import { RegisterCustomerViewComponent } from "@/components/modules/customers/register-customer/register-customer-view";
 import { PointsView } from "@/components/modules/loyalty/points-view";
 import { CashSaleViewComponent } from "@/components/modules/sales/cash-sale/cash-sale-view";
 import { PaymentMethods } from "@/components/modules/sales/payment-methods";
@@ -53,6 +54,10 @@ export const routes: RouteObject[] = [
 				path: "close-turn",
 				element: <CloseTurnViewComponent />,
 			},
+			{
+				path: "register-customer",
+				element: <RegisterCustomerViewComponent />,
+			},
 		],
 	},
 	{
@@ -60,7 +65,6 @@ export const routes: RouteObject[] = [
 		element: (
 			<PublicRoute title="Página No Encontrada">
 				<div className="text-center">
-					<div className="text-6xl mb-4">😕</div>
 					<h2 className="text-xl font-semibold mb-2">Página No Encontrada</h2>
 					<p className="text-gray-600 mb-6">
 						La página que está buscando no existe o ha sido movida.
