@@ -1,6 +1,6 @@
 /**
  * UI Store Provider
- * 
+ *
  * Provider opcional para el UI Store de Zustand.
  * Aunque Zustand no requiere un provider (funciona globalmente),
  * este componente provee:
@@ -31,13 +31,13 @@ interface UIStoreProviderProps {
 
 /**
  * Provider del UI Store
- * 
+ *
  * Envuelve la aplicación y gestiona la inicialización del store.
- * 
+ *
  * @example
  * ```tsx
  * import { UIStoreProvider } from '@/lib/providers/ui-store-provider';
- * 
+ *
  * function App() {
  *   return (
  *     <UIStoreProvider enableDebug={true}>
@@ -147,18 +147,18 @@ export const UIStoreProvider: React.FC<UIStoreProviderProps> = ({
 /**
  * Hook para verificar si el store está hidratado
  * Útil para mostrar loaders o placeholders mientras se carga el estado
- * 
+ *
  * @returns true si el estado ya fue hidratado desde storage
- * 
+ *
  * @example
  * ```tsx
  * function MyComponent() {
  *   const isHydrated = useStoreHydration();
- *   
+ *
  *   if (!isHydrated) {
  *     return <LoadingSpinner />;
  *   }
- *   
+ *
  *   return <YourContent />;
  * }
  * ```
@@ -185,12 +185,12 @@ export const useStoreHydration = () => {
 /**
  * Hook para debug del store en desarrollo
  * Expone helpers para inspeccionar y manipular el estado
- * 
+ *
  * @example
  * ```tsx
  * function DebugPanel() {
  *   const debug = useStoreDebug();
- *   
+ *
  *   return (
  *     <div>
  *       <button onClick={debug.logState}>Log State</button>
