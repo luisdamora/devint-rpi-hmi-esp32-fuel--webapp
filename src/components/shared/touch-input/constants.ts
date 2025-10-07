@@ -63,7 +63,7 @@ export const TOUCH_INPUT_SIZES = {
 export const TOUCH_INPUT_CLASSES = {
 	// Trigger
 	trigger:
-		"w-full px-4 py-1 rounded-lg font-medium focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white text-left transition-all cursor-pointer",
+		"w-full px-4 py-1 rounded-lg font-medium focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white text-left transition-all cursor-pointer flex items-center justify-between gap-2",
 	triggerDisabled: "opacity-50 cursor-not-allowed",
 	label: "block text-white font-semibold mb-1 text-xs uppercase tracking-wide",
 

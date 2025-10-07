@@ -1,4 +1,5 @@
 import React from "react";
+import { TouchInput } from "@/components/shared/touch-input";
 import { TouchSelect } from "@/components/shared/touch-select";
 import { BUTTON_STYLES } from "@/lib/config/theme";
 import { documentTypeOptions } from "../types/document-type-options";
@@ -50,80 +51,49 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 
 			{/* Número de Identificación y DV */}
 			<div className="flex gap-4">
-				<div className="flex-1">
-					<label
-						htmlFor="documentNumber"
-						className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
-					>
-						Número de Identificación:
-					</label>
-					<input
-						id="documentNumber"
-						type="text"
-						value={documentNumber}
-						onChange={(e) => onDocumentNumberChange(e.target.value)}
-						className="w-full px-4 py-2 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-						style={{ fontSize: "1rem" }}
-						placeholder="Ingrese el número"
-					/>
-				</div>
-				<div className="w-24">
-					<label
-						htmlFor="verificationDigit"
-						className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
-					>
-						DV:
-					</label>
-					<input
-						id="verificationDigit"
-						type="text"
-						maxLength={1}
-						value={verificationDigit}
-						onChange={(e) => onVerificationDigitChange(e.target.value)}
-						className="w-full px-4 py-2 rounded-md text-gray-900 font-medium text-center focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-						style={{ fontSize: "1rem" }}
-						placeholder="0"
-					/>
-				</div>
+				<TouchInput
+					className="flex-1"
+					value={documentNumber}
+					onChange={onDocumentNumberChange}
+					label="Número de Identificación:"
+					placeholder="Ingrese el número"
+					maxLength={10}
+					id="documentNumber"
+					useFixedDimensions
+				/>
+				<TouchInput
+					className="w-24"
+					value={verificationDigit}
+					onChange={onVerificationDigitChange}
+					label="DV:"
+					placeholder="0"
+					maxLength={1}
+					id="verificationDigit"
+					useFixedDimensions
+				/>
 			</div>
 
 			{/* Nombre / Razón Social */}
-			<div>
-				<label
-					htmlFor="name"
-					className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
-				>
-					Nombre / Razón Social:
-				</label>
-				<input
-					id="name"
-					type="text"
-					value={name}
-					onChange={(e) => onNameChange(e.target.value)}
-					className="w-full px-4 py-2 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-					style={{ fontSize: "1rem" }}
-					placeholder="Ingrese el nombre completo"
-				/>
-			</div>
+			<TouchInput
+				value={name}
+				onChange={onNameChange}
+				label="Nombre / Razón Social:"
+				placeholder="Ingrese el nombre completo"
+				maxLength={100}
+				id="name"
+				useFixedDimensions
+			/>
 
 			{/* Email para Factura Electrónica */}
-			<div>
-				<label
-					htmlFor="email"
-					className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
-				>
-					Email para envío de Factura Electrónica:
-				</label>
-				<input
-					id="email"
-					type="email"
-					value={email}
-					onChange={(e) => onEmailChange(e.target.value)}
-					className="w-full px-4 py-2 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-					style={{ fontSize: "1rem" }}
-					placeholder="correo@ejemplo.com"
-				/>
-			</div>
+			<TouchInput
+				value={email}
+				onChange={onEmailChange}
+				label="Email para envío de Factura Electrónica:"
+				placeholder="correo@ejemplo.com"
+				maxLength={100}
+				id="email"
+				useFixedDimensions
+			/>
 
 			{/* Botón Registrar */}
 			<div className="flex justify-center pt-1">
