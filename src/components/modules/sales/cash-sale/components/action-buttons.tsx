@@ -5,18 +5,21 @@ interface ActionButtonsProps {
 	onTripleZero: () => void;
 }
 
-export const ActionButtons: React.FC<ActionButtonsProps> = ({ onTripleZero }) => (
+export const ActionButtons: React.FC<ActionButtonsProps> = ({
+	onTripleZero,
+}) => (
 	<div className="grid grid-cols-3 gap-3 max-w-xl mx-auto mb-4">
-		<div
-			className="text-center text-white font-semibold py-2 rounded-md"
-			style={{ backgroundColor: NEXUS_COLORS.background.dark }}
-		>
-			$
-		</div>
 		<button
 			type="button"
 			className="text-center text-white font-semibold py-2 rounded-md"
-			style={{ backgroundColor: NEXUS_COLORS.background.dark }}
+			style={{ backgroundColor: NEXUS_COLORS.status.green }}
+		>
+			$
+		</button>
+		<button
+			type="button"
+			className="text-center text-white font-semibold py-2 rounded-md"
+			style={{ backgroundColor: NEXUS_COLORS.status.orange }}
 		>
 			Vol.
 		</button>
@@ -24,7 +27,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({ onTripleZero }) =>
 			type="button"
 			onClick={onTripleZero}
 			className="text-center text-white font-semibold py-2 rounded-md"
-			style={{ backgroundColor: NEXUS_COLORS.background.dark }}
+			style={{ backgroundColor: NEXUS_COLORS.primary.blue }}
 		>
 			x $1.000
 		</button>
