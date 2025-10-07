@@ -107,10 +107,10 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center px-2">
-				{/* <div className="grid grid-cols-4 gap-4 w-full max-w-6xl"> */}
-				<div className="w-full max-w-6xl">
+				<div className="grid grid-cols-6 gap-4 w-full max-w-6xl">
+					{/* <div className="w-full max-w-6xl"> */}
 					{/* Columna 1: Navegación lateral */}
-					{/* <div className="col-span-1 flex flex-col gap-6 self-start pt-8">
+					<div className="col-span-1 flex flex-col gap-6 self-start pt-8">
 						<SideTile
 							title="VENTAS"
 							icon={<DollarSign size={64} />}
@@ -121,10 +121,10 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 							icon={<Home size={64} />}
 							onClick={() => navigateTo("menu")}
 						/>
-					</div> */}
+					</div>
 
 					{/* Columnas 2-4: Métodos de pago */}
-					<div className="col-span-3 space-y-6 overflow-y-auto max-h-screen pb-8">
+					<div className="col-span-5 space-y-6 overflow-y-auto max-h-screen pb-8">
 						{/* Encabezado de la vista */}
 						{/* <div className="text-center space-y-2">
 							<h1 className="text-3xl font-bold text-gray-800">
@@ -198,10 +198,10 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 
 						{/* Grid de métodos de pago (solo en modo CONTADO) */}
 						{(sharedFormData?.mode || formData.mode) === "CONTADO" && (
-							<div className="bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200">
-								<h2 className="text-xl font-semibold text-gray-700 mb-4">
+							<div className="bg-white rounded-lg p-2 shadow-sm border-2 border-gray-200">
+								{/* <h2 className="text-xl font-semibold text-gray-700 mb-4">
 									Métodos de Pago
-								</h2>
+								</h2> */}
 								<PaymentMethodsGrid
 									methods={paymentMethods}
 									totalAmount={formData.totalAmount}
