@@ -57,7 +57,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 				onClick={handleTripleZeroClick}
 				className={`${BUTTON_STYLES.primary} flex items-center justify-center`}
 			>
-				{activeMode === "cash" ? "x $1.000" : "Agregar ."}
+				{activeMode === "cash" ? "x $1.000" : ","}
 			</button>
 		</div>
 	);
