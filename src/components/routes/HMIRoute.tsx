@@ -18,8 +18,9 @@ export const HMIRoute: React.FC = () => {
 		location.pathname.split("/").filter(Boolean)[0] || "splash";
 
 	return (
-		<HMIFrame>
-			<HMILayout currentView={currentView}>
+		<HMILayout currentView={currentView}>
+			<HMIFrame>
+				{/* <HMILayout currentView={currentView}> */}
 				{/* Loading Overlay */}
 				{isLoading && (
 					<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -59,7 +60,8 @@ export const HMIRoute: React.FC = () => {
 						<div>Vista: {currentView}</div>
 					</div>
 				)}
-			</HMILayout>
-		</HMIFrame>
+				{/* </HMILayout> */}
+			</HMIFrame>
+		</HMILayout>
 	);
 };

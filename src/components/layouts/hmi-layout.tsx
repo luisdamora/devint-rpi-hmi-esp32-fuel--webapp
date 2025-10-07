@@ -9,7 +9,7 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 }) => {
 	return (
 		<div
-			className="flex flex-col h-full"
+			className="flex flex-col h-full min-h-screen"
 			style={{ backgroundColor: NEXUS_THEME_CONFIG.background }}
 		>
 			{/* Header - 60px fixed height */}
@@ -59,7 +59,7 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 
 			{/* Main Content - flexible height */}
 			<main
-				className="flex-1 overflow-hidden"
+				className="flex-1 overflow-hidden flex items-center justify-center"
 				style={{ backgroundColor: NEXUS_THEME_CONFIG.background }}
 			>
 				{children}

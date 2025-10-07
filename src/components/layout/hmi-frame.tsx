@@ -16,9 +16,9 @@ interface HMIFrameProps {
  */
 export const HMIFrame: React.FC<HMIFrameProps> = ({ children, className }) => {
 	return (
-		// Viewport container - ocupa toda la pantalla
+		// Viewport container - ocupa todo el espacio disponible del padre
 		<div
-			className="min-h-screen flex items-center justify-center"
+			className="w-full h-full flex items-center justify-center"
 			style={{ backgroundColor: VIEWPORT_BACKGROUND }}
 		>
 			{/* HMI Frame - dimensiones fijas 800x480px */}
