@@ -18,14 +18,6 @@ export {
 	NAVIGATION_ITEMS,
 	SCREEN_CONFIGS,
 } from "./config/layout-config";
-// View Registry
-export {
-	getAllModules,
-	getNavigationViews,
-	getViewById,
-	getViewsByModule,
-	VIEW_REGISTRY,
-} from "./config/view-registry";
 // Navigation hook
 export { useHMINavigation } from "./hooks/use-hmi-navigation";
 export type {
