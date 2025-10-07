@@ -1,4 +1,4 @@
-import { BanknoteArrowDown, Home } from "lucide-react";
+import { BanknoteArrowDown, Eraser, Home } from "lucide-react";
 import React, { useState } from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
 import { NEXUS_COLORS } from "@/lib/config/theme";
@@ -96,10 +96,9 @@ export const CashSaleViewComponent: React.FC = () => {
 					<div className="col-span-3">
 						{/* Encabezado: PRESET */}
 						<div className="mb-3 text-center">
-							<h3 className="text-white font-semibold tracking-wide">PRESET</h3>
 							<div className="flex gap-3 justify-center mt-2">
 								<div
-									className="px-6 py-3 rounded-md font-bold text-2xl"
+									className="flex-1 px-6 py-3 rounded-md font-bold text-2xl"
 									style={{
 										backgroundColor: NEXUS_COLORS.status.green,
 										color: NEXUS_COLORS.white,
@@ -162,7 +161,10 @@ export const CashSaleViewComponent: React.FC = () => {
 								className="py-5 rounded-md text-white font-semibold"
 								style={{ backgroundColor: NEXUS_COLORS.status.red }}
 							>
-								Borrar
+								<span className="inline-flex items-center gap-2">
+									<Eraser size={20} />
+									Borrar
+								</span>
 							</button>
 							<button
 								type="button"
@@ -171,24 +173,6 @@ export const CashSaleViewComponent: React.FC = () => {
 								style={{ backgroundColor: NEXUS_COLORS.background.dark }}
 							>
 								0
-							</button>
-							<button
-								type="button"
-								onClick={handleDecimal}
-								className="py-5 rounded-md text-white text-2xl font-semibold"
-								style={{ backgroundColor: NEXUS_COLORS.background.dark }}
-							>
-								.
-							</button>
-
-							{/* Backspace y acciones */}
-							<button
-								type="button"
-								onClick={handleBackspace}
-								className="col-span-2 py-4 rounded-md text-white font-semibold"
-								style={{ backgroundColor: "#F97316" }}
-							>
-								← Borrar
 							</button>
 							<button
 								type="button"
