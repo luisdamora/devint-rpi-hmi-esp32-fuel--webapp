@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { HMIFooterInfo } from "@/components/shared/hmi-footer-info";
 import { SplashLogo } from "@/components/shared/splash-logo";
+import { useHMINavigation } from "@/lib";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 
 export const SplashScreen: React.FC = () => {
+	const { goToMenu } = useHMINavigation();
 	// Fecha/hora en vivo (es-CO, formato dd/MM/yyyy hh:mm am/pm)
 	const [now, setNow] = React.useState<string>("");
 	useEffect(() => {
@@ -25,12 +27,12 @@ export const SplashScreen: React.FC = () => {
 	}, []);
 
 	// Auto-redirect al menú después de 3 segundos
-	// useEffect(() => {
-	// 	const timer = setTimeout(() => {
-	// 		goToMenu();
-	// 	}, 3000);
-	// 	return () => clearTimeout(timer);
-	// }, [goToMenu]);
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			goToMenu();
+		}, 3000);
+		return () => clearTimeout(timer);
+	}, [goToMenu]);
 
 	return (
 		<div

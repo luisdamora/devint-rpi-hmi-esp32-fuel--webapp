@@ -1,11 +1,12 @@
 import { useState } from "react";
+import type { PaymentMode } from "../components/action-buttons";
 
 export interface UseCashSaleCalculatorReturn {
 	value: string;
 	isDecimal: boolean;
 	displayMoney: () => string;
 	handleNumber: (num: string) => void;
-	handleTripleZero: () => void;
+	handleTripleZero: (mode: PaymentMode) => void;
 	handleDecimal: () => void;
 	handleClear: () => void;
 	handleBackspace: () => void;
@@ -23,14 +24,31 @@ export const useCashSaleCalculator = (
 	};
 
 	const handleNumber = (num: string): void => {
+		// Si está en modo decimal y ya hay un punto, no permitir más números después del punto
+		if (isDecimal && value.includes(".")) {
+			const decimalPart = value.split(".")[1];
+			if (decimalPart && decimalPart.length >= 1) {
+				return; // Ya tiene un dígito decimal, no agregar más
+			}
+		}
+
 		const v = value === "0" ? num : value + num;
 		setValue(v);
 	};
 
-	const handleTripleZero = (): void => {
-		const numeric = value.replace(/\D/g, "");
-		const multiplied = (Number(numeric || "0") * 1000).toString();
-		setValue(multiplied);
+	const handleTripleZero = (mode: PaymentMode): void => {
+		if (mode === "cash") {
+			// Modo efectivo: multiplicar por 1000
+			const numeric = value.replace(/\D/g, "");
+			const multiplied = (Number(numeric || "0") * 1000).toString();
+			setValue(multiplied);
+		} else if (mode === "volume") {
+			// Modo volumen: agregar punto decimal si no existe
+			if (!isDecimal && !value.includes(".")) {
+				setValue(value + ".");
+				setIsDecimal(true);
+			}
+		}
 	};
 
 	const handleDecimal = (): void => {

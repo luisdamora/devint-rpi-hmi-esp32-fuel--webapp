@@ -6,14 +6,12 @@ import {
 } from "react-router";
 import { CloseTurnViewComponent } from "@/components/modules/auth/close-turn-view/close-turn-view";
 import { LoginViewComponent } from "@/components/modules/auth/login-view/login-view";
-import { MainMenu } from "@/components/modules/auth/main-menu";
-
 // HMI View Components
 import { SplashScreen } from "@/components/modules/auth/splash-screen";
-import { RegisterCustomerViewComponent } from "@/components/modules/customers/register-customer/register-customer-view";
 import { PointsView } from "@/components/modules/loyalty/points-view";
+import { MainMenu } from "@/components/modules/main-menu/main-menu";
 import { CashSaleViewComponent } from "@/components/modules/sales/cash-sale/cash-sale-view";
-import { PaymentMethods } from "@/components/modules/sales/payment-methods";
+import { PaymentViewMaster } from "@/components/modules/sales/payment-view";
 import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
@@ -44,7 +42,7 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: "payment",
-				element: <PaymentMethods />,
+				element: <PaymentViewMaster />,
 			},
 			{
 				path: "loyalty",
@@ -53,10 +51,6 @@ export const routes: RouteObject[] = [
 			{
 				path: "close-turn",
 				element: <CloseTurnViewComponent />,
-			},
-			{
-				path: "register-customer",
-				element: <RegisterCustomerViewComponent />,
 			},
 		],
 	},

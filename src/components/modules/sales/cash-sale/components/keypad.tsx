@@ -4,7 +4,6 @@ import {
 	BUTTON_BG_STYLES,
 	BUTTON_CLICK_EFFECTS,
 	BUTTON_FOCUS_STYLES,
-	BUTTON_VARIANTS,
 	NEXUS_COLORS,
 } from "@/lib/config/theme";
 import { cn } from "@/lib/utils";

@@ -7,12 +7,10 @@ import { documentTypeOptions } from "../types/document-type-options";
 interface CustomerFormProps {
 	documentType: string;
 	documentNumber: string;
-	verificationDigit: string;
 	name: string;
 	email: string;
 	onDocumentTypeChange: (value: string) => void;
 	onDocumentNumberChange: (value: string) => void;
-	onVerificationDigitChange: (value: string) => void;
 	onNameChange: (value: string) => void;
 	onEmailChange: (value: string) => void;
 	onSubmit: () => void;
@@ -21,12 +19,10 @@ interface CustomerFormProps {
 export const CustomerForm: React.FC<CustomerFormProps> = ({
 	documentType,
 	documentNumber,
-	verificationDigit,
 	name,
 	email,
 	onDocumentTypeChange,
 	onDocumentNumberChange,
-	onVerificationDigitChange,
 	onNameChange,
 	onEmailChange,
 	onSubmit,

@@ -1,7 +1,8 @@
 import { BanknoteArrowDown, Home } from "lucide-react";
-import React from "react";
-import { HMIContainer } from "@/components/layout/hmi-container";
+import React, { useState } from "react";
+import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import type { PaymentMode } from "./components/action-buttons";
 import { ActionButtons } from "./components/action-buttons";
 import { AmountDisplay } from "./components/amount-display";
 import { Keypad } from "./components/keypad";
@@ -9,9 +10,19 @@ import { SideTile } from "./components/side-tile";
 import { useCashSaleCalculator } from "./hooks/use-cash-sale-calculator";
 
 export const CashSaleViewComponent: React.FC = () => {
-	const { navigateTo, navigateBack } = useHMINavigation();
+	const { navigateTo } = useHMINavigation();
+	const [activeMode, setActiveMode] = useState<PaymentMode>("cash");
 	const { displayMoney, handleNumber, handleTripleZero, handleClear } =
 		useCashSaleCalculator();
+
+	const handleModeChange = (mode: PaymentMode) => {
+		setActiveMode(mode);
+		handleClear();
+	};
+
+	const handleTripleZeroWithMode = (mode: PaymentMode) => {
+		handleTripleZero(mode);
+	};
 
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
@@ -33,15 +44,30 @@ export const CashSaleViewComponent: React.FC = () => {
 
 					{/* Centro: preset y keypad */}
 					<div className="col-span-3">
-						<AmountDisplay displayMoney={displayMoney} />
+						<AmountDisplay displayMoney={displayMoney} mode={activeMode} />
 
-						<ActionButtons onTripleZero={handleTripleZero} />
+						<ActionButtons
+							mode={activeMode}
+							onModeChange={handleModeChange}
+							onTripleZero={handleTripleZeroWithMode}
+						/>
 
 						<Keypad
 							onNumber={handleNumber}
 							onClear={handleClear}
-							onEnter={navigateBack}
+							onEnter={() => navigateTo("payment")}
 						/>
+						{/* TODO: Integración futura con PaymentView
+									Cuando el usuario presione ENTER después de ingresar un monto:
+									1. Validar que displayMoney > 0
+									2. Navegar a payment-view con los datos de la venta:
+										 navigateTo("payment", {
+											 totalAmount: displayMoney,
+											 mode: activeMode
+										 });
+									3. PaymentView procesará el pago y guardará la venta
+									Esto reemplazará el actual navigateBack()
+							*/}
 					</div>
 				</div>
 			</div>

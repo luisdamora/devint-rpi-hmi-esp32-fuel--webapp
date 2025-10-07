@@ -1,0 +1,133 @@
+import { DollarSign, Home } from "lucide-react";
+import React from "react";
+import { HMIContainer } from "@/components/layouts/hmi-container";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { SideTile } from "../cash-sale/components/side-tile";
+import {
+	IdentificationFields,
+	PaymentMethodsGrid,
+	PaymentModeSelector,
+	SaveButton,
+} from "./components";
+import { usePaymentForm } from "./hooks";
+
+/**
+ * PaymentView - Vista principal para gestión de pagos
+ *
+ * Componente orquestador que integra todos los sub-componentes del módulo
+ * de pago. Soporta dos modos de operación:
+ * - CONTADO: Pago inmediato con múltiples métodos
+ * - CRÉDITO: Pago diferido asociado a cuenta cliente
+ *
+ * Características:
+ * - Layout HMI touch-optimizado con navegación lateral
+ * - Validación en tiempo real según modo activo
+ * - Distribución inteligente de montos entre métodos de pago
+ * - Integración completa con hooks especializados
+ *
+ * @example
+ * ```tsx
+ * <PaymentView />
+ * ```
+ */
+export const PaymentView: React.FC = () => {
+	const { navigateTo } = useHMINavigation();
+
+	// TODO: Obtener totalAmount desde props, context o state global
+	// Por ahora, usa un valor mock para desarrollo
+	const MOCK_TOTAL = 100000; // $100,000 COP
+
+	// Hook principal que orquesta todo el estado del formulario
+	const {
+		formData,
+		validation,
+		distribution,
+		paymentMethods,
+		setMode,
+		setPlaca,
+		setIdFacturaElectronica,
+		setIdPuntosColombia,
+		setHasCoupon,
+		setIdPromocion,
+		updatePaymentMethod,
+		removeMethod,
+		addMethod,
+		handleSubmit,
+		resetForm: _resetForm,
+	} = usePaymentForm(MOCK_TOTAL);
+
+	// TODO: Implementar handleSaveSuccess para integración con API
+	// const handleSaveSuccess = () => {
+	//   console.log("✅ Pago guardado exitosamente:", formData);
+	//   navigateTo('payment-confirmation');
+	// };
+
+	return (
+		<HMIContainer showHeader={false} showFooter={false}>
+			<div className="w-full h-full flex items-start justify-center px-2 overflow-y-auto">
+				<div className="grid grid-cols-4 gap-4 w-full max-w-6xl">
+					{/* Columna 1: Navegación lateral */}
+					<div className="col-span-1 flex flex-col gap-6 self-start pt-8">
+						<SideTile
+							title="VENTAS"
+							icon={<DollarSign size={64} />}
+							onClick={() => navigateTo("payment")}
+						/>
+						<SideTile
+							title="INICIO"
+							icon={<Home size={64} />}
+							onClick={() => navigateTo("menu")}
+						/>
+					</div>
+
+					{/* Columnas 2-4: Contenido principal */}
+					<div className="col-span-3 space-y-4 overflow-y-auto max-h-screen pb-8">
+						{/* 1. Selector de modo de pago */}
+						<PaymentModeSelector mode={formData.mode} onModeChange={setMode} />
+
+						{/* 2. Campos de identificación */}
+						<IdentificationFields
+							mode={formData.mode}
+							placa={formData.placa}
+							idFacturaElectronica={formData.idFacturaElectronica}
+							idPuntosColombia={formData.idPuntosColombia}
+							hasCoupon={formData.hasCoupon}
+							idPromocion={formData.idPromocion}
+							onPlacaChange={setPlaca}
+							onIdFacturaChange={setIdFacturaElectronica}
+							onIdPuntosChange={setIdPuntosColombia}
+							onHasCouponChange={setHasCoupon}
+							onIdPromocionChange={setIdPromocion}
+							validationErrors={validation.errors}
+						/>
+
+						{/* 3. Grid de métodos de pago (solo en modo CONTADO) */}
+						{formData.mode === "CONTADO" && (
+							<PaymentMethodsGrid
+								methods={paymentMethods}
+								totalAmount={formData.totalAmount}
+								distribution={distribution}
+								onUpdateMethod={updatePaymentMethod}
+								onRemoveMethod={removeMethod}
+								onAddMethod={addMethod}
+								validationErrors={validation.errors}
+							/>
+						)}
+
+						{/* 4. Botón de guardar */}
+						<SaveButton
+							isValid={validation.isValid}
+							isComplete={distribution.isComplete}
+							onSave={handleSubmit}
+						/>
+					</div>
+				</div>
+			</div>
+		</HMIContainer>
+	);
+};
+
+/**
+ * Export como componente por defecto para lazy loading
+ */
+export default PaymentView;

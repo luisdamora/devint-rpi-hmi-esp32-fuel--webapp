@@ -1,20 +1,17 @@
 import React from "react";
 import { Link } from "react-router";
-import { FOOTER_HEIGHT, HEADER_HEIGHT } from "@/lib/config/layout-dimensions";
+import { FOOTER_HEIGHT } from "@/lib/config/layout-dimensions";
 import { NEXUS_THEME_CONFIG } from "@/lib/config/theme";
 import type { HMILayoutProps } from "@/lib/types/modules";
 
-export const HMILayout: React.FC<HMILayoutProps> = ({
-	children,
-	currentView,
-}) => {
+export const HMILayout: React.FC<HMILayoutProps> = ({ children }) => {
 	return (
 		<div
 			className="flex flex-col h-full min-h-screen"
 			style={{ backgroundColor: NEXUS_THEME_CONFIG.background }}
 		>
 			{/* Header - 60px fixed height */}
-			<header
+			{/* <header
 				className="flex items-center justify-between px-4 z-10 border-b"
 				style={{
 					height: `${HEADER_HEIGHT}px`,
@@ -56,7 +53,7 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 						</span>
 					</div>
 				</div>
-			</header>
+			</header> */}
 
 			{/* Main Content - flexible height */}
 			<main
@@ -106,7 +103,6 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 						{ to: "/payment", label: "Pago" },
 						{ to: "/loyalty", label: "Puntos" },
 						{ to: "/close-turn", label: "Cerrar Turno" },
-						{ to: "/register-customer", label: "Registrar Cliente" },
 					].map((item) => (
 						<Link
 							key={item.to}

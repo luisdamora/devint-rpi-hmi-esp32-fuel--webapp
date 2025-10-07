@@ -2,14 +2,12 @@
 
 // Components
 export { HMILayout } from "../components/layouts/hmi-layout";
-export { CloseTurnViewComponent } from "../components/modules/auth/close-turn-view";
-export { LoginViewComponent } from "../components/modules/auth/login-view";
-export { MainMenu } from "../components/modules/auth/main-menu";
+export { CloseTurnViewComponent } from "../components/modules/auth/close-turn-view/close-turn-view";
+export { LoginViewComponent } from "../components/modules/auth/login-view/login-view";
 // Module Components
 export { SplashScreen } from "../components/modules/auth/splash-screen";
 export { PointsView } from "../components/modules/loyalty/points-view";
-export { KeypadViewComponent } from "../components/modules/sales/keypad-view";
-export { PaymentMethods } from "../components/modules/sales/payment-methods";
+export { MainMenu } from "../components/modules/main-menu/main-menu";
 // Layout Configuration
 export {
 	ANIMATION_CONFIGS,
@@ -19,14 +17,6 @@ export {
 	NAVIGATION_ITEMS,
 	SCREEN_CONFIGS,
 } from "./config/layout-config";
-// View Registry
-export {
-	getAllModules,
-	getNavigationViews,
-	getViewById,
-	getViewsByModule,
-	VIEW_REGISTRY,
-} from "./config/view-registry";
 // Navigation hook
 export { useHMINavigation } from "./hooks/use-hmi-navigation";
 export type {
