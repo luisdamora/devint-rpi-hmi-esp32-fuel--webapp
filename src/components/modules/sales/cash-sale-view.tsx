@@ -19,6 +19,12 @@ export const CashSaleViewComponent: React.FC = () => {
 		setValue(v);
 	};
 
+	const handleTripleZero = () => {
+		const numeric = value.replace(/\D/g, "");
+		const multiplied = (Number(numeric || "0") * 1000).toString();
+		setValue(multiplied);
+	};
+
 	const handleDecimal = () => {
 		if (!isDecimal) {
 			setValue(value + ".");
@@ -135,9 +141,7 @@ export const CashSaleViewComponent: React.FC = () => {
 								className="text-center text-white font-semibold py-2 rounded-md"
 								style={{ backgroundColor: NEXUS_COLORS.background.dark }}
 							>
-								{value.length === 0
-									? "000"
-									: value.replace(/\D/g, "").slice(-3).padStart(3, "0")}
+								x $1.000
 							</div>
 						</div>
 
