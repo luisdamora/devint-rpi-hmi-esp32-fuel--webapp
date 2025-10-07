@@ -16,8 +16,8 @@ export const AmountDisplay: React.FC<AmountDisplayProps> = ({
 			<div
 				className="flex-1 px-6 py-3 rounded-md font-bold text-2xl"
 				style={{
-					backgroundColor: NEXUS_COLORS.status.green,
-					color: NEXUS_COLORS.white,
+					backgroundColor: mode === "cash" ? "#2563eb" : "#16a34a", // blue-600 : green-600
+					color: "#ffffff",
 				}}
 			>
 				{mode === "cash" ? `$ ${displayMoney()}` : `${displayMoney()} Gal.`}
