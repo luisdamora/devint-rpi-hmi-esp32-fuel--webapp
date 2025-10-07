@@ -53,7 +53,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 				<div className="flex-1">
 					<label
 						htmlFor="documentNumber"
-						className="block text-white font-semibold mb-2 text-sm uppercase tracking-wide"
+						className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
 					>
 						Número de Identificación:
 					</label>
@@ -62,15 +62,15 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 						type="text"
 						value={documentNumber}
 						onChange={(e) => onDocumentNumberChange(e.target.value)}
-						className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-						style={{ fontSize: "1.1rem" }}
+						className="w-full px-4 py-2 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+						style={{ fontSize: "1rem" }}
 						placeholder="Ingrese el número"
 					/>
 				</div>
 				<div className="w-24">
 					<label
 						htmlFor="verificationDigit"
-						className="block text-white font-semibold mb-2 text-sm uppercase tracking-wide"
+						className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
 					>
 						DV:
 					</label>
@@ -80,8 +80,8 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 						maxLength={1}
 						value={verificationDigit}
 						onChange={(e) => onVerificationDigitChange(e.target.value)}
-						className="w-full px-4 py-3 rounded-md text-gray-900 font-medium text-center focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-						style={{ fontSize: "1.1rem" }}
+						className="w-full px-4 py-2 rounded-md text-gray-900 font-medium text-center focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+						style={{ fontSize: "1rem" }}
 						placeholder="0"
 					/>
 				</div>
@@ -91,7 +91,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 			<div>
 				<label
 					htmlFor="name"
-					className="block text-white font-semibold mb-2 text-sm uppercase tracking-wide"
+					className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
 				>
 					Nombre / Razón Social:
 				</label>
@@ -100,8 +100,8 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					type="text"
 					value={name}
 					onChange={(e) => onNameChange(e.target.value)}
-					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-					style={{ fontSize: "1.1rem" }}
+					className="w-full px-4 py-2 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+					style={{ fontSize: "1rem" }}
 					placeholder="Ingrese el nombre completo"
 				/>
 			</div>
@@ -110,7 +110,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 			<div>
 				<label
 					htmlFor="email"
-					className="block text-white font-semibold mb-2 text-sm uppercase tracking-wide"
+					className="block text-white font-semibold mb-1 text-xs uppercase tracking-wide"
 				>
 					Email para envío de Factura Electrónica:
 				</label>
@@ -119,21 +119,21 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					type="email"
 					value={email}
 					onChange={(e) => onEmailChange(e.target.value)}
-					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-					style={{ fontSize: "1.1rem" }}
+					className="w-full px-4 py-2 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+					style={{ fontSize: "1rem" }}
 					placeholder="correo@ejemplo.com"
 				/>
 			</div>
 
 			{/* Botón Registrar */}
-			<div className="flex justify-center pt-4">
+			<div className="flex justify-center pt-1">
 				<button
 					type="submit"
 					className={BUTTON_STYLES.success}
 					style={{
 						minWidth: "300px",
 						fontSize: "1.25rem",
-						padding: "1rem 2rem",
+						padding: "0.5rem 1rem",
 					}}
 				>
 					REGISTRAR

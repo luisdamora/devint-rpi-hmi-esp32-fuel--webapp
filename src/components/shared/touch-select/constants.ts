@@ -17,7 +17,7 @@ export const GRID_COLS_CLASSES: Record<1 | 2 | 3 | 4, string> = {
  */
 export const TOUCH_SELECT_SIZES = {
 	/** Altura mínima del trigger */
-	triggerMinHeight: "70px",
+	triggerMinHeight: "30px",
 	/** Tamaño de fuente del trigger */
 	triggerFontSize: "1.2rem",
 	/** Altura mínima de cada opción */
@@ -25,7 +25,7 @@ export const TOUCH_SELECT_SIZES = {
 	/** Tamaño de fuente de las opciones */
 	optionFontSize: "1.1rem",
 	/** Tamaño del botón de cerrar */
-	closeButtonSize: "60px",
+	closeButtonSize: "50px",
 } as const;
 
 /**
@@ -33,7 +33,7 @@ export const TOUCH_SELECT_SIZES = {
  */
 export const TOUCH_SELECT_CLASSES = {
 	trigger:
-		"w-full px-6 py-4 rounded-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white text-left flex items-center justify-between transition-all",
+		"w-full px-4 py-1 rounded-lg font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white text-left flex items-center justify-between transition-all",
 	triggerDisabled: "opacity-50 cursor-not-allowed",
 	label: "block text-white font-semibold mb-2 text-sm uppercase tracking-wide",
 	modalOverlay: "fixed inset-0 z-50 flex items-center justify-center",

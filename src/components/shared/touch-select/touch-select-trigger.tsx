@@ -38,7 +38,7 @@ export const TouchSelectTrigger: React.FC<TouchSelectTriggerProps> = ({
 					)}
 				>
 					{selectedOption?.icon && (
-						<span className="text-2xl">{selectedOption.icon}</span>
+						<span className="text-xl">{selectedOption.icon}</span>
 					)}
 					<span className="text-gray-900">
 						{selectedOption?.label || placeholder}
