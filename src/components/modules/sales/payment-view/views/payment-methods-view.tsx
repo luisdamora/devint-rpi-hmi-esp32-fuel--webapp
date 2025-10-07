@@ -137,7 +137,7 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 						</div> */}
 
 						{/* Información del cliente (resumen) */}
-						<div className="bg-blue-50 rounded-lg p-4 border-2 border-blue-200">
+						{/* <div className="bg-blue-50 rounded-lg p-4 border-2 border-blue-200">
 							<div className="flex justify-between items-center">
 								<div className="flex-1">
 									<p className="text-sm text-gray-600">
@@ -177,10 +177,10 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 									<span>Editar Información</span>
 								</button>
 							</div>
-						</div>
+						</div> */}
 
 						{/* Selector de modo de pago (modo activo visible) */}
-						<div className="bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200">
+						{/* <div className="bg-white rounded-lg p-6 shadow-sm border-2 border-gray-200">
 							<h2 className="text-xl font-semibold text-gray-700 mb-4">
 								Modo de Pago Actual
 							</h2>
@@ -194,7 +194,7 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 									setMode(mode);
 								}}
 							/>
-						</div>
+						</div> */}
 
 						{/* Grid de métodos de pago (solo en modo CONTADO) */}
 						{(sharedFormData?.mode || formData.mode) === "CONTADO" && (
@@ -228,7 +228,7 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 						)}
 
 						{/* Botón de guardar */}
-						<div className="pt-4">
+						<div className="pt-1">
 							<SaveButton
 								isValid={validation.isValid}
 								isComplete={distribution.isComplete}

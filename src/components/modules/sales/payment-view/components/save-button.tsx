@@ -79,7 +79,7 @@ export const SaveButton: React.FC<SaveButtonProps> = ({
 				onClick={canSave ? onSave : undefined}
 				disabled={!canSave}
 				className={cn(
-					"w-full h-20 rounded-lg font-bold text-xl",
+					"w-full h-10 rounded-lg font-bold text-xl",
 					"flex items-center justify-center gap-3",
 					"transition-all duration-200 shadow-lg",
 					"disabled:cursor-not-allowed",

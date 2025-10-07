@@ -51,18 +51,18 @@ export function usePaymentMethods(): UsePaymentMethodsReturn {
 				amount: totalAmount,
 				enabled: true,
 			},
-			{
-				id: crypto.randomUUID(),
-				type: "EFECTIVO",
-				amount: 0,
-				enabled: false,
-			},
-			{
-				id: crypto.randomUUID(),
-				type: "OTRO",
-				amount: 0,
-				enabled: false,
-			},
+			// {
+			// 	id: crypto.randomUUID(),
+			// 	type: "EFECTIVO",
+			// 	amount: 0,
+			// 	enabled: false,
+			// },
+			// {
+			// 	id: crypto.randomUUID(),
+			// 	type: "OTRO",
+			// 	amount: 0,
+			// 	enabled: false,
+			// },
 		];
 
 		setMethods(initialMethods);

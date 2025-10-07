@@ -108,10 +108,10 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 	return (
 		<div
 			className={cn(
-				"border-2 rounded-lg px-3 py-2 transition-all duration-200",
+				"border-2 rounded-lg px-2 py-1.5 transition-all duration-200",
 				isDisabled
 					? "opacity-50 bg-gray-50 border-gray-300"
-					: "bg-white border-blue-400 shadow-md",
+					: " border-blue-400 shadow-md",
 			)}
 		>
 			{/* Header con título y botón remover */}
@@ -136,7 +136,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 			</div> */}
 
 			{/* Layout en columnas para campos principales */}
-			<div className="grid grid-cols-2 gap-3">
+			<div className="grid grid-cols-2 gap-2">
 				{/* Columna 1: Tipo de método */}
 				<div className="space-y-0.5">
 					<TouchSelect
@@ -173,6 +173,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 							placeholder="0"
 							keyboardMode="numeric"
 							disabled={isDisabled}
+							useFixedDimensions
 						/>
 
 						<div className="flex items-center justify-between text-xs px-1">
@@ -191,13 +192,13 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 							type="button"
 							onClick={() => onRemove(method.id)}
 							className={cn(
-								"px-4 py-0.5 rounded-lg transition-colors",
+								"px-2 py-1 rounded-md transition-colors",
 								"hover:bg-red-100 active:scale-95",
 								"text-red-500 hover:text-red-700",
 							)}
 							aria-label="Remover método"
 						>
-							<X size={18} />
+							<X size={16} />
 						</button>
 					)}
 				</div>
@@ -205,7 +206,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 
 			{/* Campos específicos para TARJETA en columnas */}
 			{isTarjeta && (
-				<div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100">
+				<div className="grid grid-cols-2 gap-2 pt-1">
 					{/* Selector de banco */}
 					<div className="space-y-0.5">
 						<BankSelector
@@ -245,21 +246,6 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 					</div>
 				</div>
 			)}
-
-			{/* Información adicional */}
-			<div className="pt-1.5 border-t border-gray-200">
-				<div className="flex items-center justify-between text-xs">
-					<span className="text-gray-600">Estado:</span>
-					<span
-						className={cn(
-							"font-semibold",
-							method.enabled ? "text-green-600" : "text-gray-400",
-						)}
-					>
-						{method.enabled ? "Activo" : "Inactivo"}
-					</span>
-				</div>
-			</div>
 		</div>
 	);
 };
