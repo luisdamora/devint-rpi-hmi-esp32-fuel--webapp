@@ -83,7 +83,7 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 						}}
 						title="Cancelar"
 					>
-						<X size={24} className="text-white" />
+						<X size={20} className="text-white" />
 					</button>
 				</div>
 
@@ -123,7 +123,7 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 						className={TOUCH_INPUT_CLASSES.buttonClear}
 						title="Limpiar"
 					>
-						<Eraser size={20} className="inline mr-2" />
+						<Eraser size={16} className="inline mr-1" />
 						Limpiar
 					</button>
 					<button
@@ -132,7 +132,7 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 						className={TOUCH_INPUT_CLASSES.buttonConfirm}
 						title="Confirmar"
 					>
-						<Check size={20} className="inline mr-2" />
+						<Check size={16} className="inline mr-1" />
 						Confirmar
 					</button>
 				</div>

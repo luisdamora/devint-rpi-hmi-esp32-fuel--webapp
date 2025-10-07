@@ -50,11 +50,11 @@ export const TOUCH_INPUT_SIZES = {
 	/** Tamaño de fuente de las teclas */
 	keyboardKeyFontSize: "1.1rem",
 	/** Tamaño del display del modal */
-	modalDisplayHeight: "60px",
+	modalDisplayHeight: "45px",
 	/** Tamaño de fuente del display */
-	modalDisplayFontSize: "1.5rem",
+	modalDisplayFontSize: "1.2rem",
 	/** Tamaño del botón cerrar */
-	closeButtonSize: "50px",
+	closeButtonSize: "40px",
 } as const;
 
 /**
@@ -69,18 +69,18 @@ export const TOUCH_INPUT_CLASSES = {
 
 	// Modal
 	modalOverlay: "fixed inset-0 z-50 flex items-center justify-center",
-	modalContainer: "w-full h-full flex flex-col p-6",
-	modalHeader: "flex items-center justify-between mb-4",
-	modalTitle: "text-white text-2xl font-bold",
+	modalContainer: "w-full h-full flex flex-col p-4",
+	modalHeader: "flex items-center justify-between mb-2",
+	modalTitle: "text-white text-lg font-bold",
 	closeButton:
-		"p-3 rounded-lg bg-red-600 hover:bg-red-700 active:bg-red-800 transition-colors focus:outline-none focus:ring-4 focus:ring-red-500",
+		"p-2 rounded-lg bg-red-600 hover:bg-red-700 active:bg-red-800 transition-colors focus:outline-none focus:ring-4 focus:ring-red-500",
 
 	// Display
 	display:
-		"w-full px-6 py-4 rounded-lg bg-white text-gray-900 font-semibold text-center mb-4 border-2 border-blue-500",
+		"w-full px-4 py-2 rounded-lg bg-white text-gray-900 font-semibold text-center mb-2 border-2 border-blue-500",
 
 	// Keyboard
-	keyboardContainer: "flex-1 flex flex-col justify-center gap-2",
+	keyboardContainer: "flex-1 flex flex-col justify-center gap-1.5",
 	keyboardRow: "flex justify-center gap-2",
 	key: "rounded-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 active:scale-95 select-none",
 	keyNormal: "bg-white text-gray-900 hover:bg-gray-100 active:bg-gray-200",
@@ -88,9 +88,9 @@ export const TOUCH_INPUT_CLASSES = {
 	keySpecial: "bg-gray-600 text-white hover:bg-gray-700 active:bg-gray-800",
 
 	// Botones de acción
-	actionButtons: "flex gap-4 mt-4",
+	actionButtons: "flex gap-2 mt-2",
 	buttonClear:
-		"flex-1 py-3 rounded-lg bg-yellow-600 text-white font-bold hover:bg-yellow-700 active:bg-yellow-800 transition-colors",
+		"flex-1 py-2 rounded-lg bg-yellow-600 text-white font-bold hover:bg-yellow-700 active:bg-yellow-800 transition-colors",
 	buttonConfirm:
-		"flex-1 py-3 rounded-lg bg-green-600 text-white font-bold hover:bg-green-700 active:bg-green-800 transition-colors",
+		"flex-1 py-2 rounded-lg bg-green-600 text-white font-bold hover:bg-green-700 active:bg-green-800 transition-colors",
 } as const;

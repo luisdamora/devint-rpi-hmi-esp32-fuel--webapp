@@ -54,7 +54,7 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 					style={{ ...keyStyle, minWidth: "90px" }}
 					title="Borrar"
 				>
-					<Delete size={20} className="inline" />
+					<Delete size={18} className="inline" />
 				</button>
 			</div>
 
@@ -138,7 +138,7 @@ export const TouchKeyboard: React.FC<TouchKeyboardProps> = ({
 					style={{ ...keyStyle, minWidth: "400px" }}
 					title="Espacio"
 				>
-					<Space size={20} className="inline mr-2" />
+					<Space size={18} className="inline mr-2" />
 					Espacio
 				</button>
 			</div>
