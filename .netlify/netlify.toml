@@ -1,0 +1,43 @@
+redirectsOrigin = "config"
+plugins = []
+functionsDirectory = "/mnt/E608E9D408E9A431/Caprinosol-cloud/devint-rpi-hmi-esp32-fuel/devint-rpi-hmi-esp32-fuel--webapp/netlify/functions"
+functionsDirectoryOrigin = "config"
+headers = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/mnt/E608E9D408E9A431/Caprinosol-cloud/devint-rpi-hmi-esp32-fuel/devint-rpi-hmi-esp32-fuel--webapp/dist"
+publishOrigin = "config"
+commandOrigin = "config"
+command = "npm run build"
+functions = "/mnt/E608E9D408E9A431/Caprinosol-cloud/devint-rpi-hmi-esp32-fuel/devint-rpi-hmi-esp32-fuel--webapp/netlify/functions"
+
+[build.environment]
+NODE_VERSION = "18"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

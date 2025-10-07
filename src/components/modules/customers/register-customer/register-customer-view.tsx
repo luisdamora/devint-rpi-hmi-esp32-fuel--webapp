@@ -13,7 +13,6 @@ export const RegisterCustomerViewComponent: React.FC = () => {
 		formData,
 		handleDocumentTypeChange,
 		handleDocumentNumberChange,
-		handleVerificationDigitChange,
 		handleNameChange,
 		handleEmailChange,
 		handleSubmit,
@@ -45,12 +44,10 @@ export const RegisterCustomerViewComponent: React.FC = () => {
 							<CustomerForm
 								documentType={formData.documentType}
 								documentNumber={formData.documentNumber}
-								verificationDigit={formData.verificationDigit}
 								name={formData.name}
 								email={formData.email}
 								onDocumentTypeChange={handleDocumentTypeChange}
 								onDocumentNumberChange={handleDocumentNumberChange}
-								onVerificationDigitChange={handleVerificationDigitChange}
 								onNameChange={handleNameChange}
 								onEmailChange={handleEmailChange}
 								onSubmit={handleSubmit}
