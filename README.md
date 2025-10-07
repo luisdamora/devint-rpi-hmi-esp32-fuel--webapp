@@ -30,8 +30,17 @@ npm run dev
 # Construcción para producción
 npm run build
 
+# Construcción y despliegue en un solo comando
+npm run build:deploy
+
 # Vista previa de la construcción
 npm run preview
+
+# Despliegue a producción
+npm run deploy
+
+# Despliegue de preview (staging)
+npm run deploy:preview
 ```
 
 ### Tecnologías utilizadas

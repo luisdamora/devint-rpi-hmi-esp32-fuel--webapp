@@ -14,7 +14,7 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 			style={{ backgroundColor: NEXUS_THEME_CONFIG.background }}
 		>
 			{/* Header - 60px fixed height */}
-			<header
+			{/* <header
 				className="flex items-center justify-between px-4 z-10 border-b"
 				style={{
 					height: `${HEADER_HEIGHT}px`,
@@ -56,7 +56,7 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 						</span>
 					</div>
 				</div>
-			</header>
+			</header> */}
 
 			{/* Main Content - flexible height */}
 			<main
