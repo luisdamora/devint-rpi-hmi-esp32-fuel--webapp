@@ -72,7 +72,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 			key: "contado",
 			title: "CONTADO",
 			icon: <BanknoteArrowDown size={64} />,
-			action: () => navigateTo("keypad"),
+			action: () => navigateTo("cash-sale"),
 		},
 		{
 			key: "credito",

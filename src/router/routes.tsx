@@ -11,7 +11,7 @@ import { MainMenu } from "@/components/modules/auth/main-menu";
 // HMI View Components
 import { SplashScreen } from "@/components/modules/auth/splash-screen";
 import { PointsView } from "@/components/modules/loyalty/points-view";
-import { KeypadViewComponent } from "@/components/modules/sales/keypad-view";
+import { CashSaleViewComponent } from "@/components/modules/sales/cash-sale-view";
 import { PaymentMethods } from "@/components/modules/sales/payment-methods";
 import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
@@ -38,8 +38,8 @@ export const routes: RouteObject[] = [
 				element: <LoginViewComponent />,
 			},
 			{
-				path: "keypad",
-				element: <KeypadViewComponent />,
+				path: "cash-sale",
+				element: <CashSaleViewComponent />,
 			},
 			{
 				path: "payment",

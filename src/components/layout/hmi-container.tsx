@@ -8,6 +8,8 @@ interface HMIContainerProps {
 	children: React.ReactNode;
 	className?: string;
 	style?: React.CSSProperties;
+	showHeader?: boolean;
+	showFooter?: boolean;
 }
 
 /**
@@ -19,15 +21,17 @@ export const HMIContainer: React.FC<HMIContainerProps> = ({
 	children,
 	className,
 	style,
+	showHeader = true,
+	showFooter = true,
 }) => {
 	return (
 		<div
 			className={cn("w-full h-full flex flex-col", className)}
 			style={{ backgroundColor: NEXUS_COLORS.background.main, ...style }}
 		>
-			<HMIHeader stationName="Nexus POS" logoAlt="Nexus POS" />
+			{showHeader && <HMIHeader stationName="Nexus POS" logoAlt="Nexus POS" />}
 			<div className="flex-1 min-h-0 w-full overflow-auto p-2">{children}</div>
-			<HMIFooterInfo primaryBg={true} />
+			{showFooter && <HMIFooterInfo primaryBg={true} />}
 		</div>
 	);
 };

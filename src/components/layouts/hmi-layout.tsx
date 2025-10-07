@@ -102,7 +102,7 @@ export const HMILayout: React.FC<HMILayoutProps> = ({
 						{ to: "/splash", label: "Splash" },
 						{ to: "/menu", label: "Menú" },
 						{ to: "/login", label: "Login" },
-						{ to: "/keypad", label: "Teclado" },
+						{ to: "/cash-sale", label: "Contado" },
 						{ to: "/payment", label: "Pago" },
 						{ to: "/loyalty", label: "Puntos" },
 						{ to: "/close-turn", label: "Cerrar Turno" },
