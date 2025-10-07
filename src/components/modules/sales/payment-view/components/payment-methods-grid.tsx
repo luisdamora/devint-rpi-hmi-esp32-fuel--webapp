@@ -138,20 +138,21 @@ export const PaymentMethodsGrid: React.FC<PaymentMethodsGridProps> = ({
 				)}
 			</div>
 
-			{/* Grid de métodos de pago - Más compacto */}
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+			{/* Grid de métodos de pago - Layout en filas para optimizar espacio */}
+			<div className="flex flex-col gap-2">
 				{methods.map((method, index) => (
-					<PaymentMethodCard
-						key={method.id}
-						method={method}
-						index={index}
-						totalAmount={totalAmount}
-						remaining={distribution.remaining}
-						onUpdate={onUpdateMethod}
-						onRemove={index > 0 ? onRemoveMethod : undefined}
-						showRemove={index > 0}
-						validationErrors={validationErrors}
-					/>
+					<div key={method.id} className="w-full">
+						<PaymentMethodCard
+							method={method}
+							index={index}
+							totalAmount={totalAmount}
+							remaining={distribution.remaining}
+							onUpdate={onUpdateMethod}
+							onRemove={index > 0 ? onRemoveMethod : undefined}
+							showRemove={index > 0}
+							validationErrors={validationErrors}
+						/>
+					</div>
 				))}
 			</div>
 

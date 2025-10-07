@@ -108,7 +108,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 	return (
 		<div
 			className={cn(
-				"border-2 rounded-lg p-4 space-y-4 transition-all duration-200",
+				"border-2 rounded-lg p-3 space-y-3 transition-all duration-200",
 				isDisabled
 					? "opacity-50 bg-gray-50 border-gray-300"
 					: "bg-white border-blue-400 shadow-md",
@@ -116,25 +116,27 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 		>
 			{/* Header con título y botón remover */}
 			<div className="flex items-center justify-between">
-				<h3 className="text-lg font-bold text-gray-700">Método {index + 1}</h3>
+				<h3 className="text-base font-bold text-gray-700">
+					Método {index + 1}
+				</h3>
 				{showRemove && onRemove && (
 					<button
 						type="button"
 						onClick={() => onRemove(method.id)}
 						className={cn(
-							"p-2 rounded-full transition-colors",
+							"p-1.5 rounded-full transition-colors",
 							"hover:bg-red-100 active:scale-95",
 							"text-red-500 hover:text-red-700",
 						)}
 						aria-label="Remover método"
 					>
-						<X size={20} />
+						<X size={18} />
 					</button>
 				)}
 			</div>
 
 			{/* Selector de tipo de método */}
-			<div className="space-y-1">
+			<div className="space-y-0.5">
 				<TouchSelect
 					value={method.type}
 					options={methodTypeOptions}
@@ -147,7 +149,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 					gridCols={3}
 				/>
 				{validationErrors[`method_${method.id}_type`] && (
-					<p className="text-sm text-red-500 px-2">
+					<p className="text-xs text-red-500 px-1">
 						{validationErrors[`method_${method.id}_type`]}
 					</p>
 				)}
@@ -157,7 +159,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 			{isTarjeta && (
 				<>
 					{/* Selector de banco */}
-					<div className="space-y-1">
+					<div className="space-y-0.5">
 						<BankSelector
 							value={method.bank || ""}
 							onChange={(value) => onUpdate(method.id, { bank: value })}
@@ -166,14 +168,14 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 							disabled={isDisabled}
 						/>
 						{validationErrors[`method_${method.id}_bank`] && (
-							<p className="text-sm text-red-500 px-2">
+							<p className="text-xs text-red-500 px-1">
 								{validationErrors[`method_${method.id}_bank`]}
 							</p>
 						)}
 					</div>
 
 					{/* Selector de franquicia */}
-					<div className="space-y-1">
+					<div className="space-y-0.5">
 						<TouchSelect
 							value={method.franchise || ""}
 							options={franchiseOptions}
@@ -188,7 +190,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 							gridCols={2}
 						/>
 						{validationErrors[`method_${method.id}_franchise`] && (
-							<p className="text-sm text-red-500 px-2">
+							<p className="text-xs text-red-500 px-1">
 								{validationErrors[`method_${method.id}_franchise`]}
 							</p>
 						)}
@@ -197,7 +199,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 			)}
 
 			{/* Campo de monto (todos los tipos) */}
-			<div className="space-y-1">
+			<div className="space-y-0.5">
 				<TouchInput
 					value={method.amount.toString()}
 					onChange={(value) => {
@@ -211,7 +213,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 					keyboardMode="numeric"
 					disabled={isDisabled}
 				/>
-				<div className="flex items-center justify-between text-sm px-2">
+				<div className="flex items-center justify-between text-xs px-1">
 					<span className="text-gray-600">
 						Máximo: {formatCurrency(maxAmount)}
 					</span>
@@ -224,8 +226,8 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 			</div>
 
 			{/* Información adicional */}
-			<div className="pt-2 border-t border-gray-200">
-				<div className="flex items-center justify-between text-sm">
+			<div className="pt-1.5 border-t border-gray-200">
+				<div className="flex items-center justify-between text-xs">
 					<span className="text-gray-600">Estado:</span>
 					<span
 						className={cn(
