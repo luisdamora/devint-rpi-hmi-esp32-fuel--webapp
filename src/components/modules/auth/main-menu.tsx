@@ -2,7 +2,6 @@ import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import { cn } from "@/lib/utils";
 
 interface MainMenuProps {
 	turnActive?: boolean;
@@ -90,25 +89,27 @@ export const MainMenu: React.FC<MainMenuProps> = ({ turnActive = false }) => {
 
 	return (
 		<HMIContainer>
-			<div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
-				{tiles.map((t) => {
-					const isInicio = t.key === "inicio";
-					const disabled =
-						!turnActive &&
-						!isInicio &&
-						!t.key.includes("utilidades-disabled") &&
-						!t.key.includes("inicio");
-					return (
-						<MenuTile
-							key={t.key}
-							title={t.title}
-							icon={t.icon}
-							onClick={t.action}
-							disabled={disabled || !t.action}
-							ariaLabel={disabled ? `${t.title} (deshabilitado)` : t.title}
-						/>
-					);
-				})}
+			<div className="min-h-full w-full flex items-center justify-center px-4">
+				<div className="grid grid-cols-3 gap-4 max-w-4xl mx-auto w-full">
+					{tiles.map((t) => {
+						const isInicio = t.key === "inicio";
+						const disabled =
+							!turnActive &&
+							!isInicio &&
+							!t.key.includes("utilidades-disabled") &&
+							!t.key.includes("inicio");
+						return (
+							<MenuTile
+								key={t.key}
+								title={t.title}
+								icon={t.icon}
+								onClick={t.action}
+								disabled={disabled || !t.action}
+								ariaLabel={disabled ? `${t.title} (deshabilitado)` : t.title}
+							/>
+						);
+					})}
+				</div>
 			</div>
 		</HMIContainer>
 	);
