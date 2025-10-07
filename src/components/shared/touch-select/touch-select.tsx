@@ -30,6 +30,7 @@ export const TouchSelect: React.FC<TouchSelectProps> = ({
 	disabled = false,
 	className,
 	gridCols = 2,
+	useFixedDimensions = false,
 }) => {
 	const { isOpen, selectedOption, handleOpen, handleClose, handleSelect } =
 		useTouchSelect(value, options, onChange, disabled);
@@ -53,6 +54,7 @@ export const TouchSelect: React.FC<TouchSelectProps> = ({
 				gridCols={gridCols}
 				onSelect={handleSelect}
 				onClose={handleClose}
+				useFixedDimensions={useFixedDimensions}
 			/>
 		</>
 	);

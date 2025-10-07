@@ -85,13 +85,11 @@ const {
 ```typescript
 interface TouchSelectOption {
   value: string;              // Valor único
-  label: string;              // Texto principal
   icon?: React.ReactNode;     // Icono (emoji o componente)
   description?: string;       // Descripción opcional
 }
 ```
-
-### `TouchSelectProps`
+### TouchSelectProps
 ```typescript
 interface TouchSelectProps {
   value: string;
@@ -102,12 +100,10 @@ interface TouchSelectProps {
   disabled?: boolean;
   className?: string;
   gridCols?: 1 | 2 | 3 | 4;
+  useFixedDimensions?: boolean;  // Usar dimensiones fijas HMI (800x480px)
 }
 ```
-
 ## 🎨 Constantes
-
-### Grid Responsive
 ```typescript
 GRID_COLS_CLASSES = {
   1: "grid-cols-1",
@@ -156,6 +152,18 @@ const options: TouchSelectOption[] = [
 />
 ```
 
+### Ejemplo con Dimensiones Fijas HMI (800x480px)
+```tsx
+<TouchSelect
+  value={value}
+  options={options}
+  onChange={setValue}
+  label="Seleccione:"
+  gridCols={2}
+  useFixedDimensions={true}  // Modal con dimensiones HMI máximas
+/>
+```
+
 ### Ejemplo con Descripciones
 ```tsx
 const documentOptions: TouchSelectOption[] = [
@@ -176,6 +184,26 @@ const documentOptions: TouchSelectOption[] = [
   gridCols={2}
 />
 ```
+
+## 🎨 Dimensiones del Modal
+
+El modal puede comportarse de dos formas:
+
+### Modo Fullscreen (predeterminado)
+```tsx
+<TouchSelect ... />  // Sin prop o useFixedDimensions={false}
+```
+- Ocupa toda la pantalla disponible
+- Responsive a cualquier tamaño de viewport
+
+### Modo Dimensiones Fijas HMI
+```tsx
+<TouchSelect ... useFixedDimensions={true} />
+```
+- Dimensiones máximas: **800px × 480px**
+- Ideal para interfaces HMI con tamaño fijo
+- Centrado en la pantalla
+- Previene que el modal se desborde en pantallas HMI estándar
 
 ## 🔧 Personalización Avanzada
 

@@ -45,6 +45,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 				label="Tipo de Documento:"
 				placeholder="Seleccione tipo de documento..."
 				gridCols={2}
+				useFixedDimensions={true}
 			/>
 
 			{/* Número de Identificación y DV */}

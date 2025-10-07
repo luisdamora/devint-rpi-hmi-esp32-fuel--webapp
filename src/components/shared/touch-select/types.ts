@@ -34,6 +34,8 @@ export interface TouchSelectProps {
 	className?: string;
 	/** Número de columnas en grid (responsive) */
 	gridCols?: 1 | 2 | 3 | 4;
+	/** Usar dimensiones fijas del layout HMI (800x480px) */
+	useFixedDimensions?: boolean;
 }
 
 /**
@@ -72,6 +74,8 @@ export interface TouchSelectModalProps {
 	onSelect: (value: string) => void;
 	/** Callback al cerrar modal */
 	onClose: () => void;
+	/** Usar dimensiones fijas del layout HMI (800x480px) */
+	useFixedDimensions?: boolean;
 }
 
 /**

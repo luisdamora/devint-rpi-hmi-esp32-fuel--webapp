@@ -169,6 +169,7 @@ export const FormWithTouchSelect: React.FC = () => {
 				label="Tipo de Vehículo:"
 				placeholder="Seleccione el tipo de vehículo"
 				gridCols={4}
+				useFixedDimensions={true}
 			/>
 
 			<TouchSelect
@@ -178,6 +179,7 @@ export const FormWithTouchSelect: React.FC = () => {
 				label="Tipo de Combustible:"
 				placeholder="Seleccione el combustible"
 				gridCols={3}
+				useFixedDimensions={true}
 			/>
 
 			<button
@@ -187,5 +189,56 @@ export const FormWithTouchSelect: React.FC = () => {
 				Continuar
 			</button>
 		</form>
+	);
+};
+
+// Ejemplo con dimensiones fijas HMI (800x480px)
+export const TouchSelectWithFixedDimensions: React.FC = () => {
+	const [selectedOption, setSelectedOption] = useState("");
+
+	const options: TouchSelectOption[] = [
+		{
+			value: "option1",
+			label: "Opción 1",
+			icon: "🎯",
+			description: "Primera opción con dimensiones HMI fijas",
+		},
+		{
+			value: "option2",
+			label: "Opción 2",
+			icon: "⭐",
+			description: "Segunda opción con dimensiones HMI fijas",
+		},
+		{
+			value: "option3",
+			label: "Opción 3",
+			icon: "🚀",
+			description: "Tercera opción con dimensiones HMI fijas",
+		},
+	];
+
+	return (
+		<div className="p-8">
+			<h2 className="text-white text-xl font-bold mb-4">
+				Modal con Dimensiones Fijas (800x480px)
+			</h2>
+			<TouchSelect
+				value={selectedOption}
+				options={options}
+				onChange={setSelectedOption}
+				label="Seleccione una opción:"
+				placeholder="Toque para seleccionar..."
+				gridCols={2}
+				useFixedDimensions={true}
+			/>
+			{selectedOption && (
+				<p className="text-white mt-4">
+					Selección actual: {selectedOption}
+				</p>
+			)}
+			<p className="text-gray-400 mt-2 text-sm">
+				El modal tiene dimensiones máximas de 800x480px (HMI estándar)
+			</p>
+		</div>
 	);
 };

@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import React from "react";
+import { LAYOUT_DIMENSIONS } from "@/lib/config/layout-dimensions";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { cn } from "@/lib/utils";
 import {
@@ -21,6 +22,7 @@ export const TouchSelectModal: React.FC<TouchSelectModalProps> = ({
 	gridCols,
 	onSelect,
 	onClose,
+	useFixedDimensions = false,
 }) => {
 	if (!isOpen) return null;
 
@@ -31,7 +33,17 @@ export const TouchSelectModal: React.FC<TouchSelectModalProps> = ({
 			className={TOUCH_SELECT_CLASSES.modalOverlay}
 			style={{ backgroundColor: NEXUS_COLORS.background.main }}
 		>
-			<div className={TOUCH_SELECT_CLASSES.modalContainer}>
+			<div
+				className={TOUCH_SELECT_CLASSES.modalContainer}
+				style={
+					useFixedDimensions
+						? {
+								maxWidth: `${LAYOUT_DIMENSIONS.WIDTH}px`,
+								maxHeight: `${LAYOUT_DIMENSIONS.HEIGHT}px`,
+							}
+						: undefined
+				}
+			>
 				{/* Header con botón de cerrar */}
 				<div className={TOUCH_SELECT_CLASSES.modalHeader}>
 					<h2 className={TOUCH_SELECT_CLASSES.modalTitle}>{title}</h2>
