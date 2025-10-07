@@ -29,7 +29,7 @@
         "noArrayIndexKey": "off"
       },
       "style": {
-        "useImportType": "off",
+        "useImportType": "off"
       }
     }
   },
