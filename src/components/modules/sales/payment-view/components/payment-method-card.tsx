@@ -115,7 +115,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 			)}
 		>
 			{/* Header con título y botón remover */}
-			<div className="flex items-center justify-between">
+			{/* <div className="flex items-center justify-between">
 				<h3 className="text-base font-bold text-gray-700">
 					Método {index + 1}
 				</h3>
@@ -133,31 +133,78 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 						<X size={18} />
 					</button>
 				)}
+			</div> */}
+
+			{/* Layout en columnas para campos principales */}
+			<div className="grid grid-cols-2 gap-3">
+				{/* Columna 1: Tipo de método */}
+				<div className="space-y-0.5">
+					<TouchSelect
+						value={method.type}
+						options={methodTypeOptions}
+						onChange={(value) =>
+							onUpdate(method.id, { type: value as PaymentMethodData["type"] })
+						}
+						label="Tipo de Pago:"
+						placeholder="Seleccione tipo..."
+						disabled={isDisabled}
+						gridCols={3}
+					/>
+					{validationErrors[`method_${method.id}_type`] && (
+						<p className="text-xs text-red-500 px-1">
+							{validationErrors[`method_${method.id}_type`]}
+						</p>
+					)}
+				</div>
+
+				{/* Columna 2: Campo de monto */}
+				<div className="space-y-0.5 flex">
+					<div className="flex-1">
+						<TouchInput
+							value={method.amount.toString()}
+							onChange={(value) => {
+								const numValue = Number.parseInt(value, 10) || 0;
+								// Limitar al máximo permitido
+								const finalValue = Math.min(numValue, maxAmount);
+								onUpdate(method.id, { amount: finalValue });
+							}}
+							label="Monto:"
+							placeholder="0"
+							keyboardMode="numeric"
+							disabled={isDisabled}
+						/>
+
+						<div className="flex items-center justify-between text-xs px-1">
+							<span className="text-gray-600">
+								Máximo: {formatCurrency(maxAmount)}
+							</span>
+							{validationErrors[`method_${method.id}_amount`] && (
+								<span className="text-red-500">
+									{validationErrors[`method_${method.id}_amount`]}
+								</span>
+							)}
+						</div>
+					</div>
+					{showRemove && onRemove && (
+						<button
+							type="button"
+							onClick={() => onRemove(method.id)}
+							className={cn(
+								"px-4 py-0.5 rounded-lg transition-colors",
+								"hover:bg-red-100 active:scale-95",
+								"text-red-500 hover:text-red-700",
+							)}
+							aria-label="Remover método"
+						>
+							<X size={18} />
+						</button>
+					)}
+				</div>
 			</div>
 
-			{/* Selector de tipo de método */}
-			<div className="space-y-0.5">
-				<TouchSelect
-					value={method.type}
-					options={methodTypeOptions}
-					onChange={(value) =>
-						onUpdate(method.id, { type: value as PaymentMethodData["type"] })
-					}
-					label="Tipo de Pago:"
-					placeholder="Seleccione tipo..."
-					disabled={isDisabled}
-					gridCols={3}
-				/>
-				{validationErrors[`method_${method.id}_type`] && (
-					<p className="text-xs text-red-500 px-1">
-						{validationErrors[`method_${method.id}_type`]}
-					</p>
-				)}
-			</div>
-
-			{/* Campos específicos para TARJETA */}
+			{/* Campos específicos para TARJETA en columnas */}
 			{isTarjeta && (
-				<>
+				<div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-100">
 					{/* Selector de banco */}
 					<div className="space-y-0.5">
 						<BankSelector
@@ -195,35 +242,8 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 							</p>
 						)}
 					</div>
-				</>
-			)}
-
-			{/* Campo de monto (todos los tipos) */}
-			<div className="space-y-0.5">
-				<TouchInput
-					value={method.amount.toString()}
-					onChange={(value) => {
-						const numValue = Number.parseInt(value, 10) || 0;
-						// Limitar al máximo permitido
-						const finalValue = Math.min(numValue, maxAmount);
-						onUpdate(method.id, { amount: finalValue });
-					}}
-					label="Monto:"
-					placeholder="0"
-					keyboardMode="numeric"
-					disabled={isDisabled}
-				/>
-				<div className="flex items-center justify-between text-xs px-1">
-					<span className="text-gray-600">
-						Máximo: {formatCurrency(maxAmount)}
-					</span>
-					{validationErrors[`method_${method.id}_amount`] && (
-						<span className="text-red-500">
-							{validationErrors[`method_${method.id}_amount`]}
-						</span>
-					)}
 				</div>
-			</div>
+			)}
 
 			{/* Información adicional */}
 			<div className="pt-1.5 border-t border-gray-200">
