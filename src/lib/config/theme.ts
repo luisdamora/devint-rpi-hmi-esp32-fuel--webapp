@@ -147,10 +147,10 @@ export const BUTTON_STYLES = {
  * @returns Combined class string
  */
 export const createCustomButton = (
-	textColor: keyof typeof BUTTON_TEXT_STYLES = 'white',
-	bgStyle: keyof typeof BUTTON_BG_STYLES = 'gray',
-	size: 'small' | 'medium' | 'large' = 'medium',
-	shape: 'rounded' | 'square' | 'pill' = 'rounded'
+	textColor: keyof typeof BUTTON_TEXT_STYLES = "white",
+	bgStyle: keyof typeof BUTTON_BG_STYLES = "gray",
+	size: "small" | "medium" | "large" = "medium",
+	shape: "rounded" | "square" | "pill" = "rounded",
 ): string => {
 	const text = BUTTON_TEXT_STYLES[textColor];
 	const bg = BUTTON_BG_STYLES[bgStyle];
@@ -182,13 +182,16 @@ export const BUTTON_VARIANTS = {
 	primaryBlue: `${BUTTON_TEXT_STYLES.white} text-center font-semibold py-3 px-4 rounded-lg ${BUTTON_BG_STYLES.primary.base} ${BUTTON_BG_STYLES.primary.hover} ${BUTTON_BG_STYLES.primary.active} ${BUTTON_CLICK_EFFECTS.scale} ${BUTTON_CLICK_EFFECTS.transition} ${BUTTON_CLICK_EFFECTS.shadow} ${BUTTON_CLICK_EFFECTS.focus} ${BUTTON_FOCUS_STYLES.primary}`,
 
 	// Outline button (solo borde, fondo transparente)
-	outline: "text-center font-semibold py-2 px-4 rounded-lg border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white active:scale-95 transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50",
+	outline:
+		"text-center font-semibold py-2 px-4 rounded-lg border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white active:scale-95 transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50",
 
 	// Ghost button (sin fondo, solo texto con hover)
-	ghost: "text-center font-semibold py-2 px-4 rounded-lg text-gray-600 hover:bg-gray-100 active:bg-gray-200 active:scale-95 transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50",
+	ghost:
+		"text-center font-semibold py-2 px-4 rounded-lg text-gray-600 hover:bg-gray-100 active:bg-gray-200 active:scale-95 transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50",
 
 	// Disabled button style
-	disabled: "text-center font-semibold py-3 px-4 rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed opacity-50",
+	disabled:
+		"text-center font-semibold py-3 px-4 rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed opacity-50",
 } as const;
 
 /**

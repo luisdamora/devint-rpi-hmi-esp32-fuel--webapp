@@ -6,10 +6,7 @@
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false,
-    "includes": [
-      "./src/**"
-    ]
+    "ignoreUnknown": false
   },
   "formatter": {
     "enabled": true,
@@ -22,9 +19,6 @@
   },
   "linter": {
     "enabled": true,
-    "includes": [
-      "!./src/components/ui/**"
-    ],
     "domains": {
       "react": "recommended"
     },
