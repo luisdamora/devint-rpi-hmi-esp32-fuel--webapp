@@ -20,8 +20,6 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 	onConfirm,
 	useFixedDimensions = false,
 }) => {
-	if (!isOpen) return null;
-
 	// Handlers del teclado
 	const handleKeyPress = (key: string) => {
 		if (!maxLength || value.length < maxLength) {
@@ -46,6 +44,8 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 	};
 
 	const [isUppercase, setIsUppercase] = React.useState(false);
+
+	if (!isOpen) return null;
 
 	return (
 		<div
