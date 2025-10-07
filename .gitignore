@@ -14,7 +14,6 @@ dist-ssr
 
 # Editor directories and files
 !.vscode/extensions.json
-pnpm-lock.yaml
 .idea
 .DS_Store
 *.suo

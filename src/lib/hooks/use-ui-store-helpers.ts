@@ -119,7 +119,16 @@ export const useLoadingState = () => {
 
 /**
  * Hook para obtener toda la información de sesión
+ * Suscribe a valores individuales para evitar re-renders innecesarios
  */
 export const useSessionInfo = () => {
-	return useUIStore(uiStoreSelectors.sessionInfo);
+	const isAuthenticated = useUIStore(uiStoreSelectors.isAuthenticated);
+	const isTurnActive = useUIStore(uiStoreSelectors.isTurnActive);
+	const operatorName = useUIStore(uiStoreSelectors.operatorName);
+
+	return {
+		isAuthenticated,
+		isTurnActive,
+		operatorName,
+	};
 };

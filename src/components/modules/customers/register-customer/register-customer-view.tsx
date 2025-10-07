@@ -4,13 +4,11 @@ import { HMIContainer } from "@/components/layout/hmi-container";
 import { SideTile } from "@/components/modules/sales/cash-sale/components/side-tile";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import { useSessionInfo } from "@/lib/hooks/use-ui-store-helpers";
 import { CustomerForm } from "./components/customer-form";
 import { useCustomerForm } from "./hooks/use-customer-form";
 
 export const RegisterCustomerViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
-	const sessionInfo = useSessionInfo();
 	const {
 		formData,
 		handleDocumentTypeChange,
