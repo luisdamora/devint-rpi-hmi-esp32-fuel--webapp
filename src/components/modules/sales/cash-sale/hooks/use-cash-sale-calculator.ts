@@ -11,7 +11,9 @@ export interface UseCashSaleCalculatorReturn {
 	handleBackspace: () => void;
 }
 
-export const useCashSaleCalculator = (initialValue: string = "100000"): UseCashSaleCalculatorReturn => {
+export const useCashSaleCalculator = (
+	initialValue: string = "100000",
+): UseCashSaleCalculatorReturn => {
 	const [value, setValue] = useState(initialValue);
 	const [isDecimal, setIsDecimal] = useState(false);
 

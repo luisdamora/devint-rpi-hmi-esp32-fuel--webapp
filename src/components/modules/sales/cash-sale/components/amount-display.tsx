@@ -5,7 +5,9 @@ interface AmountDisplayProps {
 	displayMoney: () => string;
 }
 
-export const AmountDisplay: React.FC<AmountDisplayProps> = ({ displayMoney }) => (
+export const AmountDisplay: React.FC<AmountDisplayProps> = ({
+	displayMoney,
+}) => (
 	<div className="mb-3 text-center">
 		<div className="flex gap-3 justify-center mt-2">
 			<div

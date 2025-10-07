@@ -80,9 +80,7 @@ export const TouchSelectExample: React.FC = () => {
 
 	return (
 		<div className="p-8 space-y-8">
-			<h1 className="text-white text-2xl font-bold">
-				Ejemplos de TouchSelect
-			</h1>
+			<h1 className="text-white text-2xl font-bold">Ejemplos de TouchSelect</h1>
 
 			{/* Ejemplo 1 */}
 			<div>
@@ -167,9 +165,7 @@ export const FormWithTouchSelect: React.FC = () => {
 			<TouchSelect
 				value={formData.vehicleType}
 				options={vehicleOptions}
-				onChange={(value) =>
-					setFormData({ ...formData, vehicleType: value })
-				}
+				onChange={(value) => setFormData({ ...formData, vehicleType: value })}
 				label="Tipo de Vehículo:"
 				placeholder="Seleccione el tipo de vehículo"
 				gridCols={4}

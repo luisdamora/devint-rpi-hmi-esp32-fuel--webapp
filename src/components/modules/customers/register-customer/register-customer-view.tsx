@@ -1,9 +1,9 @@
-import React from "react";
 import { Home, UserPlus } from "lucide-react";
+import React from "react";
 import { HMIContainer } from "@/components/layout/hmi-container";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { SideTile } from "@/components/modules/sales/cash-sale/components/side-tile";
 import { NEXUS_COLORS } from "@/lib/config/theme";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { CustomerForm } from "./components/customer-form";
 import { useCustomerForm } from "./hooks/use-customer-form";
 

@@ -12,7 +12,7 @@ export const SideTile: React.FC<SideTileProps> = ({
 	title,
 	icon,
 	onClick,
-	color = NEXUS_COLORS.status.red
+	color = NEXUS_COLORS.status.red,
 }) => (
 	<button
 		type="button"
