@@ -43,7 +43,11 @@ export const PaymentInfoView: React.FC = () => {
 
 	// Validar que tenemos información básica antes de continuar
 	const canProceedToPayment = () => {
-		return validation.isValid && formData.placa.trim().length > 0;
+		// En esta primera vista (información básica), solo exigimos PLACA válida.
+		// Otras validaciones de CONTADO (métodos de pago y distribución) ocurren en la siguiente vista.
+		const hasPlaca = formData.placa.trim().length > 0;
+		const placaHasError = Boolean(validation.errors.placa);
+		return hasPlaca && !placaHasError;
 	};
 
 	// Navegar a métodos de pago si la información está completa
