@@ -1,8 +1,5 @@
 import React from "react";
-import {
-	TouchSelect,
-	type TouchSelectOption,
-} from "@/components/shared/touch-select/touch-select";
+import { TouchSelect } from "@/components/shared/touch-select";
 import { BUTTON_STYLES } from "@/lib/config/theme";
 import { documentTypeOptions } from "../types/document-type-options";
 

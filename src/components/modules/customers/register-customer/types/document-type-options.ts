@@ -1,4 +1,4 @@
-import type { TouchSelectOption } from "@/components/shared/touch-select/touch-select";
+import type { TouchSelectOption } from "@/components/shared/touch-select";
 
 // Opciones de tipo de documento
 export const documentTypeOptions: TouchSelectOption[] = [

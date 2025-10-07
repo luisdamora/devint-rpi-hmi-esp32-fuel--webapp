@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from "react";
-import { TouchSelect, type TouchSelectOption } from "./touch-select";
+import { TouchSelect, type TouchSelectOption } from "./index";
 
 export const TouchSelectExample: React.FC = () => {
 	const [selectedCountry, setSelectedCountry] = useState("");
