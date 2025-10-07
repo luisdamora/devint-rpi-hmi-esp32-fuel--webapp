@@ -65,7 +65,7 @@ export const HMIHeader: React.FC<HMIHeaderProps> = ({
 		>
 			{/* Logo - left */}
 			<div className="flex items-center" style={{ height: "100%" }}>
-				<LogoBase alt={logoAlt} className="h-10 w-auto" />
+				<LogoBase alt={logoAlt} className="h-10 w-auto rounded-2xs" />
 			</div>
 
 			{/* Center text: EDS + name */}

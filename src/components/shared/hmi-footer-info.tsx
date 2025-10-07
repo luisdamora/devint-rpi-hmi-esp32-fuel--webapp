@@ -29,7 +29,7 @@ export const HMIFooterInfo: React.FC<HMIFooterInfoProps> = ({
 
 	return (
 		<div
-			className={cn("w-full px-6", className)}
+			className={cn("w-full px-6 py-1", className)}
 			style={{ ...backgroundStyle, ...style }}
 		>
 			<div
