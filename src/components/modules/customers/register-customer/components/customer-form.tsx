@@ -47,15 +47,53 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 					id="documentType"
 					value={documentType}
 					onChange={(e) => onDocumentTypeChange(e.target.value)}
-					className="w-full px-4 py-3 rounded-md text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-					style={{ fontSize: "1.1rem" }}
+					className="w-full px-2 py-1 rounded-lg text-gray-900 font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white text-lg"
+					style={{
+						fontSize: "1.2rem",
+						minHeight: "70px",
+						WebkitAppearance: "none",
+						MozAppearance: "none",
+						appearance: "none",
+						cursor: "pointer",
+					}}
 				>
-					<option value="">Seleccione...</option>
-					<option value="CC">Cédula de Ciudadanía (CC)</option>
-					<option value="NIT">NIT</option>
-					<option value="CE">Cédula de Extranjería (CE)</option>
-					<option value="TI">Tarjeta de Identidad (TI)</option>
-					<option value="PAS">Pasaporte (PAS)</option>
+					<option
+						value=""
+						disabled
+						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
+					>
+						Seleccione tipo de documento...
+					</option>
+					<option
+						value="CC"
+						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
+					>
+						🆔 Cédula de Ciudadanía (CC)
+					</option>
+					<option
+						value="NIT"
+						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
+					>
+						🏢 NIT (Empresa)
+					</option>
+					<option
+						value="CE"
+						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
+					>
+						🌍 Cédula de Extranjería (CE)
+					</option>
+					<option
+						value="TI"
+						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
+					>
+						👶 Tarjeta de Identidad (TI)
+					</option>
+					<option
+						value="PAS"
+						style={{ fontSize: "1.1rem", padding: "1.5rem", minHeight: "60px" }}
+					>
+						📖 Pasaporte (PAS)
+					</option>
 				</select>
 			</div>
 
@@ -91,7 +129,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
 						maxLength={1}
 						value={verificationDigit}
 						onChange={(e) => onVerificationDigitChange(e.target.value)}
-						className="w-full px-4 py-3 rounded-md text-gray-900 font-medium text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+						className="w-full px-4 py-3 rounded-md text-gray-900 font-medium text-center focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
 						style={{ fontSize: "1.1rem" }}
 						placeholder="0"
 					/>
