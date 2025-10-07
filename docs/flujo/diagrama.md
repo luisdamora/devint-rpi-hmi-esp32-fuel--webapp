@@ -1,0 +1,81 @@
+```mermaid
+flowchart TD
+    Start([Inicio del Sistema]) --> Splash[Pantalla de Splash<br/>Logo Nexus]
+    Splash -->|Después de unos segundos| MainMenu[Menú Principal<br/>6 opciones: TURNOS, CONTADO,<br/>CREDITO, INICIO, FIDELIZACION,<br/>UTILIDADES]
+    
+    MainMenu --> CheckTurn{¿Turno activo?}
+    
+    CheckTurn -->|No| TurnDisabled[Botón TURNOS en rojo<br/>Otras opciones deshabilitadas]
+    CheckTurn -->|Sí| TurnEnabled[Botón TURNOS en verde<br/>Todas las opciones habilitadas]
+    
+    TurnDisabled --> ClickTurn[Click en TURNOS]
+    ClickTurn --> LoginView[Vista Login<br/>VENDEDOR<br/>Usuario y Contraseña]
+    
+    LoginView -->|Click INICIAR| ValidateCreds{¿Credenciales<br/>válidas?}
+    ValidateCreds -->|No| LoginView
+    ValidateCreds -->|Sí| TurnEnabled
+    
+    TurnEnabled --> ClickCloseTurn[Click en TURNOS<br/>para cerrar]
+    ClickCloseTurn --> CloseView[Vista Cerrar Turno<br/>VENDEDOR<br/>Usuario y Contraseña]
+    
+    CloseView -->|Click CERRAR| ValidateClose{¿Contraseña<br/>correcta?}
+    ValidateClose -->|No| CloseView
+    ValidateClose -->|Sí| TurnDisabled
+    
+    TurnEnabled --> SelectOption{Seleccionar<br/>opción}
+    
+    SelectOption -->|CONTADO| KeypadView[Vista Teclado<br/>Preset: $100.000<br/>Opciones: $, Vol., TANQUE LLENO]
+    SelectOption -->|CREDITO| KeypadView
+    SelectOption -->|FIDELIZACION| LoyaltyView[Vista Puntos Colombia<br/>Últimas ventas]
+    SelectOption -->|UTILIDADES| UtilitiesView[Vista Utilidades<br/>6 opciones]
+    SelectOption -->|INICIO| MainMenu
+    
+    KeypadView -->|Ingresar monto<br/>y presionar Enter| PaymentView[Vista Métodos de Pago<br/>TARJETA, EFECTIVO, OTRO<br/>Campos: Banco, Monto, Franquicia]
+    
+    PaymentView -->|Click CONSULTA DE PUNTOS| LoyaltyQuery[Consulta Puntos Colombia]
+    PaymentView -->|Click PROCESAR REDENCION| ProcessSale[Procesar Venta]
+    
+    LoyaltyQuery --> PaymentView
+    
+    ProcessSale --> RegisterClient{¿Registrar<br/>cliente?}
+    
+    RegisterClient -->|Sí| ClientRegView[Vista Registro Cliente<br/>Tipo Documento, ID,<br/>Nombre, Email]
+    RegisterClient -->|No| FinalizeView
+    
+    ClientRegView -->|Click REGISTRAR| FinalizeView[Vista Finalización Venta<br/>Mostrar resumen<br/>Opciones: CONTADO/CREDITO]
+    
+    FinalizeView --> PrintView[Vista Impresión<br/>Datos completos:<br/>Placa, IDs, Métodos pago]
+    
+    PrintView -->|Click GUARDAR| SaveTransaction[Guardar Transacción]
+    PrintView -->|IMPRIMIR| PrintReceipt[Imprimir Factura]
+    
+    SaveTransaction --> TurnEnabled
+    PrintReceipt --> TurnEnabled
+    
+    UtilitiesView --> UtilOption{Seleccionar<br/>utilidad}
+    
+    UtilOption -->|TEST DE IMPRESION| TestPrint[Test Impresión]
+    UtilOption -->|AJUSTES IMPRESORA| PrinterSettings[Configurar Bluetooth]
+    UtilOption -->|ULTIMAS VENTAS| LastSales[Ver Últimas Ventas]
+    UtilOption -->|ULTIMO TURNO| LastTurn[Ver Último Turno]
+    UtilOption -->|REINICIAR| RestartSystem[Reiniciar Sistema]
+    UtilOption -->|INICIO| MainMenu
+    
+    TestPrint --> UtilitiesView
+    PrinterSettings --> UtilitiesView
+    LastSales --> UtilitiesView
+    LastTurn --> UtilitiesView
+    RestartSystem --> Splash
+    
+    LoyaltyView --> TurnEnabled
+    
+    style Start fill:#4CAF50
+    style Splash fill:#2196F3
+    style MainMenu fill:#2196F3
+    style TurnEnabled fill:#4CAF50
+    style TurnDisabled fill:#F44336
+    style KeypadView fill:#9C27B0
+    style PaymentView fill:#FF9800
+    style PrintView fill:#00BCD4
+    style UtilitiesView fill:#607D8B
+```
