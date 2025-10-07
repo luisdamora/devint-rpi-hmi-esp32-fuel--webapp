@@ -108,7 +108,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 	return (
 		<div
 			className={cn(
-				"border-2 rounded-lg p-3 space-y-3 transition-all duration-200",
+				"border-2 rounded-lg px-3 py-2 transition-all duration-200",
 				isDisabled
 					? "opacity-50 bg-gray-50 border-gray-300"
 					: "bg-white border-blue-400 shadow-md",
@@ -149,6 +149,7 @@ export const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 						placeholder="Seleccione tipo..."
 						disabled={isDisabled}
 						gridCols={3}
+						useFixedDimensions
 					/>
 					{validationErrors[`method_${method.id}_type`] && (
 						<p className="text-xs text-red-500 px-1">

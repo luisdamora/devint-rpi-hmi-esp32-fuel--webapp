@@ -198,7 +198,7 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 
 						{/* Grid de métodos de pago (solo en modo CONTADO) */}
 						{(sharedFormData?.mode || formData.mode) === "CONTADO" && (
-							<div className="bg-white rounded-lg p-2 shadow-sm border-2 border-gray-200">
+							<div>
 								{/* <h2 className="text-xl font-semibold text-gray-700 mb-4">
 									Métodos de Pago
 								</h2> */}
