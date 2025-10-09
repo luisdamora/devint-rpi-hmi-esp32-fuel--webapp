@@ -14,6 +14,7 @@ import { CashSaleViewComponent } from "@/components/modules/sales/cash-sale/cash
 import { CreditSaleViewComponent } from "@/components/modules/sales/credit-sale/credit-sale-view";
 import { PaymentViewMaster } from "@/components/modules/sales/payment-view";
 import { TransactionStatusView } from "@/components/modules/sales/transaction-status/transaction-status-view";
+import { UtilitiesView } from "@/components/modules/utilities/utilities-view";
 import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
@@ -57,6 +58,10 @@ export const routes: RouteObject[] = [
 			{
 				path: "loyalty",
 				element: <PointsView />,
+			},
+			{
+				path: "utilities",
+				element: <UtilitiesView />,
 			},
 			{
 				path: "close-turn",

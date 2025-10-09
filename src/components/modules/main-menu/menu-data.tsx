@@ -33,7 +33,7 @@ export const useMenuTilesData = (): MenuTilesData => {
 			key: "utilidades",
 			title: "UTILIDADES",
 			icon: <Settings size={64} />,
-			action: undefined, // Sin acción definida por ahora
+			action: () => navigateTo("utilities"),
 		},
 	] as const;
 };

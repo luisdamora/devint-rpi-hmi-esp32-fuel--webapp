@@ -73,6 +73,13 @@ export function useHMINavigation() {
 		},
 
 		/**
+		 * Navega a utilidades
+		 */
+		goToUtilities: () => {
+			navigate("/utilities");
+		},
+
+		/**
 		 * Navega a una ruta arbitraria
 		 */
 		navigateToPath: (path: string) => {
@@ -80,3 +87,4 @@ export function useHMINavigation() {
 		},
 	};
 }
+
