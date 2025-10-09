@@ -79,8 +79,7 @@ export const TransactionStatusView: React.FC = () => {
 								<p className="text-sm text-gray-500">Monto Total</p>
 								<p className="text-2xl font-bold text-green-600">
 									$
-									{transactionData?.totalAmount?.toLocaleString("es-CO") ||
-										"0"}
+									{transactionData?.totalAmount?.toLocaleString("es-CO") || "0"}
 								</p>
 							</div>
 
@@ -92,8 +91,7 @@ export const TransactionStatusView: React.FC = () => {
 										</p>
 										{transactionData.paymentMethods.map((method, idx) => (
 											<p key={idx} className="text-lg">
-												{method.type}: $
-												{method.amount.toLocaleString("es-CO")}
+												{method.type}: ${method.amount.toLocaleString("es-CO")}
 											</p>
 										))}
 									</div>

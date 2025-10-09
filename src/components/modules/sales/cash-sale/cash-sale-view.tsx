@@ -1,12 +1,12 @@
 import { BanknoteArrowDown, Home } from "lucide-react";
 import React, { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import type { PaymentMode } from "./components/action-buttons";
-import { ActionButtons } from "./components/action-buttons";
 import { AmountDisplay } from "@/components/shared/sales/amount-display";
 import { Keypad } from "@/components/shared/sales/keypad";
 import { SideTile } from "@/components/shared/sales/side-tile";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import type { PaymentMode } from "./components/action-buttons";
+import { ActionButtons } from "./components/action-buttons";
 import { useCashSaleCalculator } from "./hooks/use-cash-sale-calculator";
 
 export const CashSaleViewComponent: React.FC = () => {
