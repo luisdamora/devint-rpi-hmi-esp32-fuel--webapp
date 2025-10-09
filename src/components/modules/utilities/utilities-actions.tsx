@@ -49,7 +49,7 @@ export const UtilitiesActions: React.FC<UtilitiesActionsProps> = ({
 	];
 
 	return (
-		<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-auto px-2">
+		<div className="grid grid-cols-2 mt-16 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-auto px-2">
 			{actions.map((action) => (
 				<button
 					key={action.key}
