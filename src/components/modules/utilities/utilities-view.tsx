@@ -1,5 +1,5 @@
-import React from "react";
 import { Settings } from "lucide-react";
+import React from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { mockSalesData } from "./mock-data";

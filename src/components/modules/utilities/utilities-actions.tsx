@@ -1,5 +1,5 @@
-import React from "react";
 import { Clock, Home, Printer, Receipt, Settings } from "lucide-react";
+import React from "react";
 import type { UtilitiesActionsProps, UtilityAction } from "./types";
 
 /**
