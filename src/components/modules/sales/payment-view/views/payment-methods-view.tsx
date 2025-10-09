@@ -1,7 +1,7 @@
 import { ArrowLeft, DollarSign, Home } from "lucide-react";
 import React from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
-import { SideTile } from "@/components/modules/sales/cash-sale/components/side-tile";
+import { SideTile } from "@/components/shared/sales/side-tile";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import {
 	PaymentMethodsGrid,

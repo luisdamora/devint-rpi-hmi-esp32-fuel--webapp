@@ -2,9 +2,9 @@ import { CreditCard, Home } from "lucide-react";
 import React from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import { AmountDisplay } from "../cash-sale/components/amount-display";
-import { Keypad } from "../cash-sale/components/keypad";
-import { SideTile } from "../cash-sale/components/side-tile";
+import { AmountDisplay } from "@/components/shared/sales/amount-display";
+import { Keypad } from "@/components/shared/sales/keypad";
+import { SideTile } from "@/components/shared/sales/side-tile";
 import { useCashSaleCalculator } from "../cash-sale/hooks/use-cash-sale-calculator";
 
 /**
