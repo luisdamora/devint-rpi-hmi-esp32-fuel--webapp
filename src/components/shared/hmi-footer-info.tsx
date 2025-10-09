@@ -42,8 +42,7 @@ export const HMIFooterInfo: React.FC<HMIFooterInfoProps> = ({
 			>
 				<span>✉ soporte@vpmnexus.com</span>
 				<span>🌐 www.vpmnexus.com</span>
-				<span>📞 +57-3184936241</span>
-				<span>📞 +57-3164475985</span>
+				<span>📱 WhatsApp</span>
 			</div>
 		</div>
 	);
