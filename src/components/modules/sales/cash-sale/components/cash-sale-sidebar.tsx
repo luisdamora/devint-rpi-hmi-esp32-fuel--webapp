@@ -42,7 +42,7 @@ export const CashSaleSidebar: React.FC<CashSaleSidebarProps> = ({
 			<div className="flex justify-center py-4">
 				<AnimatedFuelIcon
 					size={80}
-					animationDuration={5000}
+					isAnimating={false}
 					continuousAnimation={false}
 				/>
 			</div>

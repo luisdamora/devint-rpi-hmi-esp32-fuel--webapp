@@ -5,7 +5,7 @@ interface AnimatedFuelIconProps {
 	size?: number;
 	initialColor?: string;
 	finalColor?: string;
-	animationDuration?: number;
+	isAnimating?: boolean;
 	blinkSpeed?: number;
 	continuousAnimation?: boolean;
 	opacityRange?: [number, number];
@@ -16,7 +16,7 @@ export const AnimatedFuelIcon: React.FC<AnimatedFuelIconProps> = ({
 	size = 80,
 	initialColor = "text-blue-500",
 	finalColor = "text-green-500",
-	animationDuration = 5000,
+	isAnimating = false,
 	blinkSpeed = 1.5,
 	continuousAnimation = false,
 	opacityRange = [0.45, 1],
@@ -27,12 +27,12 @@ export const AnimatedFuelIcon: React.FC<AnimatedFuelIconProps> = ({
 	useEffect(() => {
 		if (continuousAnimation) return;
 
-		const timer = setTimeout(() => {
+		if (isAnimating) {
+			setIsAnimationComplete(false);
+		} else {
 			setIsAnimationComplete(true);
-		}, animationDuration);
-
-		return () => clearTimeout(timer);
-	}, [animationDuration, continuousAnimation]);
+		}
+	}, [isAnimating, continuousAnimation]);
 
 	const currentColor =
 		isAnimationComplete && !continuousAnimation ? finalColor : initialColor;

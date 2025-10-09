@@ -46,7 +46,7 @@ export const SaleSidebar: React.FC<SaleSidebarProps> = ({
 			<div className="flex justify-center py-4">
 				<AnimatedFuelIcon
 					size={80}
-					animationDuration={isAnimating ? 5000 : 0}
+					isAnimating={isAnimating}
 					continuousAnimation={false}
 				/>
 			</div>
