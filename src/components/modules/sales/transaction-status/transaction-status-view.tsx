@@ -2,8 +2,8 @@ import { Home } from "lucide-react";
 import React from "react";
 import { useLocation } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { AnimatedFuelIcon } from "@/components/shared/sales/animated-fuel-icon";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 interface TransactionData {
 	placa: string;

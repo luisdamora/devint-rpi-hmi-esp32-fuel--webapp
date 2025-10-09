@@ -34,7 +34,8 @@ export const AnimatedFuelIcon: React.FC<AnimatedFuelIconProps> = ({
 		return () => clearTimeout(timer);
 	}, [animationDuration, continuousAnimation]);
 
-	const currentColor = isAnimationComplete && !continuousAnimation ? finalColor : initialColor;
+	const currentColor =
+		isAnimationComplete && !continuousAnimation ? finalColor : initialColor;
 	const shouldAnimate = continuousAnimation || !isAnimationComplete;
 	const [minOpacity, maxOpacity] = opacityRange;
 
@@ -46,7 +47,7 @@ export const AnimatedFuelIcon: React.FC<AnimatedFuelIconProps> = ({
 				shouldAnimate
 					? {
 							animation: `blink ${blinkSpeed}s ease-in-out infinite`,
-					  }
+						}
 					: {}
 			}
 		>

@@ -1,8 +1,8 @@
 import { Home } from "lucide-react";
 import React from "react";
-import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
-import { AnimatedFuelIcon } from "@/components/shared/sales/animated-fuel-icon";
 import { AnimatedCreditIcon } from "@/components/shared/sales/animated-credit-icon";
+import { AnimatedFuelIcon } from "@/components/shared/sales/animated-fuel-icon";
+import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 

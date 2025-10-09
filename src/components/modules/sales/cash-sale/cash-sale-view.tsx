@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { AmountDisplay } from "@/components/shared/sales/amount-display";
 import { Keypad } from "@/components/shared/sales/keypad";
+import { SaleSidebar } from "@/components/shared/sales/sale-sidebar";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import type { PaymentMode } from "./components/action-buttons";
 import { ActionButtons } from "./components/action-buttons";
 import { useCashSaleCalculator } from "./hooks/use-cash-sale-calculator";
-import { SaleSidebar } from "@/components/shared/sales/sale-sidebar";
 
 export const CashSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();

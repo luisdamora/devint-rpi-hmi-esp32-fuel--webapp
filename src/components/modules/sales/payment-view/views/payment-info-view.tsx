@@ -137,12 +137,12 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 						</div>
 
 						{/* Selector de modo de pago - posición prominente */}
-					<PaymentModeSelector
-						mode={formData.mode}
-						onModeChange={setMode}
-						disabled={isModeLocked}
-						lockMessage={lockMessage}
-					/>
+						<PaymentModeSelector
+							mode={formData.mode}
+							onModeChange={setMode}
+							disabled={isModeLocked}
+							lockMessage={lockMessage}
+						/>
 
 						{/* Campos de identificación */}
 						<div className="rounded-lg px-4 py-2 shadow-sm border-2 border-gray-200">

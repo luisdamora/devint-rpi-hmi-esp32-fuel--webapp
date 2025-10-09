@@ -100,10 +100,10 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 			onSaveSuccess();
 		} else {
 			console.log("✅ Pago guardado exitosamente:", formData);
-			
+
 			// Flujo diferenciado según modo de pago
 			const mode = sharedFormData?.mode || formData.mode;
-			
+
 			if (mode === "CONTADO") {
 				// CONTADO: Mostrar pantalla de confirmación con surtidor
 				// TODO: En producción, pasar datos via state/context
