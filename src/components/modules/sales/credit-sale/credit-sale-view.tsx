@@ -42,7 +42,7 @@ export const CreditSaleViewComponent: React.FC = () => {
 					{/* Sidebar con crédito e inicio */}
 					<SaleSidebar
 						title="CRÉDITO"
-						saleType="credito"
+						isAnimating={false}
 						onTitleClick={() => navigateTo("credit-sale")}
 					/>
 

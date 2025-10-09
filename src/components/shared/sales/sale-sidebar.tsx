@@ -1,23 +1,20 @@
 import { Home } from "lucide-react";
 import React from "react";
-import { AnimatedCreditIcon } from "@/components/shared/sales/animated-credit-icon";
 import { AnimatedFuelIcon } from "@/components/shared/sales/animated-fuel-icon";
 import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
-export type SaleType = "contado" | "credito";
-
 interface SaleSidebarProps {
 	title: string;
-	saleType: SaleType;
+	isAnimating: boolean;
 	onTitleClick?: () => void;
 	navigationDestination?: string;
 }
 
 export const SaleSidebar: React.FC<SaleSidebarProps> = ({
 	title,
-	saleType,
+	isAnimating,
 	onTitleClick,
 	navigationDestination = "menu",
 }) => {
@@ -29,31 +26,6 @@ export const SaleSidebar: React.FC<SaleSidebarProps> = ({
 		}
 	};
 
-	const getSaleTypeConfig = (type: SaleType) => {
-		switch (type) {
-			case "contado":
-				return {
-					color: NEXUS_COLORS.status.red,
-					showFuelIcon: true,
-					showCreditIcon: false,
-				};
-			case "credito":
-				return {
-					color: NEXUS_COLORS.status.orange,
-					showFuelIcon: false,
-					showCreditIcon: true,
-				};
-			default:
-				return {
-					color: NEXUS_COLORS.status.gray,
-					showFuelIcon: false,
-					showCreditIcon: false,
-				};
-		}
-	};
-
-	const config = getSaleTypeConfig(saleType);
-
 	return (
 		<div className="col-span-1 flex flex-col gap-4 self-start pt-8 h-full">
 			{/* Título como span estático con estilo side-tile */}
@@ -61,7 +33,7 @@ export const SaleSidebar: React.FC<SaleSidebarProps> = ({
 				<span
 					className="inline-block px-4 text-xl font-bold"
 					style={{
-						backgroundColor: config.color,
+						backgroundColor: NEXUS_COLORS.status.red,
 						color: NEXUS_COLORS.white,
 						borderRadius: 4,
 					}}
@@ -70,22 +42,13 @@ export const SaleSidebar: React.FC<SaleSidebarProps> = ({
 				</span>
 			</div>
 
-			{/* Icono animado según tipo de venta */}
+			{/* Icono de surtidor animado */}
 			<div className="flex justify-center py-4">
-				{config.showFuelIcon && (
-					<AnimatedFuelIcon
-						size={80}
-						animationDuration={5000}
-						continuousAnimation={false}
-					/>
-				)}
-				{config.showCreditIcon && (
-					<AnimatedCreditIcon
-						size={80}
-						animationDuration={3000}
-						continuousAnimation={false}
-					/>
-				)}
+				<AnimatedFuelIcon
+					size={80}
+					animationDuration={isAnimating ? 5000 : 0}
+					continuousAnimation={false}
+				/>
 			</div>
 
 			{/* Espacio flexible */}

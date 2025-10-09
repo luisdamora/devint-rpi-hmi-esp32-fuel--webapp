@@ -30,7 +30,7 @@ export const CashSaleViewComponent: React.FC = () => {
 					{/* Sidebar con contado e inicio */}
 					<SaleSidebar
 						title="CONTADO"
-						saleType="contado"
+						isAnimating={true}
 						onTitleClick={() => navigateTo("cash-sale")}
 					/>
 
