@@ -36,9 +36,6 @@ export interface UtilityAction {
 	/** Etiqueta a mostrar en el botón */
 	label: string;
 
-	/** Color del botón (clase TailwindCSS) */
-	color: string;
-
 	/** Icono de lucide-react */
 	icon: React.ReactNode;
 

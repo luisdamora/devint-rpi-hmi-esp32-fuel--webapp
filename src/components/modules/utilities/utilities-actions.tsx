@@ -14,28 +14,24 @@ export const UtilitiesActions: React.FC<UtilitiesActionsProps> = ({
 		{
 			key: "inicio",
 			label: "INICIO",
-			color: NEXUS_COLORS.status.red,
 			icon: <Home size={48} />,
 			action: () => onActionClick("inicio"),
 		},
 		{
 			key: "test-print",
 			label: "TEST DE IMPRESION",
-			color: NEXUS_COLORS.status.orange,
 			icon: <Printer size={48} />,
 			action: () => onActionClick("test-print"),
 		},
 		{
 			key: "printer-settings",
 			label: "AJUSTES IMPRESORA",
-			color: "#7E22CE",
 			icon: <Settings size={48} />,
 			action: () => onActionClick("printer-settings"),
 		},
 		{
 			key: "last-sales",
 			label: "ULTIMAS VENTAS",
-			color: NEXUS_COLORS.status.yellow,
 			icon: <Receipt size={48} />,
 			action: () => onActionClick("last-sales"),
 			isActive: true,
@@ -43,7 +39,6 @@ export const UtilitiesActions: React.FC<UtilitiesActionsProps> = ({
 		{
 			key: "last-turn",
 			label: "ULTIMO TURNO",
-			color: "#06B6D4",
 			icon: <Clock size={48} />,
 			action: () => onActionClick("last-turn"),
 		},
@@ -56,7 +51,7 @@ export const UtilitiesActions: React.FC<UtilitiesActionsProps> = ({
 					key={action.key}
 					type="button"
 					onClick={action.action}
-					className={`group relative rounded-md border-2 p-3 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform hover:scale-[1.02] select-none ${action.isActive ? "ring-2 ring-yellow-300" : ""}`}
+					className={`group relative rounded-md border-2 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform hover:scale-[1.02] select-none`}
 					style={{
 						borderColor: NEXUS_COLORS.status.red,
 						backgroundColor: "transparent",
@@ -71,7 +66,7 @@ export const UtilitiesActions: React.FC<UtilitiesActionsProps> = ({
 						}}
 					>
 						<span
-							className="inline-block px-4 text-xs"
+							className="inline-block px-3 text-xs"
 							style={{
 								backgroundColor: NEXUS_COLORS.status.red,
 								borderRadius: 4,
@@ -80,7 +75,7 @@ export const UtilitiesActions: React.FC<UtilitiesActionsProps> = ({
 							{action.label}
 						</span>
 					</div>
-					<div className="flex items-center justify-center h-28">
+					<div className="flex items-center justify-center h-24">
 						<span className="text-white" aria-hidden>
 							{action.icon}
 						</span>
