@@ -43,24 +43,7 @@ export const UtilitiesView: React.FC = () => {
 
 	return (
 		<HMIContainer>
-			<div className="min-h-screen bg-gradient-to-br from-blue-900 to-blue-600 p-6">
-				{/* Header */}
-				<div className="bg-blue-800 text-white rounded-lg p-4 mb-6 shadow-lg">
-					<div className="flex justify-between items-center">
-						<div className="flex items-center gap-3">
-							<Settings size={40} />
-							<h1 className="text-2xl font-bold">UTILIDADES</h1>
-						</div>
-						<button
-							type="button"
-							onClick={navigateBack}
-							className="text-white hover:text-blue-200 bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors font-medium"
-						>
-							← Atrás
-						</button>
-					</div>
-				</div>
-
+			<div className="h-full p-2">
 				{/* Sales Table */}
 				<SalesTable salesData={mockSalesData} />
 

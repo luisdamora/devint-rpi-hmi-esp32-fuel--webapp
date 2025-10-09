@@ -17,30 +17,28 @@ const formatCurrency = (amount: number): string => {
  */
 export const SalesTable: React.FC<SalesTableProps> = ({ salesData }) => {
 	return (
-		<div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-			<h2 className="text-xl font-bold text-gray-800 mb-4">ÚLTIMAS VENTAS</h2>
-
+		<div className="bg-white rounded-lg shadow-lg p-2 mb-2">
 			<div className="overflow-x-auto">
 				<table className="w-full border-collapse">
 					<thead className="bg-blue-900 text-white">
 						<tr>
-							<th className="px-4 py-3 text-left text-sm font-semibold">#FE</th>
-							<th className="px-4 py-3 text-left text-sm font-semibold">
+							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">#FE</th>
+							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">
 								ID PUNTOS
 							</th>
-							<th className="px-4 py-3 text-left text-sm font-semibold">
+							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">
 								ID PROMO
 							</th>
-							<th className="px-4 py-3 text-left text-sm font-semibold">
+							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">
 								PLACA
 							</th>
-							<th className="px-4 py-3 text-left text-sm font-semibold">
+							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">
 								PRODUCTO
 							</th>
-							<th className="px-4 py-3 text-right text-sm font-semibold">
+							<th className="px-1.5 py-1.5 text-right text-xs font-semibold">
 								DINERO
 							</th>
-							<th className="px-4 py-3 text-right text-sm font-semibold">
+							<th className="px-1.5 py-1.5 text-right text-xs font-semibold">
 								VOLUMEN
 							</th>
 						</tr>
@@ -51,23 +49,23 @@ export const SalesTable: React.FC<SalesTableProps> = ({ salesData }) => {
 								key={sale.fe}
 								className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
 							>
-								<td className="px-4 py-3 text-sm text-gray-700">{sale.fe}</td>
-								<td className="px-4 py-3 text-sm text-gray-700">
+								<td className="px-1.5 py-1 text-xs text-gray-700">{sale.fe}</td>
+								<td className="px-1.5 py-1 text-xs text-gray-700">
 									{sale.idPuntos}
 								</td>
-								<td className="px-4 py-3 text-sm text-gray-700">
+								<td className="px-1.5 py-1 text-xs text-gray-700">
 									{sale.idPromo}
 								</td>
-								<td className="px-4 py-3 text-sm text-gray-700">
+								<td className="px-1.5 py-1 text-xs text-gray-700">
 									{sale.placa}
 								</td>
-								<td className="px-4 py-3 text-sm text-gray-700">
+								<td className="px-1.5 py-1 text-xs text-gray-700">
 									{sale.producto}
 								</td>
-								<td className="px-4 py-3 text-sm text-gray-700 text-right font-medium">
+								<td className="px-1.5 py-1 text-xs text-gray-700 text-right font-medium">
 									{formatCurrency(sale.dinero)}
 								</td>
-								<td className="px-4 py-3 text-sm text-gray-700 text-right">
+								<td className="px-1.5 py-1 text-xs text-gray-700 text-right">
 									{sale.volumen.toFixed(1)} L
 								</td>
 							</tr>

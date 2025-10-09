@@ -98,6 +98,7 @@ export const HMILayout: React.FC<HMILayoutProps> = ({ children }) => {
 					{[
 						{ to: "/splash", label: "Splash" },
 						{ to: "/menu", label: "Menú" },
+						{ to: "/utilities", label: "Utilidades" },
 						{ to: "/login", label: "Login" },
 						{ to: "/cash-sale", label: "Contado" },
 						{ to: "/credit-sale", label: "Crédito" },
