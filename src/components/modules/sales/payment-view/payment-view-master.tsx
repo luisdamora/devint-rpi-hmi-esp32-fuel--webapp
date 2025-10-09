@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { PaymentInfoView } from "./views/payment-info-view";
@@ -27,6 +27,9 @@ export const PaymentViewMaster: React.FC = () => {
 	// Estado simple para navegación entre vistas
 	const [currentView, setCurrentView] = useState<1 | 2>(1);
 
+	// Estado para bloquear el cambio de modo después de ingresar datos
+	const [isModeLocked, setIsModeLocked] = useState(false);
+
 	// Estado compartido para datos del formulario
 	const [sharedFormData, setSharedFormData] = useState({
 		mode: "CONTADO" as "CONTADO" | "CREDITO",
@@ -36,6 +39,15 @@ export const PaymentViewMaster: React.FC = () => {
 		hasCoupon: false,
 		idPromocion: "",
 	});
+
+	// Bloquear modo cuando se ingrese la placa (transacción iniciada)
+	useEffect(() => {
+		if (sharedFormData.placa.length > 0) {
+			setIsModeLocked(true);
+		} else {
+			setIsModeLocked(false);
+		}
+	}, [sharedFormData.placa]);
 
 	// Validar si puede proceder a la siguiente vista
 	const canProceed =
@@ -110,6 +122,8 @@ export const PaymentViewMaster: React.FC = () => {
 						onProceedToPayment={handleNext}
 						sharedFormData={sharedFormData}
 						onUpdateSharedData={updateSharedData}
+						isModeLocked={isModeLocked}
+						lockMessage="No se puede cambiar el modo una vez iniciada la transacción"
 					/>
 				) : (
 					<PaymentMethodsView

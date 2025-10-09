@@ -100,7 +100,28 @@ export const PaymentMethodsView: React.FC<PaymentMethodsViewProps> = ({
 			onSaveSuccess();
 		} else {
 			console.log("✅ Pago guardado exitosamente:", formData);
-			navigateTo("payment-confirmation");
+			
+			// Flujo diferenciado según modo de pago
+			const mode = sharedFormData?.mode || formData.mode;
+			
+			if (mode === "CONTADO") {
+				// CONTADO: Mostrar pantalla de confirmación con surtidor
+				// TODO: En producción, pasar datos via state/context
+				console.log("📊 Datos de transacción:", {
+					placa: sharedFormData?.placa || formData.placa,
+					mode: mode,
+					totalAmount: MOCK_TOTAL,
+					paymentMethods: paymentMethods.map((pm) => ({
+						type: pm.type,
+						amount: pm.amount,
+					})),
+					timestamp: new Date().toISOString(),
+				});
+				navigateTo("transaction-status");
+			} else {
+				// CRÉDITO: Ir directamente al menú principal
+				navigateTo("menu");
+			}
 		}
 	};
 

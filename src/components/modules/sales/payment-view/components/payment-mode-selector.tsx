@@ -12,6 +12,8 @@ export interface PaymentModeSelectorProps {
 	onModeChange: (mode: PaymentMode) => void;
 	/** Deshabilitar el selector */
 	disabled?: boolean;
+	/** Mostrar mensaje de bloqueo cuando el modo no puede cambiar */
+	lockMessage?: string;
 }
 
 /**
@@ -40,9 +42,18 @@ export const PaymentModeSelector: React.FC<PaymentModeSelectorProps> = ({
 	mode,
 	onModeChange,
 	disabled = false,
+	lockMessage,
 }) => {
 	return (
-		<div className="grid grid-cols-2 gap-4 w-full">
+		<div className="space-y-2">
+			{disabled && lockMessage && (
+				<div className="bg-amber-50 border-2 border-amber-300 rounded-lg px-4 py-2 text-center">
+					<p className="text-sm text-amber-800 font-medium">
+						🔒 {lockMessage}
+					</p>
+				</div>
+			)}
+			<div className="grid grid-cols-2 gap-4 w-full">
 			{/* Botón CONTADO */}
 			<button
 				type="button"
@@ -78,6 +89,7 @@ export const PaymentModeSelector: React.FC<PaymentModeSelectorProps> = ({
 				<span className="text-2xl">💳</span>
 				<span>CRÉDITO</span>
 			</button>
+			</div>
 		</div>
 	);
 };

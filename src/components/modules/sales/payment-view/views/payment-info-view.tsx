@@ -34,6 +34,10 @@ export interface PaymentInfoViewProps {
 	) => void;
 	/** Total amount prop */
 	totalAmount?: number;
+	/** Si el modo está bloqueado (no se puede cambiar) */
+	isModeLocked?: boolean;
+	/** Mensaje a mostrar cuando el modo está bloqueado */
+	lockMessage?: string;
 }
 
 /**
@@ -58,6 +62,8 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 	sharedFormData,
 	onUpdateSharedData,
 	totalAmount = 100000, // $100,000 COP
+	isModeLocked = false,
+	lockMessage,
 }) => {
 	const { navigateTo } = useHMINavigation();
 
@@ -128,16 +134,21 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 							<p className="text-lg text-gray-600">
 								Paso 1 de 2: Complete los datos del vehículo y cliente
 							</p>
-						</div> */}
+						</div>
 
 						{/* Selector de modo de pago - posición prominente */}
-						<PaymentModeSelector mode={formData.mode} onModeChange={setMode} />
+					<PaymentModeSelector
+						mode={formData.mode}
+						onModeChange={setMode}
+						disabled={isModeLocked}
+						lockMessage={lockMessage}
+					/>
 
 						{/* Campos de identificación */}
 						<div className="rounded-lg px-4 py-2 shadow-sm border-2 border-gray-200">
-							{/* <h2 className="text-xl font-semibold text-gray-700 mb-4">
+							<h2 className="text-xl font-semibold text-gray-700 mb-4">
 								Datos del Vehículo
-							</h2> */}
+							</h2>
 							<IdentificationFields
 								mode={formData.mode}
 								placa={formData.placa}
