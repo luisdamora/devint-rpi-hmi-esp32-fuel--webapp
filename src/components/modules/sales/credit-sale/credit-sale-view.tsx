@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { AmountDisplay } from "@/components/shared/sales/amount-display";
 import { Keypad } from "@/components/shared/sales/keypad";
@@ -19,8 +19,18 @@ import { useCashSaleCalculator } from "../cash-sale/hooks/use-cash-sale-calculat
  */
 export const CreditSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
+	const [isAnimating, setIsAnimating] = useState(true);
 	const { displayMoney, handleNumber, handleTripleZero, handleClear } =
 		useCashSaleCalculator();
+
+	useEffect(() => {
+		// Detener la animación después de 5 segundos
+		const timer = setTimeout(() => {
+			setIsAnimating(false);
+		}, 5000);
+
+		return () => clearTimeout(timer);
+	}, []);
 
 	const handleEnter = () => {
 		// Navegar a payment-view con modo CRÉDITO y monto ingresado
@@ -42,7 +52,7 @@ export const CreditSaleViewComponent: React.FC = () => {
 					{/* Sidebar con crédito e inicio */}
 					<SaleSidebar
 						title="CRÉDITO"
-						isAnimating={false}
+						isAnimating={isAnimating}
 						onTitleClick={() => navigateTo("credit-sale")}
 					/>
 
