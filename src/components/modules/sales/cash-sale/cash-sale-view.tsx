@@ -6,7 +6,7 @@ import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import type { PaymentMode } from "./components/action-buttons";
 import { ActionButtons } from "./components/action-buttons";
 import { useCashSaleCalculator } from "./hooks/use-cash-sale-calculator";
-import { CashSaleSidebar } from "./components/cash-sale-sidebar";
+import { SaleSidebar } from "@/components/shared/sales/sale-sidebar";
 
 export const CashSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
@@ -28,7 +28,11 @@ export const CashSaleViewComponent: React.FC = () => {
 			<div className="w-full h-full flex items-center justify-center px-2">
 				<div className="grid grid-cols-4 gap-4 w-full max-w-6xl">
 					{/* Sidebar con contado e inicio */}
-					<CashSaleSidebar onContadoClick={() => navigateTo("cash-sale")} />
+					<SaleSidebar
+						title="CONTADO"
+						saleType="contado"
+						onTitleClick={() => navigateTo("cash-sale")}
+					/>
 
 					{/* Centro: preset y keypad */}
 					<div className="col-span-3">

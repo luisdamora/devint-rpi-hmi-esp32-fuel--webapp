@@ -22,7 +22,7 @@ export const SmallSideTile: React.FC<SmallSideTileProps> = ({
 		type="button"
 		onClick={onClick}
 		aria-label={ariaLabel ?? title}
-		className={`group relative rounded-md border-2 p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform hover:scale-[1.02] select-none ${className}`}
+		className={`group relative rounded-md border-2 py-2 px-6 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform hover:scale-[1.02] select-none ${className}`}
 		style={{ borderColor: color, backgroundColor: "transparent" }}
 	>
 		<div
@@ -36,7 +36,7 @@ export const SmallSideTile: React.FC<SmallSideTileProps> = ({
 				{title}
 			</span>
 		</div>
-		<div className="flex items-center justify-center h-20">
+		<div className="flex items-center justify-center h-16">
 			<span className="text-4xl text-white" aria-hidden>
 				{icon}
 			</span>

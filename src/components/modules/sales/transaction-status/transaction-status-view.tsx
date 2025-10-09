@@ -1,8 +1,9 @@
-import { Fuel, Home } from "lucide-react";
+import { Home } from "lucide-react";
 import React from "react";
 import { useLocation } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { AnimatedFuelIcon } from "@/components/shared/sales/animated-fuel-icon";
 
 interface TransactionData {
 	placa: string;
@@ -43,19 +44,11 @@ export const TransactionStatusView: React.FC = () => {
 						{/* Columna izquierda: Surtidor titilando */}
 						<div className="flex items-center justify-center">
 							<div className="relative">
-								<Fuel
+								<AnimatedFuelIcon
 									size={200}
-									className="text-blue-500"
-									style={{
-										animation: "blink 1.5s ease-in-out infinite",
-									}}
+									continuousAnimation={true}
+									opacityRange={[0.3, 1]}
 								/>
-								<style>{`
-									@keyframes blink {
-										0%, 100% { opacity: 1; }
-										50% { opacity: 0.3; }
-									}
-								`}</style>
 							</div>
 						</div>
 

@@ -1,6 +1,7 @@
-import { Fuel, Home } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Home } from "lucide-react";
+import React from "react";
 import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
+import { AnimatedFuelIcon } from "@/components/shared/sales/animated-fuel-icon";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
@@ -12,16 +13,6 @@ export const CashSaleSidebar: React.FC<CashSaleSidebarProps> = ({
 	onContadoClick,
 }) => {
 	const { navigateTo } = useHMINavigation();
-	const [isAnimationComplete, setIsAnimationComplete] = useState(false);
-
-	useEffect(() => {
-		// Animación por 3 segundos
-		const timer = setTimeout(() => {
-			setIsAnimationComplete(true);
-		}, 3000);
-
-		return () => clearTimeout(timer);
-	}, []);
 
 	const handleContadoClick = () => {
 		if (onContadoClick) {
@@ -49,33 +40,21 @@ export const CashSaleSidebar: React.FC<CashSaleSidebarProps> = ({
 
 			{/* Icono de surtidor con animación */}
 			<div className="flex justify-center py-4">
-				<Fuel
+				<AnimatedFuelIcon
 					size={80}
-					className={isAnimationComplete ? "text-green-500" : "text-blue-500"}
-					style={
-						isAnimationComplete
-							? {}
-							: {
-									animation: "blink 1.5s ease-in-out infinite",
-								}
-					}
+					animationDuration={5000}
+					continuousAnimation={false}
 				/>
-				<style>{`
-					@keyframes blink {
-						0%, 100% { opacity: 1; }
-						50% { opacity: 0.3; }
-					}
-				`}</style>
 			</div>
 
 			{/* Espacio flexible */}
 			<div className="flex-grow"></div>
 
-			{/* Botón Inicio con SmallSideTile */}
-			<div className="mt-auto">
+			{/* Botón Inicio con SmallSideTile centrado */}
+			<div className="mt-auto flex justify-center">
 				<SmallSideTile
 					title="INICIO"
-					icon={<Home size={48} />}
+					icon={<Home size={36} />}
 					onClick={() => navigateTo("menu")}
 				/>
 			</div>
