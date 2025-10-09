@@ -100,8 +100,10 @@ export const HMILayout: React.FC<HMILayoutProps> = ({ children }) => {
 						{ to: "/menu", label: "Menú" },
 						{ to: "/login", label: "Login" },
 						{ to: "/cash-sale", label: "Contado" },
+						{ to: "/credit-sale", label: "Crédito" },
 						{ to: "/payment", label: "Pago" },
 						{ to: "/loyalty", label: "Puntos" },
+						{ to: "/transaction-status", label: "Estado" },
 						{ to: "/close-turn", label: "Cerrar Turno" },
 					].map((item) => (
 						<Link
