@@ -1,5 +1,6 @@
 import { Clock, Home, Printer, Receipt, Settings } from "lucide-react";
 import React from "react";
+import { NEXUS_COLORS } from "@/lib/config/theme";
 import type { UtilitiesActionsProps, UtilityAction } from "./types";
 
 /**
@@ -13,66 +14,77 @@ export const UtilitiesActions: React.FC<UtilitiesActionsProps> = ({
 		{
 			key: "inicio",
 			label: "INICIO",
-			color: "bg-red-600 hover:bg-red-700",
-			icon: <Home size={20} />,
+			color: NEXUS_COLORS.status.red,
+			icon: <Home size={48} />,
 			action: () => onActionClick("inicio"),
 		},
 		{
 			key: "test-print",
 			label: "TEST DE IMPRESION",
-			color: "bg-orange-500 hover:bg-orange-600",
-			icon: <Printer size={20} />,
+			color: NEXUS_COLORS.status.orange,
+			icon: <Printer size={48} />,
 			action: () => onActionClick("test-print"),
 		},
 		{
 			key: "printer-settings",
 			label: "AJUSTES IMPRESORA",
-			color: "bg-purple-600 hover:bg-purple-700",
-			icon: <Settings size={20} />,
+			color: "#7E22CE",
+			icon: <Settings size={48} />,
 			action: () => onActionClick("printer-settings"),
 		},
 		{
 			key: "last-sales",
 			label: "ULTIMAS VENTAS",
-			color: "bg-yellow-500 hover:bg-yellow-600",
-			icon: <Receipt size={20} />,
+			color: NEXUS_COLORS.status.yellow,
+			icon: <Receipt size={48} />,
 			action: () => onActionClick("last-sales"),
 			isActive: true,
 		},
 		{
 			key: "last-turn",
 			label: "ULTIMO TURNO",
-			color: "bg-cyan-500 hover:bg-cyan-600",
-			icon: <Clock size={20} />,
+			color: "#06B6D4",
+			icon: <Clock size={48} />,
 			action: () => onActionClick("last-turn"),
 		},
 	];
 
 	return (
-		<div className="grid grid-cols-2 mt-16 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-auto px-2">
+		<div className="grid grid-cols-5 mt-16 gap-3 mx-auto px-2">
 			{actions.map((action) => (
 				<button
 					key={action.key}
 					type="button"
 					onClick={action.action}
-					className={`
-						${action.color}
-						${action.isActive ? "ring-2 ring-yellow-300" : ""}
-						text-white font-semibold
-						px-2 py-2
-						rounded-lg
-						flex flex-col items-center justify-center gap-1
-						transition-all duration-200
-						hover:scale-105
-						disabled:opacity-50 disabled:cursor-not-allowed
-						shadow-lg
-					`}
+					className={`group relative rounded-md border-2 p-3 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-transform hover:scale-[1.02] select-none ${action.isActive ? "ring-2 ring-yellow-300" : ""}`}
+					style={{
+						borderColor: NEXUS_COLORS.status.red,
+						backgroundColor: "transparent",
+					}}
 					disabled={!action.action}
 				>
-					{action.icon}
-					<span className="text-xs text-center leading-tight">
-						{action.label}
-					</span>
+					<div
+						className="absolute top-0 left-0 right-0 text-center font-semibold"
+						style={{
+							transform: "translateY(-50%)",
+							color: NEXUS_COLORS.white,
+						}}
+					>
+						<span
+							className="inline-block px-4 text-xs"
+							style={{
+								backgroundColor: NEXUS_COLORS.status.red,
+								borderRadius: 4,
+							}}
+						>
+							{action.label}
+						</span>
+					</div>
+					<div className="flex items-center justify-center h-28">
+						<span className="text-white" aria-hidden>
+							{action.icon}
+						</span>
+					</div>
 				</button>
 			))}
 		</div>
