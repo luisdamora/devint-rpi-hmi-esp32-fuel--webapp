@@ -1,5 +1,5 @@
 import { Settings } from "lucide-react";
-b
+import React from "react";
 import { Outlet, useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
@@ -41,7 +41,7 @@ export const UtilitiesView: React.FC = () => {
 	};
 
 	return (
-		<HMIContainer>
+		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="h-full p-2">
 				{/* Renderiza la vista actual basada en la ruta */}
 				<Outlet />

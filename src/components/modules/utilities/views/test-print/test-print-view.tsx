@@ -1,46 +1,49 @@
+import { AlertCircle, ArrowLeft, CheckCircle, Printer } from "lucide-react";
 import React, { useState } from "react";
-import { ArrowLeft, Printer, CheckCircle, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { TouchInput } from "@/components/shared/touch-input";
-import { NEXUS_COLORS } from "@/lib/config/theme";
-import { BUTTON_STYLES } from "@/lib/config/theme";
+import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
 import type { PrintResult, PrintStatus } from "../../types";
 
 export const TestPrintView: React.FC = () => {
 	const navigate = useNavigate();
-	const [printStatus, setPrintStatus] = useState<PrintStatus>('idle');
+	const [printStatus, setPrintStatus] = useState<PrintStatus>("idle");
 	const [printResult, setPrintResult] = useState<PrintResult | null>(null);
-	const [testMessage, setTestMessage] = useState("TICKET DE PRUEBA - NEXUS POS");
+	const [testMessage, setTestMessage] = useState(
+		"TICKET DE PRUEBA - NEXUS POS",
+	);
 
 	const handleTestPrint = async () => {
-		setPrintStatus('printing');
+		setPrintStatus("printing");
 		setPrintResult(null);
 
 		try {
 			// Simular impresión
-			await new Promise(resolve => setTimeout(resolve, 2000));
+			await new Promise((resolve) => setTimeout(resolve, 2000));
 
 			const result: PrintResult = {
-				status: 'success',
-				message: 'Ticket de prueba impreso correctamente',
+				status: "success",
+				message: "Ticket de prueba impreso correctamente",
 				data: {
 					timestamp: new Date().toISOString(),
-					message: testMessage
-				}
+					message: testMessage,
+				},
 			};
 
 			setPrintResult(result);
-			setPrintStatus('success');
+			setPrintStatus("success");
 		} catch (error) {
 			const result: PrintResult = {
-				status: 'error',
-				message: 'Error al imprimir ticket de prueba',
-				data: { error: error instanceof Error ? error.message : 'Error desconocido' }
+				status: "error",
+				message: "Error al imprimir ticket de prueba",
+				data: {
+					error: error instanceof Error ? error.message : "Error desconocido",
+				},
 			};
 
 			setPrintResult(result);
-			setPrintStatus('error');
+			setPrintStatus("error");
 		}
 	};
 
@@ -50,11 +53,13 @@ export const TestPrintView: React.FC = () => {
 
 	const getStatusIcon = () => {
 		switch (printStatus) {
-			case 'printing':
-				return <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>;
-			case 'success':
+			case "printing":
+				return (
+					<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
+				);
+			case "success":
 				return <CheckCircle size={64} className="text-green-500" />;
-			case 'error':
+			case "error":
 				return <AlertCircle size={64} className="text-red-500" />;
 			default:
 				return <Printer size={64} className="text-white" />;
@@ -63,14 +68,14 @@ export const TestPrintView: React.FC = () => {
 
 	const getStatusMessage = () => {
 		switch (printStatus) {
-			case 'printing':
-				return 'Imprimiendo ticket de prueba...';
-			case 'success':
-				return printResult?.message || 'Impresión exitosa';
-			case 'error':
-				return printResult?.message || 'Error en la impresión';
+			case "printing":
+				return "Imprimiendo ticket de prueba...";
+			case "success":
+				return printResult?.message || "Impresión exitosa";
+			case "error":
+				return printResult?.message || "Error en la impresión";
 			default:
-				return 'Listo para imprimir';
+				return "Listo para imprimir";
 		}
 	};
 
@@ -82,7 +87,7 @@ export const TestPrintView: React.FC = () => {
 					<div className="flex items-center justify-between">
 						<button
 							type="button"
-							onClick={handleBackToUtilities}
+							onClick={() => navigate("/utilities")}
 							className="flex items-center text-white hover:text-gray-300 transition-colors"
 						>
 							<ArrowLeft size={24} className="mr-2" />
@@ -93,24 +98,25 @@ export const TestPrintView: React.FC = () => {
 
 					{/* Status Display */}
 					<div className="bg-gray-800 rounded-lg p-8 text-center">
-						<div className="flex justify-center mb-4">
-							{getStatusIcon()}
-						</div>
+						<div className="flex justify-center mb-4">{getStatusIcon()}</div>
 						<h2 className="text-xl font-semibold text-white mb-2">
 							{getStatusMessage()}
 						</h2>
-						{printResult && (
+						{printResult && printResult.data?.timestamp && (
 							<p className="text-gray-300 text-sm">
-								{printResult.data?.timestamp &&
-									`Hora: ${new Date(printResult.data.timestamp).toLocaleString()}`
-								}
+								Hora:{" "}
+								{new Date(
+									printResult.data.timestamp as string,
+								).toLocaleString()}
 							</p>
 						)}
 					</div>
 
 					{/* Test Message Input */}
 					<div className="space-y-4">
-						<h3 className="text-lg font-semibold text-white">Mensaje de Prueba</h3>
+						<h3 className="text-lg font-semibold text-white">
+							Mensaje de Prueba
+						</h3>
 						<TouchInput
 							value={testMessage}
 							onChange={setTestMessage}
@@ -118,7 +124,7 @@ export const TestPrintView: React.FC = () => {
 							placeholder="Ingrese el mensaje de prueba"
 							maxLength={50}
 							useFixedDimensions={true}
-							disabled={printStatus === 'printing'}
+							disabled={printStatus === "printing"}
 						/>
 					</div>
 
@@ -127,16 +133,18 @@ export const TestPrintView: React.FC = () => {
 						<button
 							type="button"
 							onClick={handleTestPrint}
-							disabled={printStatus === 'printing' || !testMessage.trim()}
+							disabled={printStatus === "printing" || !testMessage.trim()}
 							className={`${BUTTON_STYLES.success} px-8 py-3`}
 							style={{ minWidth: "200px" }}
 						>
-							{printStatus === 'printing' ? 'IMPRIMIENDO...' : 'IMPRIMIR PRUEBA'}
+							{printStatus === "printing"
+								? "IMPRIMIENDO..."
+								: "IMPRIMIR PRUEBA"}
 						</button>
 
 						<button
 							type="button"
-							onClick={handleBackToUtilities}
+							onClick={() => navigate("/utilities")}
 							className={`${BUTTON_STYLES.secondary} px-8 py-3`}
 							style={{ minWidth: "200px" }}
 						>
