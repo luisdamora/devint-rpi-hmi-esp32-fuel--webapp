@@ -11,6 +11,7 @@ import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
 import { TouchInput } from "@/components/shared/touch-input";
 import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
+import { InstructionsCard, StatusDisplay } from "../../components";
 import type { PrintResult, PrintStatus } from "../../types";
 
 export const TestPrintView: React.FC = () => {
@@ -123,22 +124,13 @@ export const TestPrintView: React.FC = () => {
 					<div className="col-span-3">
 						<div className="w-full max-w-lg space-y-3">
 							{/* Status Display */}
-							<div className="bg-gray-800 rounded-lg p-4 text-center">
-								<div className="flex justify-center mb-2">
-									{getStatusIcon()}
-								</div>
-								<h2 className="text-lg font-semibold text-white mb-2">
-									{getStatusMessage()}
-								</h2>
-								{printResult && printResult.data?.timestamp && (
-									<p className="text-gray-300 text-sm">
-										Hora:{" "}
-										{new Date(
-											printResult.data.timestamp as string,
-										).toLocaleString()}
-									</p>
-								)}
-							</div>
+							<StatusDisplay
+								status={printStatus}
+								title={getStatusMessage()}
+								message={printResult?.message}
+								timestamp={printResult?.data?.timestamp}
+								icon={printStatus === "printing" ? undefined : printStatus === "success" ? CheckCircle : printStatus === "error" ? AlertCircle : Printer}
+							/>
 
 							{/* Test Message Input */}
 							<div className="space-y-2">
@@ -181,21 +173,15 @@ export const TestPrintView: React.FC = () => {
 							</div>
 
 							{/* Instructions */}
-							<div className="bg-gray-800 rounded-lg p-2">
-								<h4 className="font-semibold text-white mb-2">
-									Instrucciones:
-								</h4>
-								<ul className="text-gray-300 text-sm space-y-1">
-									<li>• Configure el mensaje de prueba en el campo de texto</li>
-									<li>
-										• Presione "IMPRIMIR PRUEBA" para iniciar la impresión
-									</li>
-									<li>
-										• Verifique que la impresora esté conectada y encendida
-									</li>
-									<li>• El ticket de prueba mostrará la fecha y hora actual</li>
-								</ul>
-							</div>
+							<InstructionsCard
+								title="Instrucciones:"
+								instructions={[
+									"• Configure el mensaje de prueba en el campo de texto",
+									"• Presione \"IMPRIMIR PRUEBA\" para iniciar la impresión",
+									"• Verifique que la impresora esté conectada y encendida",
+									"• El ticket de prueba mostrará la fecha y hora actual",
+								]}
+							/>
 						</div>
 					</div>
 				</div>

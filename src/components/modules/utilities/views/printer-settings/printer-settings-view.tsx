@@ -13,6 +13,7 @@ import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
 import { TouchInput } from "@/components/shared/touch-input";
 import { TouchSelect } from "@/components/shared/touch-select";
 import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
+import { StatusDisplay } from "../../components";
 import type { PrinterConfig, PrintResult } from "../../types";
 
 const PAPER_WIDTH_OPTIONS = [
@@ -281,10 +282,10 @@ export const PrinterSettingsView: React.FC = () => {
 														{testStatus === "testing"
 															? "Probando..."
 															: testStatus === "success"
-																? "Conectado"
-																: testStatus === "error"
-																	? "Error de conexión"
-																	: "No probado"}
+															? "Conectado"
+															: testStatus === "error"
+																? "Error de conexión"
+																: "No probado"}
 													</p>
 													{testResult && (
 														<p className="text-gray-300 text-sm">
