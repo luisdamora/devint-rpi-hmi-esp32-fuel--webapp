@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { ArrowLeft, Clock, User, DollarSign, Fuel, Receipt, TrendingUp } from "lucide-react";
+import {
+	ArrowLeft,
+	Clock,
+	DollarSign,
+	Fuel,
+	Receipt,
+	TrendingUp,
+	User,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
-import { NEXUS_COLORS } from "@/lib/config/theme";
-import { BUTTON_STYLES } from "@/lib/config/theme";
-import type { TurnInfo, SaleRecord } from "../../types";
+import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
 import { mockSalesData } from "../../mock-data";
+import type { SaleRecord, TurnInfo } from "../../types";
 
 export const LastTurnView: React.FC = () => {
 	const navigate = useNavigate();
@@ -18,7 +25,7 @@ export const LastTurnView: React.FC = () => {
 			setIsLoading(true);
 			try {
 				// Simular carga de datos del último turno
-				await new Promise(resolve => setTimeout(resolve, 1500));
+				await new Promise((resolve) => setTimeout(resolve, 1500));
 
 				// Crear datos ficticios del último turno basados en ventas mock
 				const lastTurn: TurnInfo = {
@@ -27,15 +34,18 @@ export const LastTurnView: React.FC = () => {
 					endTime: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 horas atrás
 					operator: "María González",
 					totalSales: mockSalesData.reduce((sum, sale) => sum + sale.dinero, 0),
-					totalVolume: mockSalesData.reduce((sum, sale) => sum + sale.volumen, 0),
+					totalVolume: mockSalesData.reduce(
+						(sum, sale) => sum + sale.volumen,
+						0,
+					),
 					transactionCount: mockSalesData.length,
-					status: "closed"
+					status: "closed",
 				};
 
 				setTurnInfo(lastTurn);
 				setTurnSales(mockSalesData.slice(0, 5)); // Últimas 5 ventas
 			} catch (error) {
-				console.error('Error cargando datos del turno:', error);
+				console.error("Error cargando datos del turno:", error);
 			} finally {
 				setIsLoading(false);
 			}
@@ -49,15 +59,15 @@ export const LastTurnView: React.FC = () => {
 	};
 
 	const formatCurrency = (amount: number) => {
-		return new Intl.NumberFormat('es-CO', {
-			style: 'currency',
-			currency: 'COP',
-			minimumFractionDigits: 0
+		return new Intl.NumberFormat("es-CO", {
+			style: "currency",
+			currency: "COP",
+			minimumFractionDigits: 0,
 		}).format(amount);
 	};
 
 	const formatVolume = (volume: number) => {
-		return `${volume.toLocaleString('es-CO')} L`;
+		return `${volume.toLocaleString("es-CO")} L`;
 	};
 
 	if (isLoading) {
@@ -66,7 +76,9 @@ export const LastTurnView: React.FC = () => {
 				<div className="w-full h-full flex items-center justify-center">
 					<div className="text-center">
 						<div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
-						<p className="text-white text-xl">Cargando información del turno...</p>
+						<p className="text-white text-xl">
+							Cargando información del turno...
+						</p>
 					</div>
 				</div>
 			</HMIContainer>
@@ -78,7 +90,9 @@ export const LastTurnView: React.FC = () => {
 			<HMIContainer showHeader={true} showFooter={true}>
 				<div className="w-full h-full flex items-center justify-center">
 					<div className="text-center">
-						<p className="text-white text-xl mb-4">No se encontró información del último turno</p>
+						<p className="text-white text-xl mb-4">
+							No se encontró información del último turno
+						</p>
 						<button
 							type="button"
 							onClick={handleBackToUtilities}
@@ -93,7 +107,7 @@ export const LastTurnView: React.FC = () => {
 	}
 
 	return (
-		<HMIContainer showHeader={true} showFooter={true}>
+		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center p-3">
 				<div className="w-full max-w-4xl space-y-4">
 					{/* Header */}
@@ -114,33 +128,43 @@ export const LastTurnView: React.FC = () => {
 						{/* Operator Card */}
 						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
 							<User size={24} className="mx-auto mb-1 text-blue-400" />
-							<h3 className="text-xs font-medium text-gray-300 mb-1">Operador</h3>
-							<p className="text-white font-semibold text-sm leading-tight">{turnInfo.operator}</p>
+							<h3 className="text-xs font-medium text-gray-300 mb-1">
+								Operador
+							</h3>
+							<p className="text-white font-semibold text-sm leading-tight">
+								{turnInfo.operator}
+							</p>
 						</div>
 
 						{/* Duration Card */}
 						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
 							<Clock size={24} className="mx-auto mb-1 text-green-400" />
-							<h3 className="text-xs font-medium text-gray-300 mb-1">Duración</h3>
+							<h3 className="text-xs font-medium text-gray-300 mb-1">
+								Duración
+							</h3>
 							<p className="text-white font-semibold text-sm leading-tight">
-								{new Date(turnInfo.startTime).toLocaleDateString('es-CO')}
+								{new Date(turnInfo.startTime).toLocaleDateString("es-CO")}
 							</p>
 							<p className="text-gray-400 text-xs leading-tight">
-								{new Date(turnInfo.startTime).toLocaleTimeString('es-CO', {
-									hour: '2-digit',
-									minute: '2-digit'
-								})} - {' '}
-								{turnInfo.endTime && new Date(turnInfo.endTime).toLocaleTimeString('es-CO', {
-									hour: '2-digit',
-									minute: '2-digit'
-								})}
+								{new Date(turnInfo.startTime).toLocaleTimeString("es-CO", {
+									hour: "2-digit",
+									minute: "2-digit",
+								})}{" "}
+								-{" "}
+								{turnInfo.endTime &&
+									new Date(turnInfo.endTime).toLocaleTimeString("es-CO", {
+										hour: "2-digit",
+										minute: "2-digit",
+									})}
 							</p>
 						</div>
 
 						{/* Sales Card */}
 						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
 							<DollarSign size={24} className="mx-auto mb-1 text-yellow-400" />
-							<h3 className="text-xs font-medium text-gray-300 mb-1">Ventas Totales</h3>
+							<h3 className="text-xs font-medium text-gray-300 mb-1">
+								Ventas Totales
+							</h3>
 							<p className="text-white font-semibold text-sm leading-tight">
 								{formatCurrency(turnInfo.totalSales)}
 							</p>
@@ -149,7 +173,9 @@ export const LastTurnView: React.FC = () => {
 						{/* Volume Card */}
 						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
 							<Fuel size={24} className="mx-auto mb-1 text-purple-400" />
-							<h3 className="text-xs font-medium text-gray-300 mb-1">Volumen Total</h3>
+							<h3 className="text-xs font-medium text-gray-300 mb-1">
+								Volumen Total
+							</h3>
 							<p className="text-white font-semibold text-sm leading-tight">
 								{formatVolume(turnInfo.totalVolume)}
 							</p>
@@ -162,10 +188,17 @@ export const LastTurnView: React.FC = () => {
 						<div className="bg-gray-800 rounded-lg p-3">
 							<div className="flex items-center justify-between">
 								<div className="min-w-0 flex-1">
-									<h3 className="text-xs font-medium text-gray-300 mb-1">Transacciones</h3>
-									<p className="text-white font-semibold text-xl leading-tight">{turnInfo.transactionCount}</p>
+									<h3 className="text-xs font-medium text-gray-300 mb-1">
+										Transacciones
+									</h3>
+									<p className="text-white font-semibold text-xl leading-tight">
+										{turnInfo.transactionCount}
+									</p>
 								</div>
-								<Receipt size={20} className="text-gray-400 flex-shrink-0 ml-2" />
+								<Receipt
+									size={20}
+									className="text-gray-400 flex-shrink-0 ml-2"
+								/>
 							</div>
 						</div>
 
@@ -173,36 +206,51 @@ export const LastTurnView: React.FC = () => {
 						<div className="bg-gray-800 rounded-lg p-3">
 							<div className="flex items-center justify-between">
 								<div className="min-w-0 flex-1">
-									<h3 className="text-xs font-medium text-gray-300 mb-1">Venta Promedio</h3>
+									<h3 className="text-xs font-medium text-gray-300 mb-1">
+										Venta Promedio
+									</h3>
 									<p className="text-white font-semibold text-xl leading-tight">
-										{formatCurrency(turnInfo.transactionCount > 0 ?
-											turnInfo.totalSales / turnInfo.transactionCount : 0)}
+										{formatCurrency(
+											turnInfo.transactionCount > 0
+												? turnInfo.totalSales / turnInfo.transactionCount
+												: 0,
+										)}
 									</p>
 								</div>
-								<TrendingUp size={20} className="text-gray-400 flex-shrink-0 ml-2" />
+								<TrendingUp
+									size={20}
+									className="text-gray-400 flex-shrink-0 ml-2"
+								/>
 							</div>
 						</div>
 					</div>
 
 					{/* Recent Sales Table */}
 					<div className="bg-gray-800 rounded-lg p-3">
-						<h3 className="text-base font-semibold text-white mb-3">Últimas Ventas del Turno</h3>
+						<h3 className="text-base font-semibold text-white mb-3">
+							Últimas Ventas del Turno
+						</h3>
 						<div className="space-y-1">
 							{turnSales.map((sale, index) => (
-								<div key={`${sale.fe}-${index}`} className="flex justify-between items-center py-1.5 border-b border-gray-700 last:border-b-0 text-sm">
+								<div
+									key={`${sale.fe}-${index}`}
+									className="flex justify-between items-center py-1.5 border-b border-gray-700 last:border-b-0 text-sm"
+								>
 									<div className="min-w-0 flex-1 pr-2">
-										<p className="text-white font-medium truncate">{sale.producto}</p>
-										<p className="text-gray-400 text-xs truncate">
+										<span className="text-white font-medium">
+											{sale.producto}
+										</span>
+										<span className="text-gray-400 text-xs ml-2">
 											{sale.placa} • {sale.fe}
-										</p>
+										</span>
 									</div>
 									<div className="text-right flex-shrink-0">
-										<p className="text-white font-semibold text-sm">
+										<span className="text-white font-semibold">
 											{formatCurrency(sale.dinero)}
-										</p>
-										<p className="text-gray-400 text-xs">
+										</span>
+										<span className="text-gray-400 text-xs ml-2">
 											{formatVolume(sale.volumen)}
-										</p>
+										</span>
 									</div>
 								</div>
 							))}
@@ -211,22 +259,30 @@ export const LastTurnView: React.FC = () => {
 
 					{/* Turn Status */}
 					<div className="bg-gray-800 rounded-lg p-3 text-center">
-						<div className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
-							turnInfo.status === 'closed'
-								? 'bg-green-900 text-green-200'
-								: turnInfo.status === 'active'
-								? 'bg-yellow-900 text-yellow-200'
-								: 'bg-red-900 text-red-200'
-						}`}>
-							<div className={`w-1.5 h-1.5 rounded-full mr-2 ${
-								turnInfo.status === 'closed'
-									? 'bg-green-400'
-									: turnInfo.status === 'active'
-									? 'bg-yellow-400'
-									: 'bg-red-400'
-							}`}></div>
-							Turno {turnInfo.status === 'closed' ? 'Cerrado' :
-									turnInfo.status === 'active' ? 'Activo' : 'Cancelado'}
+						<div
+							className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
+								turnInfo.status === "closed"
+									? "bg-green-900 text-green-200"
+									: turnInfo.status === "active"
+										? "bg-yellow-900 text-yellow-200"
+										: "bg-red-900 text-red-200"
+							}`}
+						>
+							<div
+								className={`w-1.5 h-1.5 rounded-full mr-2 ${
+									turnInfo.status === "closed"
+										? "bg-green-400"
+										: turnInfo.status === "active"
+											? "bg-yellow-400"
+											: "bg-red-400"
+								}`}
+							></div>
+							Turno{" "}
+							{turnInfo.status === "closed"
+								? "Cerrado"
+								: turnInfo.status === "active"
+									? "Activo"
+									: "Cancelado"}
 						</div>
 					</div>
 
