@@ -112,6 +112,22 @@ export interface PrinterConfig {
 export type PrintStatus = 'idle' | 'printing' | 'success' | 'error';
 
 /**
+ * Datos adicionales en el resultado de impresión
+ */
+export interface PrintResultData {
+	/** Timestamp de la operación */
+	timestamp?: string;
+	/** Mensaje impreso */
+	message?: string;
+	/** Error ocurrido (si aplica) */
+	error?: string;
+	/** Dirección IP (para conexiones de prueba) */
+	ip?: string;
+	/** Puerto (para conexiones de prueba) */
+	port?: number;
+}
+
+/**
  * Resultado de una operación de impresión
  */
 export interface PrintResult {
@@ -122,7 +138,7 @@ export interface PrintResult {
 	message: string;
 
 	/** Datos adicionales (opcional) */
-	data?: Record<string, unknown>;
+	data?: PrintResultData;
 }
 
 /**

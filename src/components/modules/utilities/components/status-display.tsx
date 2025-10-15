@@ -1,5 +1,6 @@
+import { AlertCircle, CheckCircle } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import React from "react";
-import { AlertCircle, CheckCircle, LucideIcon } from "lucide-react";
 
 interface StatusDisplayProps {
 	status: "idle" | "testing" | "success" | "error" | "printing";
@@ -32,7 +33,9 @@ export const StatusDisplay: React.FC<StatusDisplayProps> = ({
 			case "error":
 				return <AlertCircle size={32} className="text-red-500" />;
 			default:
-				return <div className="w-8 h-8 bg-gray-400 rounded-full mx-auto mb-2"></div>;
+				return (
+					<div className="w-8 h-8 bg-gray-400 rounded-full mx-auto mb-2"></div>
+				);
 		}
 	};
 
@@ -54,9 +57,7 @@ export const StatusDisplay: React.FC<StatusDisplayProps> = ({
 	return (
 		<div className="bg-gray-800 rounded-lg p-4 text-center">
 			<div className="flex justify-center mb-2">{getStatusIcon()}</div>
-			<h2 className="text-lg font-semibold text-white mb-2">
-				{title}
-			</h2>
+			<h2 className="text-lg font-semibold text-white mb-2">{title}</h2>
 			<p className="text-gray-300 text-sm mb-2">
 				{message || getStatusMessage()}
 			</p>
