@@ -9,9 +9,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
+import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
 import { TouchInput } from "@/components/shared/touch-input";
 import { TouchSelect } from "@/components/shared/touch-select";
-import { BUTTON_STYLES } from "@/lib/config/theme";
+import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
 import type { PrinterConfig, PrintResult } from "../../types";
 
 const PAPER_WIDTH_OPTIONS = [
@@ -158,168 +159,189 @@ export const PrinterSettingsView: React.FC = () => {
 	return (
 		<HMIContainer showHeader={true} showFooter={true}>
 			<div className="w-full h-full flex items-center justify-center p-4">
-				<div className="w-full max-w-2xl space-y-6">
-					{/* Header */}
-					<div className="flex items-center justify-between">
-						<button
-							type="button"
-							onClick={handleBackToUtilities}
-							className="flex items-center text-white hover:text-gray-300 transition-colors"
-						>
-							<ArrowLeft size={24} className="mr-2" />
-							Volver a Utilidades
-						</button>
-						<h1 className="text-2xl font-bold text-white">
-							Configuración de Impresora
-						</h1>
+				<div className="grid grid-cols-4 gap-6 w-full max-w-6xl h-full">
+					{/* Panel lateral ultra-compacto */}
+					<div className="col-span-1 flex flex-col gap-4 self-start pt-8 h-full">
+						{/* Título como span estático */}
+						<div className="text-center">
+							<span
+								className="inline-block px-4 text-xl font-bold"
+								style={{
+									backgroundColor: NEXUS_COLORS.status.orange,
+									color: NEXUS_COLORS.white,
+									borderRadius: 4,
+								}}
+							>
+								CONFIGURACIÓN
+							</span>
+						</div>
+
+						{/* Espacio flexible */}
+						<div className="flex-grow"></div>
+
+						{/* Navegación a Utilidades con SmallSideTile */}
+						<div className="flex justify-center">
+							<SmallSideTile
+								title="UTILIDADES"
+								icon={<Settings size={36} />}
+								onClick={() => navigate("/utilities")}
+							/>
+						</div>
 					</div>
 
-					{/* Loading State */}
-					{isLoading && (
-						<div className="bg-gray-800 rounded-lg p-8 text-center">
-							<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-4"></div>
-							<p className="text-white">Cargando configuración...</p>
-						</div>
-					)}
+					{/* Contenido central */}
+					<div className="col-span-3">
+						<div className="w-full max-w-2xl space-y-6">
+							{/* Loading State */}
+							{isLoading && (
+								<div className="bg-gray-800 rounded-lg p-8 text-center">
+									<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-4"></div>
+									<p className="text-white">Cargando configuración...</p>
+								</div>
+							)}
 
-					{/* Configuration Form */}
-					{!isLoading && (
-						<div className="bg-gray-800 rounded-lg p-6 space-y-6">
-							{/* Printer Name */}
-							<TouchInput
-								value={config.name}
-								onChange={(value) => handleConfigChange("name", value)}
-								label="Nombre de la Impresora"
-								placeholder="Ingrese el nombre de la impresora"
-								maxLength={50}
-								useFixedDimensions={true}
-							/>
+							{/* Configuration Form */}
+							{!isLoading && (
+								<div className="bg-gray-800 rounded-lg p-6 space-y-6">
+									{/* Printer Name */}
+									<TouchInput
+										value={config.name}
+										onChange={(value) => handleConfigChange("name", value)}
+										label="Nombre de la Impresora"
+										placeholder="Ingrese el nombre de la impresora"
+										maxLength={50}
+										useFixedDimensions={true}
+									/>
 
-							{/* IP Address and Port */}
-							<div className="grid grid-cols-2 gap-4">
-								<TouchInput
-									value={config.ipAddress}
-									onChange={(value) => handleConfigChange("ipAddress", value)}
-									label="Dirección IP"
-									placeholder="192.168.1.100"
-									maxLength={15}
-									keyboardMode="numeric"
-									useFixedDimensions={true}
-								/>
-								<TouchInput
-									value={config.port.toString()}
-									onChange={(value) =>
-										handleConfigChange("port", parseInt(value) || 9100)
-									}
-									label="Puerto"
-									placeholder="9100"
-									maxLength={5}
-									keyboardMode="numeric"
-									useFixedDimensions={true}
-								/>
-							</div>
+									{/* IP Address and Port */}
+									<div className="grid grid-cols-2 gap-4">
+										<TouchInput
+											value={config.ipAddress}
+											onChange={(value) =>
+												handleConfigChange("ipAddress", value)
+											}
+											label="Dirección IP"
+											placeholder="192.168.1.100"
+											maxLength={15}
+											keyboardMode="numeric"
+											useFixedDimensions={true}
+										/>
+										<TouchInput
+											value={config.port.toString()}
+											onChange={(value) =>
+												handleConfigChange("port", parseInt(value) || 9100)
+											}
+											label="Puerto"
+											placeholder="9100"
+											maxLength={5}
+											keyboardMode="numeric"
+											useFixedDimensions={true}
+										/>
+									</div>
 
-							{/* Paper Width */}
-							<TouchSelect
-								value={config.paperWidth.toString()}
-								options={PAPER_WIDTH_OPTIONS}
-								onChange={(value) =>
-									handleConfigChange("paperWidth", parseInt(value))
-								}
-								label="Ancho del Papel"
-								placeholder="Seleccione el ancho del papel..."
-								gridCols={1}
-								useFixedDimensions={true}
-							/>
+									{/* Paper Width */}
+									<TouchSelect
+										value={config.paperWidth.toString()}
+										options={PAPER_WIDTH_OPTIONS}
+										onChange={(value) =>
+											handleConfigChange("paperWidth", parseInt(value))
+										}
+										label="Ancho del Papel"
+										placeholder="Seleccione el ancho del papel..."
+										gridCols={1}
+										useFixedDimensions={true}
+									/>
 
-							{/* Font Selection */}
-							<TouchSelect
-								value={config.font || "default"}
-								options={[
-									{ value: "default", label: "Fuente por defecto" },
-									{ value: "small", label: "Fuente pequeña" },
-									{ value: "large", label: "Fuente grande" },
-								]}
-								onChange={(value) => handleConfigChange("font", value)}
-								label="Fuente"
-								placeholder="Seleccione la fuente..."
-								gridCols={1}
-								useFixedDimensions={true}
-							/>
+									{/* Font Selection */}
+									<TouchSelect
+										value={config.font || "default"}
+										options={[
+											{ value: "default", label: "Fuente por defecto" },
+											{ value: "small", label: "Fuente pequeña" },
+											{ value: "large", label: "Fuente grande" },
+										]}
+										onChange={(value) => handleConfigChange("font", value)}
+										label="Fuente"
+										placeholder="Seleccione la fuente..."
+										gridCols={1}
+										useFixedDimensions={true}
+									/>
 
-							{/* Test Connection */}
-							<div className="border-t border-gray-600 pt-4">
-								<h3 className="text-lg font-semibold text-white mb-4">
-									Test de Conexión
-								</h3>
-								<div className="flex items-center justify-between mb-4">
-									<div className="flex items-center space-x-3">
-										{getTestStatusIcon()}
-										<div>
-											<p className="text-white font-medium">
-												Estado:{" "}
+									{/* Test Connection */}
+									<div className="border-t border-gray-600 pt-4">
+										<h3 className="text-lg font-semibold text-white mb-4">
+											Test de Conexión
+										</h3>
+										<div className="flex items-center justify-between mb-4">
+											<div className="flex items-center space-x-3">
+												{getTestStatusIcon()}
+												<div>
+													<p className="text-white font-medium">
+														Estado:{" "}
+														{testStatus === "testing"
+															? "Probando..."
+															: testStatus === "success"
+																? "Conectado"
+																: testStatus === "error"
+																	? "Error de conexión"
+																	: "No probado"}
+													</p>
+													{testResult && (
+														<p className="text-gray-300 text-sm">
+															{testResult.message}
+														</p>
+													)}
+												</div>
+											</div>
+											<button
+												type="button"
+												onClick={handleTestConnection}
+												disabled={testStatus === "testing"}
+												className={`${BUTTON_STYLES.primary} px-4 py-2`}
+											>
 												{testStatus === "testing"
-													? "Probando..."
-													: testStatus === "success"
-														? "Conectado"
-														: testStatus === "error"
-															? "Error de conexión"
-															: "No probado"}
-											</p>
-											{testResult && (
-												<p className="text-gray-300 text-sm">
-													{testResult.message}
-												</p>
-											)}
+													? "PROBANDO..."
+													: "PROBAR CONEXIÓN"}
+											</button>
 										</div>
 									</div>
-									<button
-										type="button"
-										onClick={handleTestConnection}
-										disabled={testStatus === "testing"}
-										className={`${BUTTON_STYLES.primary} px-4 py-2`}
-									>
-										{testStatus === "testing"
-											? "PROBANDO..."
-											: "PROBAR CONEXIÓN"}
-									</button>
 								</div>
+							)}
+
+							{/* Action Buttons */}
+							<div className="flex justify-center space-x-4">
+								<button
+									type="button"
+									onClick={handleSaveConfig}
+									disabled={isLoading || !hasUnsavedChanges}
+									className={`${BUTTON_STYLES.success} px-8 py-3`}
+									style={{ minWidth: "200px" }}
+								>
+									<Save size={20} className="mr-2" />
+									{isLoading ? "GUARDANDO..." : "GUARDAR CONFIGURACIÓN"}
+								</button>
+
+								<button
+									type="button"
+									onClick={() => navigate("/utilities")}
+									className={`${BUTTON_STYLES.secondary} px-8 py-3`}
+									style={{ minWidth: "200px" }}
+								>
+									CANCELAR
+								</button>
 							</div>
+
+							{/* Unsaved Changes Warning */}
+							{hasUnsavedChanges && (
+								<div className="bg-yellow-900 border border-yellow-600 rounded-lg p-4">
+									<p className="text-yellow-200 text-sm">
+										⚠️ Tiene cambios sin guardar. Asegúrese de guardar la
+										configuración antes de salir.
+									</p>
+								</div>
+							)}
 						</div>
-					)}
-
-					{/* Action Buttons */}
-					<div className="flex justify-center space-x-4">
-						<button
-							type="button"
-							onClick={handleSaveConfig}
-							disabled={isLoading || !hasUnsavedChanges}
-							className={`${BUTTON_STYLES.success} px-8 py-3`}
-							style={{ minWidth: "200px" }}
-						>
-							<Save size={20} className="mr-2" />
-							{isLoading ? "GUARDANDO..." : "GUARDAR CONFIGURACIÓN"}
-						</button>
-
-						<button
-							type="button"
-							onClick={handleBackToUtilities}
-							className={`${BUTTON_STYLES.secondary} px-8 py-3`}
-							style={{ minWidth: "200px" }}
-						>
-							CANCELAR
-						</button>
 					</div>
-
-					{/* Unsaved Changes Warning */}
-					{hasUnsavedChanges && (
-						<div className="bg-yellow-900 border border-yellow-600 rounded-lg p-4">
-							<p className="text-yellow-200 text-sm">
-								⚠️ Tiene cambios sin guardar. Asegúrese de guardar la
-								configuración antes de salir.
-							</p>
-						</div>
-					)}
 				</div>
 			</div>
 		</HMIContainer>

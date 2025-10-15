@@ -1,7 +1,14 @@
-import { AlertCircle, ArrowLeft, CheckCircle, Printer } from "lucide-react";
+import {
+	AlertCircle,
+	ArrowLeft,
+	CheckCircle,
+	Printer,
+	Settings,
+} from "lucide-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
+import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
 import { TouchInput } from "@/components/shared/touch-input";
 import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
 import type { PrintResult, PrintStatus } from "../../types";
@@ -82,85 +89,114 @@ export const TestPrintView: React.FC = () => {
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center p-3">
-				<div className="w-full max-w-lg space-y-3">
-					{/* Header */}
-					<div className="flex items-center justify-between">
-						<button
-							type="button"
-							onClick={() => navigate("/utilities")}
-							className="flex items-center text-white hover:text-gray-300 transition-colors"
-						>
-							<ArrowLeft size={24} className="mr-2" />
-							Volver a Utilidades
-						</button>
-						<h1 className="text-xl font-bold text-white">Test de Impresión</h1>
+				<div className="grid grid-cols-4 gap-6 w-full max-w-6xl">
+					{/* Panel lateral ultra-compacto */}
+					<div className="col-span-1 flex flex-col gap-4 self-start pt-8 h-full">
+						{/* Título como span estático */}
+						<div className="text-center">
+							<span
+								className="inline-block px-4 text-xl font-bold"
+								style={{
+									backgroundColor: NEXUS_COLORS.status.orange,
+									color: NEXUS_COLORS.white,
+									borderRadius: 4,
+								}}
+							>
+								TEST IMPRESIÓN
+							</span>
+						</div>
+
+						{/* Espacio flexible */}
+						<div className="flex-grow"></div>
+
+						{/* Navegación a Utilidades con SmallSideTile */}
+						<div className="flex justify-center">
+							<SmallSideTile
+								title="UTILIDADES"
+								icon={<Settings size={36} />}
+								onClick={() => navigate("/utilities")}
+							/>
+						</div>
 					</div>
 
-					{/* Status Display */}
-					<div className="bg-gray-800 rounded-lg p-4 text-center">
-						<div className="flex justify-center mb-2">{getStatusIcon()}</div>
-						<h2 className="text-lg font-semibold text-white mb-2">
-							{getStatusMessage()}
-						</h2>
-						{printResult && printResult.data?.timestamp && (
-							<p className="text-gray-300 text-sm">
-								Hora:{" "}
-								{new Date(
-									printResult.data.timestamp as string,
-								).toLocaleString()}
-							</p>
-						)}
-					</div>
+					{/* Contenido central */}
+					<div className="col-span-3">
+						<div className="w-full max-w-lg space-y-3">
+							{/* Status Display */}
+							<div className="bg-gray-800 rounded-lg p-4 text-center">
+								<div className="flex justify-center mb-2">
+									{getStatusIcon()}
+								</div>
+								<h2 className="text-lg font-semibold text-white mb-2">
+									{getStatusMessage()}
+								</h2>
+								{printResult && printResult.data?.timestamp && (
+									<p className="text-gray-300 text-sm">
+										Hora:{" "}
+										{new Date(
+											printResult.data.timestamp as string,
+										).toLocaleString()}
+									</p>
+								)}
+							</div>
 
-					{/* Test Message Input */}
-					<div className="space-y-2">
-						<h3 className="text-sm font-semibold text-white mb-1">
-							Mensaje de Prueba
-						</h3>
-						<TouchInput
-							value={testMessage}
-							onChange={setTestMessage}
-							label="Texto a imprimir"
-							placeholder="Ingrese el mensaje de prueba"
-							maxLength={50}
-							useFixedDimensions={true}
-							disabled={printStatus === "printing"}
-						/>
-					</div>
+							{/* Test Message Input */}
+							<div className="space-y-2">
+								<h3 className="text-sm font-semibold text-white mb-1">
+									Mensaje de Prueba
+								</h3>
+								<TouchInput
+									value={testMessage}
+									onChange={setTestMessage}
+									label="Texto a imprimir"
+									placeholder="Ingrese el mensaje de prueba"
+									maxLength={50}
+									useFixedDimensions={true}
+									disabled={printStatus === "printing"}
+								/>
+							</div>
 
-					{/* Action Buttons */}
-					<div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2">
-						<button
-							type="button"
-							onClick={handleTestPrint}
-							disabled={printStatus === "printing" || !testMessage.trim()}
-							className={`${BUTTON_STYLES.success} px-4 py-2`}
-							style={{ minWidth: "120px" }}
-						>
-							{printStatus === "printing"
-								? "IMPRIMIENDO..."
-								: "IMPRIMIR PRUEBA"}
-						</button>
+							{/* Action Buttons */}
+							<div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2">
+								<button
+									type="button"
+									onClick={handleTestPrint}
+									disabled={printStatus === "printing" || !testMessage.trim()}
+									className={`${BUTTON_STYLES.success} px-4 py-2`}
+									style={{ minWidth: "120px" }}
+								>
+									{printStatus === "printing"
+										? "IMPRIMIENDO..."
+										: "IMPRIMIR PRUEBA"}
+								</button>
 
-						<button
-							type="button"
-							onClick={() => navigate("/utilities")}
-							className={`${BUTTON_STYLES.secondary} px-4 py-2`}
-							style={{ minWidth: "120px" }}
-						>
-							CANCELAR
-						</button>
-					</div>
+								<button
+									type="button"
+									onClick={() => navigate("/utilities")}
+									className={`${BUTTON_STYLES.secondary} px-4 py-2`}
+									style={{ minWidth: "120px" }}
+								>
+									CANCELAR
+								</button>
+							</div>
 
-					{/* Instructions */}
-					<div className="bg-gray-800 rounded-lg p-2">
-						<h4 className="font-semibold text-white mb-2">Instrucciones:</h4>
-						<ul className="text-gray-300 text-sm space-y-1">
-							<li>• Configure el mensaje de prueba en el campo de texto</li>
-							<li>• Presione "IMPRIMIR PRUEBA" para iniciar la impresión</li>
-							<li>• Verifique que la impresora esté conectada y encendida</li>
-							<li>• El ticket de prueba mostrará la fecha y hora actual</li>
-						</ul>
+							{/* Instructions */}
+							<div className="bg-gray-800 rounded-lg p-2">
+								<h4 className="font-semibold text-white mb-2">
+									Instrucciones:
+								</h4>
+								<ul className="text-gray-300 text-sm space-y-1">
+									<li>• Configure el mensaje de prueba en el campo de texto</li>
+									<li>
+										• Presione "IMPRIMIR PRUEBA" para iniciar la impresión
+									</li>
+									<li>
+										• Verifique que la impresora esté conectada y encendida
+									</li>
+									<li>• El ticket de prueba mostrará la fecha y hora actual</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
