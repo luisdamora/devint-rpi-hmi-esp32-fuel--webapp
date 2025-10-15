@@ -48,13 +48,14 @@ export const UtilitiesView: React.FC = () => {
 
 				{/* Si estamos en la ruta principal /utilities, mostrar la tabla y acciones */}
 				{window.location.pathname === "/utilities" && (
-					<>
+					<div className="flex flex-col h-full w-full">
 						{/* Sales Table */}
 						<SalesTable salesData={mockSalesData} />
 
+						<div className="flex-grow" />
 						{/* Actions */}
 						<UtilitiesActions onActionClick={handleActionClick} />
-					</>
+					</div>
 				)}
 			</div>
 		</HMIContainer>
