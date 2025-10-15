@@ -1,7 +1,7 @@
 import { Home, Search } from "lucide-react";
 import React, { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
-import { SideTile } from "@/components/shared/sales/side-tile";
+import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
 import { TouchInput } from "@/components/shared/touch-input";
 import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
@@ -25,22 +25,55 @@ export const PointsView: React.FC = () => {
 		<HMIContainer showHeader={true} showFooter={true}>
 			<div className="w-full h-full flex items-center justify-center px-2">
 				<div className="grid grid-cols-4 gap-6 w-full max-w-6xl">
-					{/* Tiles laterales */}
-					<div className="col-span-1 flex flex-col gap-6 self-start pt-8">
-						<SideTile
-							title="CONSULTAR PUNTOS"
-							icon={<Search size={64} />}
-							onClick={() => {
-								/* funcionalidad futura */
-							}}
-							color={NEXUS_COLORS.status.green}
-						/>
-						<SideTile
-							title="INICIO"
-							icon={<Home size={64} />}
-							onClick={() => navigateTo("menu")}
-							color={NEXUS_COLORS.status.red}
-						/>
+					{/* Panel lateral compacto */}
+					<div className="col-span-1 flex flex-col gap-4 self-start pt-8">
+						{/* Título como span estático con estilo side-tile */}
+						<div className="text-center">
+							<span
+								className="inline-block px-4 text-xl font-bold"
+								style={{
+									backgroundColor: NEXUS_COLORS.status.green,
+									color: NEXUS_COLORS.white,
+									borderRadius: 4,
+								}}
+							>
+								PUNTOS DE FIDELIDAD
+							</span>
+						</div>
+
+						{/* Íconos compactos */}
+						<div className="flex flex-col gap-4 items-center">
+							{/* Consultar puntos como texto estático */}
+							<div className="text-center">
+								<span
+									className="inline-block px-3 text-sm"
+									style={{
+										backgroundColor: NEXUS_COLORS.status.green,
+										color: NEXUS_COLORS.white,
+										borderRadius: 4,
+									}}
+								>
+									CONSULTAR PUNTOS
+								</span>
+							</div>
+
+							{/* Ícono de búsqueda más pequeño */}
+							<div className="flex justify-center py-2">
+								<Search size={48} color={NEXUS_COLORS.status.green} />
+							</div>
+						</div>
+
+						{/* Espacio flexible */}
+						<div className="flex-grow"></div>
+
+						{/* Botón Inicio con SmallSideTile centrado */}
+						<div className="flex justify-center">
+							<SmallSideTile
+								title="INICIO"
+								icon={<Home size={36} />}
+								onClick={() => navigateTo("menu")}
+							/>
+						</div>
 					</div>
 
 					{/* Formulario central */}
