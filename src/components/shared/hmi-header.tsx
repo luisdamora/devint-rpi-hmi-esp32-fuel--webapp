@@ -3,6 +3,7 @@ import { LogoBase } from "@/components/shared/logo-base";
 import { HEADER_HEIGHT } from "@/lib/config/layout-dimensions";
 import { NEXUS_COLORS, NEXUS_THEME_CONFIG } from "@/lib/config/theme";
 import { cn } from "@/lib/utils";
+import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 
 export interface HMIHeaderProps {
 	/** Texto de la estación, ej: "Estacion de Servicio Nexus" */
@@ -29,6 +30,7 @@ export const HMIHeader: React.FC<HMIHeaderProps> = ({
 	logoAlt = "Nexus logo",
 	className,
 }) => {
+	const { goToMenu } = useHMINavigation();
 	const [now, setNow] = React.useState<string>("");
 
 	React.useEffect(() => {
@@ -65,7 +67,14 @@ export const HMIHeader: React.FC<HMIHeaderProps> = ({
 		>
 			{/* Logo - left */}
 			<div className="flex items-center" style={{ height: "100%" }}>
-				<LogoBase alt={logoAlt} white className="h-10 w-auto rounded-2xs" />
+				<button
+					className="cursor-pointer"
+					onClick={goToMenu}
+					type="button"
+					aria-label="Ir al menú principal"
+				>
+					<LogoBase alt={logoAlt} white className="h-10 w-auto rounded-2xs" />
+				</button>
 			</div>
 
 			{/* Center text: EDS + name */}
