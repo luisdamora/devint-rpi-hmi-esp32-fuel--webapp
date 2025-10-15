@@ -55,6 +55,77 @@ export interface SalesTableProps {
 }
 
 /**
+ * Información del último turno de trabajo
+ */
+export interface TurnInfo {
+	/** ID único del turno */
+	id: string;
+
+	/** Fecha y hora de inicio del turno */
+	startTime: string;
+
+	/** Fecha y hora de fin del turno (opcional) */
+	endTime?: string;
+
+	/** Operador del turno */
+	operator: string;
+
+	/** Total de ventas en pesos */
+	totalSales: number;
+
+	/** Total de volumen vendido */
+	totalVolume: number;
+
+	/** Número de transacciones */
+	transactionCount: number;
+
+	/** Estado del turno */
+	status: 'active' | 'closed' | 'cancelled';
+}
+
+/**
+ * Configuración de la impresora
+ */
+export interface PrinterConfig {
+	/** Nombre o identificador de la impresora */
+	name: string;
+
+	/** Dirección IP de la impresora */
+	ipAddress: string;
+
+	/** Puerto de conexión */
+	port: number;
+
+	/** Ancho del papel en mm */
+	paperWidth: number;
+
+	/** Fuente a usar (opcional) */
+	font?: string;
+
+	/** Configuración activa */
+	isActive: boolean;
+}
+
+/**
+ * Estados de impresión
+ */
+export type PrintStatus = 'idle' | 'printing' | 'success' | 'error';
+
+/**
+ * Resultado de una operación de impresión
+ */
+export interface PrintResult {
+	/** Estado de la impresión */
+	status: PrintStatus;
+
+	/** Mensaje descriptivo */
+	message: string;
+
+	/** Datos adicionales (opcional) */
+	data?: Record<string, unknown>;
+}
+
+/**
  * Props del componente UtilitiesActions
  */
 export interface UtilitiesActionsProps {

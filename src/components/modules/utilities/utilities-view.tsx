@@ -1,17 +1,21 @@
 import { Settings } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { mockSalesData } from "./mock-data";
 import { SalesTable } from "./sales-table";
 import { UtilitiesActions } from "./utilities-actions";
+import { TestPrintView } from "./views/test-print/test-print-view";
+import { PrinterSettingsView } from "./views/printer-settings/printer-settings-view";
+import { LastTurnView } from "./views/last-turn/last-turn-view";
 
 /**
  * Vista principal del módulo de Utilidades
- * Incluye tabla de últimas ventas y botones de acción (sin REINICIAR)
+ * Incluye navegación entre diferentes funcionalidades
  */
 export const UtilitiesView: React.FC = () => {
 	const { navigateBack, goToMenu } = useHMINavigation();
+	const [currentView, setCurrentView] = useState<'main' | 'test-print' | 'printer-settings' | 'last-turn'>('main');
 
 	/**
 	 * Handler para los clicks en botones de acción
@@ -22,34 +26,45 @@ export const UtilitiesView: React.FC = () => {
 				goToMenu();
 				break;
 			case "test-print":
-				// TODO: Implementar test de impresión
-				console.log("Test de impresión");
+				setCurrentView('test-print');
 				break;
 			case "printer-settings":
-				// TODO: Implementar configuración de impresora
-				console.log("Ajustes de impresora");
+				setCurrentView('printer-settings');
 				break;
 			case "last-sales":
-				// Ya estamos en esta vista
+				setCurrentView('main');
 				break;
 			case "last-turn":
-				// TODO: Implementar vista de último turno
-				console.log("Último turno");
+				setCurrentView('last-turn');
 				break;
 			default:
 				console.warn(`Acción no reconocida: ${actionKey}`);
 		}
 	};
 
-	return (
-		<HMIContainer>
-			<div className="h-full p-2">
-				{/* Sales Table */}
-				<SalesTable salesData={mockSalesData} />
+	const handleBackToMain = () => {
+		setCurrentView('main');
+	};
 
-				{/* Actions */}
-				<UtilitiesActions onActionClick={handleActionClick} />
-			</div>
-		</HMIContainer>
-	);
+	// Renderizado condicional basado en la vista actual
+	switch (currentView) {
+		case 'test-print':
+			return <TestPrintView />;
+		case 'printer-settings':
+			return <PrinterSettingsView />;
+		case 'last-turn':
+			return <LastTurnView />;
+		default:
+			return (
+				<HMIContainer>
+					<div className="h-full p-2">
+						{/* Sales Table */}
+						<SalesTable salesData={mockSalesData} />
+
+						{/* Actions */}
+						<UtilitiesActions onActionClick={handleActionClick} />
+					</div>
+				</HMIContainer>
+			);
+	}
 };
