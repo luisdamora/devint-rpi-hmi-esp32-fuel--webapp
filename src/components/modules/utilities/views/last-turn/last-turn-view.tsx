@@ -14,7 +14,7 @@ import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
 import { mockSalesData } from "../../mock-data";
 import type { SaleRecord, TurnInfo } from "../../types";
 
-export const LastTurnView: React.FC = () => {
+export const LastTurnView: React.FC<{ showRecentSales?: boolean }> = ({ showRecentSales = false }) => {
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const [turnInfo, setTurnInfo] = useState<TurnInfo | null>(null);
@@ -226,36 +226,38 @@ export const LastTurnView: React.FC = () => {
 					</div>
 
 					{/* Recent Sales Table */}
-					<div className="bg-gray-800 rounded-lg p-3">
-						<h3 className="text-base font-semibold text-white mb-3">
-							Últimas Ventas del Turno
-						</h3>
-						<div className="space-y-1">
-							{turnSales.map((sale, index) => (
-								<div
-									key={`${sale.fe}-${index}`}
-									className="flex justify-between items-center py-1.5 border-b border-gray-700 last:border-b-0 text-sm"
-								>
-									<div className="min-w-0 flex-1 pr-2">
-										<span className="text-white font-medium">
-											{sale.producto}
-										</span>
-										<span className="text-gray-400 text-xs ml-2">
-											{sale.placa} • {sale.fe}
-										</span>
+					{showRecentSales && (
+						<div className="bg-gray-800 rounded-lg p-3">
+							<h3 className="text-base font-semibold text-white mb-3">
+								Últimas Ventas del Turno
+							</h3>
+							<div className="space-y-1">
+								{turnSales.map((sale, index) => (
+									<div
+										key={`${sale.fe}-${index}`}
+										className="flex justify-between items-center py-1.5 border-b border-gray-700 last:border-b-0 text-sm"
+									>
+										<div className="min-w-0 flex-1 pr-2">
+											<span className="text-white font-medium">
+												{sale.producto}
+											</span>
+											<span className="text-gray-400 text-xs ml-2">
+												{sale.placa} • {sale.fe}
+											</span>
+										</div>
+										<div className="text-right flex-shrink-0">
+											<span className="text-white font-semibold">
+												{formatCurrency(sale.dinero)}
+											</span>
+											<span className="text-gray-400 text-xs ml-2">
+												{formatVolume(sale.volumen)}
+											</span>
+										</div>
 									</div>
-									<div className="text-right flex-shrink-0">
-										<span className="text-white font-semibold">
-											{formatCurrency(sale.dinero)}
-										</span>
-										<span className="text-gray-400 text-xs ml-2">
-											{formatVolume(sale.volumen)}
-										</span>
-									</div>
-								</div>
-							))}
+								))}
+							</div>
 						</div>
-					</div>
+					)}
 
 					{/* Turn Status */}
 					<div className="bg-gray-800 rounded-lg p-3 text-center">
