@@ -94,8 +94,8 @@ export const LastTurnView: React.FC = () => {
 
 	return (
 		<HMIContainer showHeader={true} showFooter={true}>
-			<div className="w-full h-full flex items-center justify-center p-4">
-				<div className="w-full max-w-4xl space-y-6">
+			<div className="w-full h-full flex items-center justify-center p-3">
+				<div className="w-full max-w-4xl space-y-4">
 					{/* Header */}
 					<div className="flex items-center justify-between">
 						<button
@@ -110,22 +110,22 @@ export const LastTurnView: React.FC = () => {
 					</div>
 
 					{/* Turn Summary Cards */}
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+					<div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
 						{/* Operator Card */}
-						<div className="bg-gray-800 rounded-lg p-4 text-center">
-							<User size={32} className="mx-auto mb-2 text-blue-400" />
-							<h3 className="text-sm font-medium text-gray-300 mb-1">Operador</h3>
-							<p className="text-white font-semibold">{turnInfo.operator}</p>
+						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
+							<User size={24} className="mx-auto mb-1 text-blue-400" />
+							<h3 className="text-xs font-medium text-gray-300 mb-1">Operador</h3>
+							<p className="text-white font-semibold text-sm leading-tight">{turnInfo.operator}</p>
 						</div>
 
 						{/* Duration Card */}
-						<div className="bg-gray-800 rounded-lg p-4 text-center">
-							<Clock size={32} className="mx-auto mb-2 text-green-400" />
-							<h3 className="text-sm font-medium text-gray-300 mb-1">Duración</h3>
-							<p className="text-white font-semibold">
+						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
+							<Clock size={24} className="mx-auto mb-1 text-green-400" />
+							<h3 className="text-xs font-medium text-gray-300 mb-1">Duración</h3>
+							<p className="text-white font-semibold text-sm leading-tight">
 								{new Date(turnInfo.startTime).toLocaleDateString('es-CO')}
 							</p>
-							<p className="text-gray-400 text-xs">
+							<p className="text-gray-400 text-xs leading-tight">
 								{new Date(turnInfo.startTime).toLocaleTimeString('es-CO', {
 									hour: '2-digit',
 									minute: '2-digit'
@@ -138,69 +138,69 @@ export const LastTurnView: React.FC = () => {
 						</div>
 
 						{/* Sales Card */}
-						<div className="bg-gray-800 rounded-lg p-4 text-center">
-							<DollarSign size={32} className="mx-auto mb-2 text-yellow-400" />
-							<h3 className="text-sm font-medium text-gray-300 mb-1">Ventas Totales</h3>
-							<p className="text-white font-semibold text-lg">
+						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
+							<DollarSign size={24} className="mx-auto mb-1 text-yellow-400" />
+							<h3 className="text-xs font-medium text-gray-300 mb-1">Ventas Totales</h3>
+							<p className="text-white font-semibold text-sm leading-tight">
 								{formatCurrency(turnInfo.totalSales)}
 							</p>
 						</div>
 
 						{/* Volume Card */}
-						<div className="bg-gray-800 rounded-lg p-4 text-center">
-							<Fuel size={32} className="mx-auto mb-2 text-purple-400" />
-							<h3 className="text-sm font-medium text-gray-300 mb-1">Volumen Total</h3>
-							<p className="text-white font-semibold text-lg">
+						<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
+							<Fuel size={24} className="mx-auto mb-1 text-purple-400" />
+							<h3 className="text-xs font-medium text-gray-300 mb-1">Volumen Total</h3>
+							<p className="text-white font-semibold text-sm leading-tight">
 								{formatVolume(turnInfo.totalVolume)}
 							</p>
 						</div>
 					</div>
 
 					{/* Statistics Cards */}
-					<div className="grid grid-cols-2 gap-4">
+					<div className="grid grid-cols-2 gap-3">
 						{/* Transactions Card */}
-						<div className="bg-gray-800 rounded-lg p-4">
+						<div className="bg-gray-800 rounded-lg p-3">
 							<div className="flex items-center justify-between">
-								<div>
-									<h3 className="text-sm font-medium text-gray-300 mb-1">Transacciones</h3>
-									<p className="text-white font-semibold text-2xl">{turnInfo.transactionCount}</p>
+								<div className="min-w-0 flex-1">
+									<h3 className="text-xs font-medium text-gray-300 mb-1">Transacciones</h3>
+									<p className="text-white font-semibold text-xl leading-tight">{turnInfo.transactionCount}</p>
 								</div>
-								<Receipt size={24} className="text-gray-400" />
+								<Receipt size={20} className="text-gray-400 flex-shrink-0 ml-2" />
 							</div>
 						</div>
 
 						{/* Average Sale Card */}
-						<div className="bg-gray-800 rounded-lg p-4">
+						<div className="bg-gray-800 rounded-lg p-3">
 							<div className="flex items-center justify-between">
-								<div>
-									<h3 className="text-sm font-medium text-gray-300 mb-1">Venta Promedio</h3>
-									<p className="text-white font-semibold text-2xl">
+								<div className="min-w-0 flex-1">
+									<h3 className="text-xs font-medium text-gray-300 mb-1">Venta Promedio</h3>
+									<p className="text-white font-semibold text-xl leading-tight">
 										{formatCurrency(turnInfo.transactionCount > 0 ?
 											turnInfo.totalSales / turnInfo.transactionCount : 0)}
 									</p>
 								</div>
-								<TrendingUp size={24} className="text-gray-400" />
+								<TrendingUp size={20} className="text-gray-400 flex-shrink-0 ml-2" />
 							</div>
 						</div>
 					</div>
 
 					{/* Recent Sales Table */}
-					<div className="bg-gray-800 rounded-lg p-4">
-						<h3 className="text-lg font-semibold text-white mb-4">Últimas Ventas del Turno</h3>
-						<div className="space-y-2 max-h-64 overflow-y-auto">
+					<div className="bg-gray-800 rounded-lg p-3">
+						<h3 className="text-base font-semibold text-white mb-3">Últimas Ventas del Turno</h3>
+						<div className="space-y-1">
 							{turnSales.map((sale, index) => (
-								<div key={`${sale.fe}-${index}`} className="flex justify-between items-center py-2 border-b border-gray-700 last:border-b-0">
-									<div>
-										<p className="text-white font-medium">{sale.producto}</p>
-										<p className="text-gray-400 text-sm">
+								<div key={`${sale.fe}-${index}`} className="flex justify-between items-center py-1.5 border-b border-gray-700 last:border-b-0 text-sm">
+									<div className="min-w-0 flex-1 pr-2">
+										<p className="text-white font-medium truncate">{sale.producto}</p>
+										<p className="text-gray-400 text-xs truncate">
 											{sale.placa} • {sale.fe}
 										</p>
 									</div>
-									<div className="text-right">
-										<p className="text-white font-semibold">
+									<div className="text-right flex-shrink-0">
+										<p className="text-white font-semibold text-sm">
 											{formatCurrency(sale.dinero)}
 										</p>
-										<p className="text-gray-400 text-sm">
+										<p className="text-gray-400 text-xs">
 											{formatVolume(sale.volumen)}
 										</p>
 									</div>
@@ -210,15 +210,15 @@ export const LastTurnView: React.FC = () => {
 					</div>
 
 					{/* Turn Status */}
-					<div className="bg-gray-800 rounded-lg p-4 text-center">
-						<div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium ${
+					<div className="bg-gray-800 rounded-lg p-3 text-center">
+						<div className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
 							turnInfo.status === 'closed'
 								? 'bg-green-900 text-green-200'
 								: turnInfo.status === 'active'
 								? 'bg-yellow-900 text-yellow-200'
 								: 'bg-red-900 text-red-200'
 						}`}>
-							<div className={`w-2 h-2 rounded-full mr-2 ${
+							<div className={`w-1.5 h-1.5 rounded-full mr-2 ${
 								turnInfo.status === 'closed'
 									? 'bg-green-400'
 									: turnInfo.status === 'active'
@@ -226,7 +226,7 @@ export const LastTurnView: React.FC = () => {
 									: 'bg-red-400'
 							}`}></div>
 							Turno {turnInfo.status === 'closed' ? 'Cerrado' :
-								 turnInfo.status === 'active' ? 'Activo' : 'Cancelado'}
+									turnInfo.status === 'active' ? 'Activo' : 'Cancelado'}
 						</div>
 					</div>
 
@@ -235,8 +235,8 @@ export const LastTurnView: React.FC = () => {
 						<button
 							type="button"
 							onClick={handleBackToUtilities}
-							className={`${BUTTON_STYLES.primary} px-8 py-3`}
-							style={{ minWidth: "200px" }}
+							className={`${BUTTON_STYLES.primary} px-6 py-2 text-sm`}
+							style={{ minWidth: "160px" }}
 						>
 							VOLVER A UTILIDADES
 						</button>
