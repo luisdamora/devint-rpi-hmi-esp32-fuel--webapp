@@ -1,5 +1,4 @@
 import {
-	ArrowLeft,
 	Clock,
 	DollarSign,
 	Fuel,
@@ -12,7 +11,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SmallSideTile } from "@/components/shared/sales/small-side-tile";
-import { BUTTON_STYLES, NEXUS_COLORS } from "@/lib/config/theme";
+import { NEXUS_COLORS } from "@/lib/config/theme";
+import {
+	SalesTable,
+	StatisticsCard,
+	StatusBadge,
+	SummaryCard,
+} from "../../components";
 import { mockSalesData } from "../../mock-data";
 import type { SaleRecord, TurnInfo } from "../../types";
 
@@ -28,14 +33,12 @@ export const LastTurnView: React.FC<{ showRecentSales?: boolean }> = ({
 		const loadLastTurnData = async () => {
 			setIsLoading(true);
 			try {
-				// Simular carga de datos del último turno
 				await new Promise((resolve) => setTimeout(resolve, 1500));
 
-				// Crear datos ficticios del último turno basados en ventas mock
 				const lastTurn: TurnInfo = {
 					id: "turn-001",
-					startTime: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(), // 8 horas atrás
-					endTime: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 horas atrás
+					startTime: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
+					endTime: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
 					operator: "María González",
 					totalSales: mockSalesData.reduce((sum, sale) => sum + sale.dinero, 0),
 					totalVolume: mockSalesData.reduce(
@@ -47,7 +50,7 @@ export const LastTurnView: React.FC<{ showRecentSales?: boolean }> = ({
 				};
 
 				setTurnInfo(lastTurn);
-				setTurnSales(mockSalesData.slice(0, 5)); // Últimas 5 ventas
+				setTurnSales(mockSalesData.slice(0, 5));
 			} catch (error) {
 				console.error("Error cargando datos del turno:", error);
 			} finally {
@@ -57,10 +60,6 @@ export const LastTurnView: React.FC<{ showRecentSales?: boolean }> = ({
 
 		loadLastTurnData();
 	}, []);
-
-	const handleBackToUtilities = () => {
-		navigate("/utilities");
-	};
 
 	const formatCurrency = (amount: number) => {
 		return new Intl.NumberFormat("es-CO", {
@@ -99,8 +98,8 @@ export const LastTurnView: React.FC<{ showRecentSales?: boolean }> = ({
 						</p>
 						<button
 							type="button"
-							onClick={handleBackToUtilities}
-							className={`${BUTTON_STYLES.primary} px-6 py-3`}
+							onClick={() => navigate("/utilities")}
+							className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
 						>
 							Volver a Utilidades
 						</button>
@@ -148,171 +147,85 @@ export const LastTurnView: React.FC<{ showRecentSales?: boolean }> = ({
 						<div className="w-full max-w-4xl space-y-4">
 							{/* Turn Summary Cards */}
 							<div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-								{/* Operator Card */}
-								<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
-									<User size={24} className="mx-auto mb-1 text-blue-400" />
-									<h3 className="text-xs font-medium text-gray-300 mb-1">
-										Operador
-									</h3>
-									<p className="text-white font-semibold text-sm leading-tight">
-										{turnInfo.operator}
-									</p>
-								</div>
+								<SummaryCard
+									title="Operador"
+									value={turnInfo.operator}
+									icon={User}
+									iconColor="text-blue-400"
+								/>
 
-								{/* Duration Card */}
-								<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
-									<Clock size={24} className="mx-auto mb-1 text-green-400" />
-									<h3 className="text-xs font-medium text-gray-300 mb-1">
-										Duración
-									</h3>
-									<p className="text-white font-semibold text-sm leading-tight">
-										{new Date(turnInfo.startTime).toLocaleDateString("es-CO")}
-									</p>
-									<p className="text-gray-400 text-xs leading-tight">
-										{new Date(turnInfo.startTime).toLocaleTimeString("es-CO", {
+								<SummaryCard
+									title="Duración"
+									value={new Date(turnInfo.startTime).toLocaleDateString(
+										"es-CO",
+									)}
+									icon={Clock}
+									iconColor="text-green-400"
+									subValue={`${new Date(turnInfo.startTime).toLocaleTimeString(
+										"es-CO",
+										{
 											hour: "2-digit",
 											minute: "2-digit",
-										})}{" "}
-										-{" "}
-										{turnInfo.endTime &&
-											new Date(turnInfo.endTime).toLocaleTimeString("es-CO", {
-												hour: "2-digit",
-												minute: "2-digit",
-											})}
-									</p>
-								</div>
+										},
+									)} - ${
+										turnInfo.endTime
+											? new Date(turnInfo.endTime).toLocaleTimeString("es-CO", {
+													hour: "2-digit",
+													minute: "2-digit",
+												})
+											: ""
+									}`}
+								/>
 
-								{/* Sales Card */}
-								<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
-									<DollarSign
-										size={24}
-										className="mx-auto mb-1 text-yellow-400"
-									/>
-									<h3 className="text-xs font-medium text-gray-300 mb-1">
-										Ventas Totales
-									</h3>
-									<p className="text-white font-semibold text-sm leading-tight">
-										{formatCurrency(turnInfo.totalSales)}
-									</p>
-								</div>
+								<SummaryCard
+									title="Ventas Totales"
+									value={formatCurrency(turnInfo.totalSales)}
+									icon={DollarSign}
+									iconColor="text-yellow-400"
+								/>
 
-								{/* Volume Card */}
-								<div className="bg-gray-800 rounded-lg p-3 text-center min-h-0">
-									<Fuel size={24} className="mx-auto mb-1 text-purple-400" />
-									<h3 className="text-xs font-medium text-gray-300 mb-1">
-										Volumen Total
-									</h3>
-									<p className="text-white font-semibold text-sm leading-tight">
-										{formatVolume(turnInfo.totalVolume)}
-									</p>
-								</div>
+								<SummaryCard
+									title="Volumen Total"
+									value={formatVolume(turnInfo.totalVolume)}
+									icon={Fuel}
+									iconColor="text-purple-400"
+								/>
 							</div>
 
 							{/* Statistics Cards */}
 							<div className="grid grid-cols-2 gap-3">
-								{/* Transactions Card */}
-								<div className="bg-gray-800 rounded-lg p-3">
-									<div className="flex items-center justify-between">
-										<div className="min-w-0 flex-1">
-											<h3 className="text-xs font-medium text-gray-300 mb-1">
-												Transacciones
-											</h3>
-											<p className="text-white font-semibold text-xl leading-tight">
-												{turnInfo.transactionCount}
-											</p>
-										</div>
-										<Receipt
-											size={20}
-											className="text-gray-400 flex-shrink-0 ml-2"
-										/>
-									</div>
-								</div>
+								<StatisticsCard
+									title="Transacciones"
+									value={turnInfo.transactionCount}
+									icon={Receipt}
+								/>
 
-								{/* Average Sale Card */}
-								<div className="bg-gray-800 rounded-lg p-3">
-									<div className="flex items-center justify-between">
-										<div className="min-w-0 flex-1">
-											<h3 className="text-xs font-medium text-gray-300 mb-1">
-												Venta Promedio
-											</h3>
-											<p className="text-white font-semibold text-xl leading-tight">
-												{formatCurrency(
-													turnInfo.transactionCount > 0
-														? turnInfo.totalSales / turnInfo.transactionCount
-														: 0,
-												)}
-											</p>
-										</div>
-										<TrendingUp
-											size={20}
-											className="text-gray-400 flex-shrink-0 ml-2"
-										/>
-									</div>
-								</div>
+								<StatisticsCard
+									title="Venta Promedio"
+									value={formatCurrency(
+										turnInfo.transactionCount > 0
+											? turnInfo.totalSales / turnInfo.transactionCount
+											: 0,
+									)}
+									icon={TrendingUp}
+								/>
 							</div>
 
 							{/* Recent Sales Table */}
 							{showRecentSales && (
-								<div className="bg-gray-800 rounded-lg p-3">
-									<h3 className="text-base font-semibold text-white mb-3">
-										Últimas Ventas del Turno
-									</h3>
-									<div className="space-y-1">
-										{turnSales.map((sale, index) => (
-											<div
-												key={`${sale.fe}-${index}`}
-												className="flex justify-between items-center py-1.5 border-b border-gray-700 last:border-b-0 text-sm"
-											>
-												<div className="min-w-0 flex-1 pr-2">
-													<span className="text-white font-medium">
-														{sale.producto}
-													</span>
-													<span className="text-gray-400 text-xs ml-2">
-														{sale.placa} • {sale.fe}
-													</span>
-												</div>
-												<div className="text-right flex-shrink-0">
-													<span className="text-white font-semibold">
-														{formatCurrency(sale.dinero)}
-													</span>
-													<span className="text-gray-400 text-xs ml-2">
-														{formatVolume(sale.volumen)}
-													</span>
-												</div>
-											</div>
-										))}
-									</div>
-								</div>
+								<SalesTable
+									sales={turnSales}
+									formatCurrency={formatCurrency}
+									formatVolume={formatVolume}
+									title="Últimas Ventas del Turno"
+								/>
 							)}
 
 							{/* Turn Status */}
-							<div className="bg-gray-800 rounded-lg p-3 text-center">
-								<div
-									className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
-										turnInfo.status === "closed"
-											? "bg-green-900 text-green-200"
-											: turnInfo.status === "active"
-												? "bg-yellow-900 text-yellow-200"
-												: "bg-red-900 text-red-200"
-									}`}
-								>
-									<div
-										className={`w-1.5 h-1.5 rounded-full mr-2 ${
-											turnInfo.status === "closed"
-												? "bg-green-400"
-												: turnInfo.status === "active"
-													? "bg-yellow-400"
-													: "bg-red-400"
-										}`}
-									></div>
-									Turno{" "}
-									{turnInfo.status === "closed"
-										? "Cerrado"
-										: turnInfo.status === "active"
-											? "Activo"
-											: "Cancelado"}
-								</div>
-							</div>
+							<StatusBadge
+								status={turnInfo.status}
+								text={`Turno ${turnInfo.status === "closed" ? "Cerrado" : turnInfo.status === "active" ? "Activo" : "Cancelado"}`}
+							/>
 						</div>
 					</div>
 				</div>
