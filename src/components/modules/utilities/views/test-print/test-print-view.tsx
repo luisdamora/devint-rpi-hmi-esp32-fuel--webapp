@@ -55,14 +55,14 @@ export const TestPrintView: React.FC = () => {
 		switch (printStatus) {
 			case "printing":
 				return (
-					<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+					<div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white"></div>
 				);
 			case "success":
-				return <CheckCircle size={48} className="text-green-500" />;
+				return <CheckCircle size={32} className="text-green-500" />;
 			case "error":
-				return <AlertCircle size={48} className="text-red-500" />;
+				return <AlertCircle size={32} className="text-red-500" />;
 			default:
-				return <Printer size={48} className="text-white" />;
+				return <Printer size={32} className="text-white" />;
 		}
 	};
 
@@ -80,9 +80,9 @@ export const TestPrintView: React.FC = () => {
 	};
 
 	return (
-		<HMIContainer showHeader={true} showFooter={true}>
-			<div className="w-full h-full flex items-center justify-center p-4">
-				<div className="w-full max-w-xl space-y-4">
+		<HMIContainer showHeader={false} showFooter={false}>
+			<div className="w-full h-full flex items-center justify-center p-3">
+				<div className="w-full max-w-lg space-y-3">
 					{/* Header */}
 					<div className="flex items-center justify-between">
 						<button
@@ -97,8 +97,8 @@ export const TestPrintView: React.FC = () => {
 					</div>
 
 					{/* Status Display */}
-					<div className="bg-gray-800 rounded-lg p-6 text-center">
-						<div className="flex justify-center mb-4">{getStatusIcon()}</div>
+					<div className="bg-gray-800 rounded-lg p-4 text-center">
+						<div className="flex justify-center mb-2">{getStatusIcon()}</div>
 						<h2 className="text-lg font-semibold text-white mb-2">
 							{getStatusMessage()}
 						</h2>
@@ -113,8 +113,8 @@ export const TestPrintView: React.FC = () => {
 					</div>
 
 					{/* Test Message Input */}
-					<div className="space-y-3">
-						<h3 className="text-base font-semibold text-white">
+					<div className="space-y-2">
+						<h3 className="text-sm font-semibold text-white mb-1">
 							Mensaje de Prueba
 						</h3>
 						<TouchInput
@@ -129,13 +129,13 @@ export const TestPrintView: React.FC = () => {
 					</div>
 
 					{/* Action Buttons */}
-					<div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-3">
+					<div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2">
 						<button
 							type="button"
 							onClick={handleTestPrint}
 							disabled={printStatus === "printing" || !testMessage.trim()}
-							className={`${BUTTON_STYLES.success} px-6 py-3`}
-							style={{ minWidth: "160px" }}
+							className={`${BUTTON_STYLES.success} px-4 py-2`}
+							style={{ minWidth: "120px" }}
 						>
 							{printStatus === "printing"
 								? "IMPRIMIENDO..."
@@ -145,15 +145,15 @@ export const TestPrintView: React.FC = () => {
 						<button
 							type="button"
 							onClick={() => navigate("/utilities")}
-							className={`${BUTTON_STYLES.secondary} px-6 py-3`}
-							style={{ minWidth: "160px" }}
+							className={`${BUTTON_STYLES.secondary} px-4 py-2`}
+							style={{ minWidth: "120px" }}
 						>
 							CANCELAR
 						</button>
 					</div>
 
 					{/* Instructions */}
-					<div className="bg-gray-800 rounded-lg p-3">
+					<div className="bg-gray-800 rounded-lg p-2">
 						<h4 className="font-semibold text-white mb-2">Instrucciones:</h4>
 						<ul className="text-gray-300 text-sm space-y-1">
 							<li>• Configure el mensaje de prueba en el campo de texto</li>
