@@ -2,8 +2,8 @@ import React from "react";
 import { LogoBase } from "@/components/shared/logo-base";
 import { HEADER_HEIGHT } from "@/lib/config/layout-dimensions";
 import { NEXUS_COLORS, NEXUS_THEME_CONFIG } from "@/lib/config/theme";
-import { cn } from "@/lib/utils";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { cn } from "@/lib/utils";
 
 export interface HMIHeaderProps {
 	/** Texto de la estación, ej: "Estacion de Servicio Nexus" */

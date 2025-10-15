@@ -129,7 +129,15 @@ export const TestPrintView: React.FC = () => {
 								title={getStatusMessage()}
 								message={printResult?.message}
 								timestamp={printResult?.data?.timestamp}
-								icon={printStatus === "printing" ? undefined : printStatus === "success" ? CheckCircle : printStatus === "error" ? AlertCircle : Printer}
+								icon={
+									printStatus === "printing"
+										? undefined
+										: printStatus === "success"
+											? CheckCircle
+											: printStatus === "error"
+												? AlertCircle
+												: Printer
+								}
 							/>
 
 							{/* Test Message Input */}
@@ -177,7 +185,7 @@ export const TestPrintView: React.FC = () => {
 								title="Instrucciones:"
 								instructions={[
 									"• Configure el mensaje de prueba en el campo de texto",
-									"• Presione \"IMPRIMIR PRUEBA\" para iniciar la impresión",
+									'• Presione "IMPRIMIR PRUEBA" para iniciar la impresión',
 									"• Verifique que la impresora esté conectada y encendida",
 									"• El ticket de prueba mostrará la fecha y hora actual",
 								]}

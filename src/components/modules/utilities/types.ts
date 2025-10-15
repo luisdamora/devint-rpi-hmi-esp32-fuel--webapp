@@ -80,7 +80,7 @@ export interface TurnInfo {
 	transactionCount: number;
 
 	/** Estado del turno */
-	status: 'active' | 'closed' | 'cancelled';
+	status: "active" | "closed" | "cancelled";
 }
 
 /**
@@ -109,7 +109,7 @@ export interface PrinterConfig {
 /**
  * Estados de impresión
  */
-export type PrintStatus = 'idle' | 'printing' | 'success' | 'error';
+export type PrintStatus = "idle" | "printing" | "success" | "error";
 
 /**
  * Datos adicionales en el resultado de impresión

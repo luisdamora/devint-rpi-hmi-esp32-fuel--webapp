@@ -22,7 +22,9 @@ export const SalesTable: React.FC<SalesTableProps> = ({ salesData }) => {
 				<table className="w-full border-collapse">
 					<thead className="bg-blue-900 text-white">
 						<tr>
-							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">#FE</th>
+							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">
+								#FE
+							</th>
 							<th className="px-1.5 py-1.5 text-left text-xs font-semibold">
 								ID PUNTOS
 							</th>

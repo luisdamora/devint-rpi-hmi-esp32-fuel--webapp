@@ -282,10 +282,10 @@ export const PrinterSettingsView: React.FC = () => {
 														{testStatus === "testing"
 															? "Probando..."
 															: testStatus === "success"
-															? "Conectado"
-															: testStatus === "error"
-																? "Error de conexión"
-																: "No probado"}
+																? "Conectado"
+																: testStatus === "error"
+																	? "Error de conexión"
+																	: "No probado"}
 													</p>
 													{testResult && (
 														<p className="text-gray-300 text-sm">
