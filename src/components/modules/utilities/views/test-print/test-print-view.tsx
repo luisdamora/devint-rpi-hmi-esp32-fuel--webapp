@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { ArrowLeft, Printer, CheckCircle, AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { TouchInput } from "@/components/shared/touch-input";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { BUTTON_STYLES } from "@/lib/config/theme";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import type { PrintResult, PrintStatus } from "../types";
+import type { PrintResult, PrintStatus } from "../../types";
 
 export const TestPrintView: React.FC = () => {
-	const { navigateBack } = useHMINavigation();
+	const navigate = useNavigate();
 	const [printStatus, setPrintStatus] = useState<PrintStatus>('idle');
 	const [printResult, setPrintResult] = useState<PrintResult | null>(null);
 	const [testMessage, setTestMessage] = useState("TICKET DE PRUEBA - NEXUS POS");
@@ -45,7 +45,7 @@ export const TestPrintView: React.FC = () => {
 	};
 
 	const handleBackToUtilities = () => {
-		navigateBack();
+		navigate("/utilities");
 	};
 
 	const getStatusIcon = () => {

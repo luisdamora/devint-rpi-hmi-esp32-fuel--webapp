@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { ArrowLeft, Clock, User, DollarSign, Fuel, Receipt, TrendingUp } from "lucide-react";
+import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { NEXUS_COLORS } from "@/lib/config/theme";
 import { BUTTON_STYLES } from "@/lib/config/theme";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import type { TurnInfo, SaleRecord } from "../../types";
 import { mockSalesData } from "../../mock-data";
 
 export const LastTurnView: React.FC = () => {
-	const { navigateBack } = useHMINavigation();
+	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const [turnInfo, setTurnInfo] = useState<TurnInfo | null>(null);
 	const [turnSales, setTurnSales] = useState<SaleRecord[]>([]);
@@ -45,7 +45,7 @@ export const LastTurnView: React.FC = () => {
 	}, []);
 
 	const handleBackToUtilities = () => {
-		navigateBack();
+		navigate("/utilities");
 	};
 
 	const formatCurrency = (amount: number) => {

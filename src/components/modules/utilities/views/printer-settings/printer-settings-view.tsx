@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ArrowLeft, Settings, Save, TestTube, CheckCircle, AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { TouchInput } from "@/components/shared/touch-input";
 import { TouchSelect } from "@/components/shared/touch-select";
-import { NEXUS_COLORS } from "@/lib/config/theme";
-import { BUTTON_STYLES } from "@/lib/config/theme";
-import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import type { PrinterConfig, PrintResult } from "../../types";
 
 const PAPER_WIDTH_OPTIONS = [
@@ -15,7 +13,7 @@ const PAPER_WIDTH_OPTIONS = [
 ];
 
 export const PrinterSettingsView: React.FC = () => {
-	const { navigateBack } = useHMINavigation();
+	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
 	const [testStatus, setTestStatus] = useState<'idle' | 'testing' | 'success' | 'error'>('idle');
 	const [testResult, setTestResult] = useState<PrintResult | null>(null);
@@ -123,7 +121,7 @@ export const PrinterSettingsView: React.FC = () => {
 	};
 
 	const handleBackToUtilities = () => {
-		navigateBack();
+		navigate("/utilities");
 	};
 
 	const hasUnsavedChanges = JSON.stringify(config) !== JSON.stringify(originalConfig);

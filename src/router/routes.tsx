@@ -15,6 +15,9 @@ import { CreditSaleViewComponent } from "@/components/modules/sales/credit-sale/
 import { PaymentViewMaster } from "@/components/modules/sales/payment-view";
 import { TransactionStatusView } from "@/components/modules/sales/transaction-status/transaction-status-view";
 import { UtilitiesView } from "@/components/modules/utilities/utilities-view";
+import { TestPrintView } from "@/components/modules/utilities/views/test-print/test-print-view";
+import { PrinterSettingsView } from "@/components/modules/utilities/views/printer-settings/printer-settings-view";
+import { LastTurnView } from "@/components/modules/utilities/views/last-turn/last-turn-view";
 import { HMIRoute } from "@/components/routes/HMIRoute";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
@@ -62,6 +65,20 @@ export const routes: RouteObject[] = [
 			{
 				path: "utilities",
 				element: <UtilitiesView />,
+				children: [
+					{
+						path: "test-print",
+						element: <TestPrintView />,
+					},
+					{
+						path: "printer-settings",
+						element: <PrinterSettingsView />,
+					},
+					{
+						path: "last-turn",
+						element: <LastTurnView />,
+					},
+				],
 			},
 			{
 				path: "close-turn",
