@@ -230,7 +230,7 @@ export const PrinterSettingsView: React.FC = () => {
 										<TouchInput
 											value={config.port.toString()}
 											onChange={(value) =>
-												handleConfigChange("port", parseInt(value) || 9100)
+												handleConfigChange("port", parseInt(value, 10) || 9100)
 											}
 											label="Puerto"
 											placeholder="9100"
@@ -245,7 +245,7 @@ export const PrinterSettingsView: React.FC = () => {
 										value={config.paperWidth.toString()}
 										options={PAPER_WIDTH_OPTIONS}
 										onChange={(value) =>
-											handleConfigChange("paperWidth", parseInt(value))
+											handleConfigChange("paperWidth", parseInt(value, 10))
 										}
 										label="Ancho del Papel"
 										placeholder="Seleccione el ancho del papel..."

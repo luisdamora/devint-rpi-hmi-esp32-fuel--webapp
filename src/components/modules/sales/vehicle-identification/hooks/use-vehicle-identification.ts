@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type {
 	IdentificationMethod,
 	VehicleData,
@@ -49,7 +49,7 @@ export const useVehicleIdentification = (): UseVehicleIdentificationReturn => {
 	 * Simular lectura RFID
 	 * En producción, esto se conectaría con el lector RFID físico
 	 */
-	const readRFID = async (): Promise<void> => {
+	const readRFID = useCallback(async (): Promise<void> => {
 		setIsReading(true);
 		setError(null);
 
@@ -72,13 +72,13 @@ export const useVehicleIdentification = (): UseVehicleIdentificationReturn => {
 		}
 
 		setIsReading(false);
-	};
+	}, []);
 
 	/**
 	 * Simular lectura iButton
 	 * En producción, esto se conectaría con el lector iButton físico
 	 */
-	const readIButton = async (): Promise<void> => {
+	const readIButton = useCallback(async (): Promise<void> => {
 		setIsReading(true);
 		setError(null);
 
@@ -101,7 +101,7 @@ export const useVehicleIdentification = (): UseVehicleIdentificationReturn => {
 		}
 
 		setIsReading(false);
-	};
+	}, []);
 
 	/**
 	 * Validar formato de placa colombiana
@@ -143,7 +143,7 @@ export const useVehicleIdentification = (): UseVehicleIdentificationReturn => {
 		} else if (activeMethod === "IBUTTON" && !isIdentified && !isReading) {
 			readIButton();
 		}
-	}, [activeMethod]);
+	}, [activeMethod, isIdentified, isReading, readRFID, readIButton]);
 
 	/**
 	 * Reset de identificación

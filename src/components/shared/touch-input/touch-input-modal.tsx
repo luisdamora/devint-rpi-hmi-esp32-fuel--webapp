@@ -36,7 +36,7 @@ export const TouchInputModal: React.FC<TouchInputModalProps> = ({
 
 	const handleSpace = () => {
 		if (!maxLength || value.length < maxLength) {
-			onChange(value + " ");
+			onChange(`${value} `);
 		}
 	};
 
