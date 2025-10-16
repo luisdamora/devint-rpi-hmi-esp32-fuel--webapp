@@ -18,7 +18,7 @@ export interface ViewRegistryItem {
 	description: string;
 	module: string;
 	states: ViewState[];
-	component: ComponentType<any>;
+	component: ComponentType;
 }
 
 /**
