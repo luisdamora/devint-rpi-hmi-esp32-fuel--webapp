@@ -1,4 +1,4 @@
-import { useNavigate, type NavigateOptions } from "react-router";
+import { type NavigateOptions, useNavigate } from "react-router";
 
 /**
  * Hook personalizado para navegación en el sistema HMI

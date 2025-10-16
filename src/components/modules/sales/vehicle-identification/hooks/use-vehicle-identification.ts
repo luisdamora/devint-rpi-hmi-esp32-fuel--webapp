@@ -1,5 +1,8 @@
-import { useState, useEffect } from "react";
-import type { IdentificationMethod, VehicleData } from "@/lib/hooks/use-transaction-context";
+import { useEffect, useState } from "react";
+import type {
+	IdentificationMethod,
+	VehicleData,
+} from "@/lib/hooks/use-transaction-context";
 
 export interface UseVehicleIdentificationReturn {
 	activeMethod: IdentificationMethod | null;
@@ -34,7 +37,9 @@ export interface UseVehicleIdentificationReturn {
  * ```
  */
 export const useVehicleIdentification = (): UseVehicleIdentificationReturn => {
-	const [activeMethod, setActiveMethod] = useState<IdentificationMethod | null>(null);
+	const [activeMethod, setActiveMethod] = useState<IdentificationMethod | null>(
+		null,
+	);
 	const [isIdentified, setIsIdentified] = useState(false);
 	const [vehicleData, setVehicleData] = useState<VehicleData | null>(null);
 	const [isReading, setIsReading] = useState(false);

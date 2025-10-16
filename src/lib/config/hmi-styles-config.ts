@@ -1,10 +1,10 @@
 /**
  * Configuración de estilos estandarizados para HMI
- * 
+ *
  * Este archivo centraliza todos los estilos, colores, dimensiones y
  * configuraciones visuales del sistema HMI para garantizar consistencia
  * en toda la aplicación.
- * 
+ *
  * Basado en optimizaciones ULTRA-COMPACTAS para pantallas táctiles
  */
 

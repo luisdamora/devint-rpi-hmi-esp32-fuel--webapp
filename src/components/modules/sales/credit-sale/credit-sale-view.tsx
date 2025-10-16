@@ -21,13 +21,8 @@ import { useCashSaleCalculator } from "../cash-sale/hooks/use-cash-sale-calculat
 export const CreditSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 	const [isAnimating, setIsAnimating] = useState(true);
-	const {
-		value,
-		displayMoney,
-		handleNumber,
-		handleTripleZero,
-		handleClear,
-	} = useCashSaleCalculator();
+	const { value, displayMoney, handleNumber, handleTripleZero, handleClear } =
+		useCashSaleCalculator();
 
 	useEffect(() => {
 		// Detener la animación después de 5 segundos

@@ -1,6 +1,10 @@
+import { AlertCircle, CheckCircle } from "lucide-react";
 import { useState } from "react";
-import { CheckCircle, AlertCircle } from "lucide-react";
-import { getInputClasses, getButtonClasses, HMI_COLORS } from "@/lib/config/hmi-styles-config";
+import {
+	getButtonClasses,
+	getInputClasses,
+	HMI_COLORS,
+} from "@/lib/config/hmi-styles-config";
 
 export interface ManualPlacaInputProps {
 	onSubmit: (placa: string) => boolean;
@@ -61,7 +65,10 @@ export const ManualPlacaInput: React.FC<ManualPlacaInputProps> = ({
 		<form onSubmit={handleSubmit} className="space-y-3">
 			{/* Input de placa */}
 			<div>
-				<label htmlFor="placa-input" className="block text-sm font-semibold text-gray-700 mb-1">
+				<label
+					htmlFor="placa-input"
+					className="block text-sm font-semibold text-gray-700 mb-1"
+				>
 					PLACA DEL VEHÍCULO
 				</label>
 
@@ -93,14 +100,20 @@ export const ManualPlacaInput: React.FC<ManualPlacaInputProps> = ({
 
 				{/* Mensaje de error */}
 				{error && (
-					<p className="mt-1 text-sm font-medium" style={{ color: HMI_COLORS.error }}>
+					<p
+						className="mt-1 text-sm font-medium"
+						style={{ color: HMI_COLORS.error }}
+					>
 						{error}
 					</p>
 				)}
 
 				{/* Hint */}
 				{!error && value.length < 6 && (
-					<p className="mt-1 text-sm" style={{ color: HMI_COLORS.textSecondary }}>
+					<p
+						className="mt-1 text-sm"
+						style={{ color: HMI_COLORS.textSecondary }}
+					>
 						Formato: 3 letras + 3 números (ej: ABC123)
 					</p>
 				)}

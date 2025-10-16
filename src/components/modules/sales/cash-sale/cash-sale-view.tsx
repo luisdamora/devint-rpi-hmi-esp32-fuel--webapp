@@ -13,13 +13,8 @@ export const CashSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 	const [activeMode, setActiveMode] = useState<PaymentMode>("cash");
 	const [isAnimating, setIsAnimating] = useState(true);
-	const {
-		value,
-		displayMoney,
-		handleNumber,
-		handleTripleZero,
-		handleClear,
-	} = useCashSaleCalculator();
+	const { value, displayMoney, handleNumber, handleTripleZero, handleClear } =
+		useCashSaleCalculator();
 
 	useEffect(() => {
 		// Detener la animación después de 5 segundos

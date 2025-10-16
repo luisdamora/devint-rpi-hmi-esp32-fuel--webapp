@@ -1,13 +1,17 @@
+import { ArrowRight, CreditCard, Home } from "lucide-react";
 import { useState } from "react";
-import { ArrowRight, Home, CreditCard } from "lucide-react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SideTile } from "@/components/shared/sales/side-tile";
+import {
+	getButtonClasses,
+	HMI_COLORS,
+	HMI_LAYOUT,
+} from "@/lib/config/hmi-styles-config";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { useTransactionContext } from "@/lib/hooks/use-transaction-context";
-import { getButtonClasses, HMI_COLORS, HMI_LAYOUT } from "@/lib/config/hmi-styles-config";
-import { useVehicleIdentification } from "./hooks";
 import { IdentificationMethodCard } from "./components/identification-method-card";
 import { ManualPlacaInput } from "./components/manual-placa-input";
+import { useVehicleIdentification } from "./hooks";
 
 /**
  * VehicleIdentificationView - Vista de identificación de vehículos para crédito
@@ -135,7 +139,9 @@ export const VehicleIdentificationView: React.FC = () => {
 								method="RFID"
 								label="LECTOR RFID"
 								isActive={activeMethod === "RFID"}
-								isIdentified={isIdentified && vehicleData?.identificationType === "RFID"}
+								isIdentified={
+									isIdentified && vehicleData?.identificationType === "RFID"
+								}
 								isReading={isReading && activeMethod === "RFID"}
 								vehicleId={vehicleData?.vehicleId}
 								onSelect={() => handleMethodSelect("RFID")}
@@ -146,7 +152,9 @@ export const VehicleIdentificationView: React.FC = () => {
 								method="IBUTTON"
 								label="LECTOR IBUTTON"
 								isActive={activeMethod === "IBUTTON"}
-								isIdentified={isIdentified && vehicleData?.identificationType === "IBUTTON"}
+								isIdentified={
+									isIdentified && vehicleData?.identificationType === "IBUTTON"
+								}
 								isReading={isReading && activeMethod === "IBUTTON"}
 								vehicleId={vehicleData?.vehicleId}
 								onSelect={() => handleMethodSelect("IBUTTON")}
@@ -157,21 +165,25 @@ export const VehicleIdentificationView: React.FC = () => {
 								method="MANUAL"
 								label="INGRESO MANUAL"
 								isActive={activeMethod === "MANUAL"}
-								isIdentified={isIdentified && vehicleData?.identificationType === "MANUAL"}
+								isIdentified={
+									isIdentified && vehicleData?.identificationType === "MANUAL"
+								}
 								isReading={false}
 								vehicleId={vehicleData?.vehicleId}
 								onSelect={() => handleMethodSelect("MANUAL")}
 							/>
 
 							{/* Input manual (condicional) */}
-							{showManualInput && activeMethod === "MANUAL" && !isIdentified && (
-								<div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
-									<ManualPlacaInput
-										onSubmit={handleManualSubmit}
-										onValidate={validatePlaca}
-									/>
-								</div>
-							)}
+							{showManualInput &&
+								activeMethod === "MANUAL" &&
+								!isIdentified && (
+									<div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
+										<ManualPlacaInput
+											onSubmit={handleManualSubmit}
+											onValidate={validatePlaca}
+										/>
+									</div>
+								)}
 						</div>
 
 						{/* Error global */}
@@ -183,7 +195,10 @@ export const VehicleIdentificationView: React.FC = () => {
 									borderColor: HMI_COLORS.error,
 								}}
 							>
-								<p className="text-center font-semibold" style={{ color: HMI_COLORS.error }}>
+								<p
+									className="text-center font-semibold"
+									style={{ color: HMI_COLORS.error }}
+								>
 									{error}
 								</p>
 							</div>
@@ -199,7 +214,10 @@ export const VehicleIdentificationView: React.FC = () => {
 								}}
 							>
 								<div className="text-center space-y-2">
-									<p className="text-lg font-bold" style={{ color: HMI_COLORS.success }}>
+									<p
+										className="text-lg font-bold"
+										style={{ color: HMI_COLORS.success }}
+									>
 										✅ VEHICULO IDENTIFICADO
 									</p>
 									<div className="flex items-center justify-center gap-4 mt-3">
@@ -235,7 +253,10 @@ export const VehicleIdentificationView: React.FC = () => {
 
 						{/* Hint */}
 						{!isIdentified && (
-							<p className="mt-4 text-center text-sm" style={{ color: HMI_COLORS.textSecondary }}>
+							<p
+								className="mt-4 text-center text-sm"
+								style={{ color: HMI_COLORS.textSecondary }}
+							>
 								Identifique el vehículo para continuar con la transacción
 							</p>
 						)}

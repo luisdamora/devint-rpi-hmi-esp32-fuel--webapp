@@ -1,6 +1,6 @@
 import { Fuel } from "lucide-react";
-import type { TransactionType } from "@/lib/hooks/use-transaction-context";
 import { HMI_COLORS } from "@/lib/config/hmi-styles-config";
+import type { TransactionType } from "@/lib/hooks/use-transaction-context";
 
 export interface TransactionSummaryHeaderProps {
 	/** Tipo de transacción */
@@ -80,7 +80,10 @@ export const TransactionSummaryHeader: React.FC<
 			{/* Columna 2: Estado Actual */}
 			<div className="space-y-2">
 				{/* Label de estado */}
-				<div className="text-sm font-bold" style={{ color: HMI_COLORS.warning }}>
+				<div
+					className="text-sm font-bold"
+					style={{ color: HMI_COLORS.warning }}
+				>
 					ESTADO ACTUAL
 				</div>
 

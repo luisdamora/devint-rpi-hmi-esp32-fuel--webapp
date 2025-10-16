@@ -1,5 +1,5 @@
-import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 /**
  * Tipos de transacción soportados
@@ -110,13 +110,16 @@ export const useTransactionContext = (
 	// Redirigir si no hay estado válido y es requerido
 	useEffect(() => {
 		if (options.requireValidState && !hasValidState) {
-			console.warn(
-				"⚠️ No hay datos de transacción válidos. Redirigiendo...",
-			);
+			console.warn("⚠️ No hay datos de transacción válidos. Redirigiendo...");
 			const redirectPath = options.redirectPath || "/menu";
 			navigate(redirectPath, { replace: true });
 		}
-	}, [hasValidState, options.requireValidState, navigate, options.redirectPath]);
+	}, [
+		hasValidState,
+		options.requireValidState,
+		navigate,
+		options.redirectPath,
+	]);
 
 	// Precio por galón por defecto (puede venir del backend)
 	const DEFAULT_PRICE_PER_GALLON = 8040;
@@ -168,7 +171,8 @@ export const createTransactionState = (
 ): TransactionState => {
 	const DEFAULT_PRICE_PER_GALLON = 8040;
 
-	const pricePerGallon = params.fuel?.pricePerGallon || DEFAULT_PRICE_PER_GALLON;
+	const pricePerGallon =
+		params.fuel?.pricePerGallon || DEFAULT_PRICE_PER_GALLON;
 	const gallons = params.fuel?.gallons || params.amount / pricePerGallon;
 
 	return {

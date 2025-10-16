@@ -26,13 +26,8 @@ export const PaymentViewMaster: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 
 	// Obtener contexto de transacción
-	const {
-		transactionType,
-		amount,
-		vehicleData,
-		currentState,
-		hasValidState,
-	} = useTransactionContext({ requireValidState: true });
+	const { transactionType, amount, vehicleData, currentState, hasValidState } =
+		useTransactionContext({ requireValidState: true });
 
 	// Estado simple para navegación entre vistas
 	const [currentView, setCurrentView] = useState<1 | 2>(1);

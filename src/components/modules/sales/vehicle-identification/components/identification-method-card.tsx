@@ -1,6 +1,6 @@
-import { CheckCircle, Loader2, CreditCard, Key, Keyboard } from "lucide-react";
+import { CheckCircle, CreditCard, Key, Keyboard, Loader2 } from "lucide-react";
+import { getCardClasses, HMI_COLORS } from "@/lib/config/hmi-styles-config";
 import type { IdentificationMethod } from "@/lib/hooks/use-transaction-context";
-import { HMI_COLORS, getCardClasses } from "@/lib/config/hmi-styles-config";
 
 export interface IdentificationMethodCardProps {
 	method: IdentificationMethod;

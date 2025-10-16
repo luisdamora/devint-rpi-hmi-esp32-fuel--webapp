@@ -2,11 +2,15 @@ import { ArrowRight, CheckCircle, DollarSign, Home } from "lucide-react";
 import React from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SideTile } from "@/components/shared/sales/side-tile";
+import { HMI_LAYOUT } from "@/lib/config/hmi-styles-config";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import type { TransactionType } from "@/lib/hooks/use-transaction-context";
-import { IdentificationFields, PaymentModeSelector, TransactionSummaryHeader } from "../components";
+import {
+	IdentificationFields,
+	PaymentModeSelector,
+	TransactionSummaryHeader,
+} from "../components";
 import { usePaymentForm } from "../hooks";
-import { HMI_LAYOUT } from "@/lib/config/hmi-styles-config";
 
 /**
  * Props adicionales para integración con PaymentViewMaster
