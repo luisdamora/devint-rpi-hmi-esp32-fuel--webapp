@@ -4,6 +4,7 @@ import { AmountDisplay } from "@/components/shared/sales/amount-display";
 import { Keypad } from "@/components/shared/sales/keypad";
 import { SaleSidebar } from "@/components/shared/sales/sale-sidebar";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { createTransactionState } from "@/lib/hooks/use-transaction-context";
 import type { PaymentMode } from "./components/action-buttons";
 import { ActionButtons } from "./components/action-buttons";
 import { useCashSaleCalculator } from "./hooks/use-cash-sale-calculator";
@@ -12,8 +13,13 @@ export const CashSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 	const [activeMode, setActiveMode] = useState<PaymentMode>("cash");
 	const [isAnimating, setIsAnimating] = useState(true);
-	const { displayMoney, handleNumber, handleTripleZero, handleClear } =
-		useCashSaleCalculator();
+	const {
+		value,
+		displayMoney,
+		handleNumber,
+		handleTripleZero,
+		handleClear,
+	} = useCashSaleCalculator();
 
 	useEffect(() => {
 		// Detener la animación después de 5 segundos
@@ -31,6 +37,24 @@ export const CashSaleViewComponent: React.FC = () => {
 
 	const handleTripleZeroWithMode = (mode: PaymentMode) => {
 		handleTripleZero(mode);
+	};
+
+	const handleEnterWithState = () => {
+		const numericValue = Number(value || 0);
+
+		if (numericValue > 0) {
+			// Mapear modo: "cash" -> "cash", "volume" -> se trata como "cash"
+			// El modo "volume" es para preset por galones, pero el payment es en efectivo
+			const transactionState = createTransactionState({
+				transactionType: "CONTADO",
+				amount: numericValue,
+				paymentMode: "cash", // Por defecto efectivo para contado
+			});
+
+			navigateTo("payment", { state: transactionState });
+		} else {
+			console.warn("⚠️ Debe ingresar un monto válido antes de continuar");
+		}
 	};
 
 	return (
@@ -57,19 +81,8 @@ export const CashSaleViewComponent: React.FC = () => {
 						<Keypad
 							onNumber={handleNumber}
 							onClear={handleClear}
-							onEnter={() => navigateTo("payment")}
+							onEnter={handleEnterWithState}
 						/>
-						{/* TODO: Integración futura con PaymentView
-									Cuando el usuario presione ENTER después de ingresar un monto:
-									1. Validar que displayMoney > 0
-									2. Navegar a payment-view con los datos de la venta:
-										 navigateTo("payment", {
-											 totalAmount: displayMoney,
-											 mode: activeMode
-										 });
-									3. PaymentView procesará el pago y guardará la venta
-									Esto reemplazará el actual navigateBack()
-							*/}
 					</div>
 				</div>
 			</div>

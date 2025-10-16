@@ -3,8 +3,10 @@ import React from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SideTile } from "@/components/shared/sales/side-tile";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import { IdentificationFields, PaymentModeSelector } from "../components";
+import type { TransactionType } from "@/lib/hooks/use-transaction-context";
+import { IdentificationFields, PaymentModeSelector, TransactionSummaryHeader } from "../components";
 import { usePaymentForm } from "../hooks";
+import { HMI_LAYOUT } from "@/lib/config/hmi-styles-config";
 
 /**
  * Props adicionales para integración con PaymentViewMaster
@@ -34,6 +36,10 @@ export interface PaymentInfoViewProps {
 	) => void;
 	/** Total amount prop */
 	totalAmount?: number;
+	/** Tipo de transacción (CONTADO/CREDITO) */
+	transactionType?: TransactionType;
+	/** Galones actuales calculados */
+	currentGallons?: number;
 	/** Si el modo está bloqueado (no se puede cambiar) */
 	isModeLocked?: boolean;
 	/** Mensaje a mostrar cuando el modo está bloqueado */
@@ -62,6 +68,8 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 	sharedFormData,
 	onUpdateSharedData,
 	totalAmount = 100000, // $100,000 COP
+	transactionType = "CONTADO",
+	currentGallons = 12.45,
 	isModeLocked = false,
 	lockMessage,
 }) => {
@@ -125,16 +133,13 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 					</div>
 
 					{/* Columnas 2-4: Información del cliente */}
-					<div className="col-span-3 space-y-6 overflow-y-auto max-h-screen pb-8">
-						{/* Encabezado de la vista */}
-						{/* <div className="text-center space-y-2">
-							<h1 className="text-3xl font-bold text-gray-800">
-								Información del Cliente
-							</h1>
-							<p className="text-lg text-gray-600">
-								Paso 1 de 2: Complete los datos del vehículo y cliente
-							</p>
-						</div>
+					<div className="col-span-3 space-y-4 overflow-y-auto max-h-screen pb-8">
+						{/* Header consolidado con estado de transacción */}
+						<TransactionSummaryHeader
+							transactionType={transactionType}
+							amount={totalAmount}
+							gallons={currentGallons}
+						/>
 
 						{/* Selector de modo de pago - posición prominente */}
 						<PaymentModeSelector

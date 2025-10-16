@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { useTransactionContext } from "@/lib/hooks/use-transaction-context";
 import { PaymentInfoView } from "./views/payment-info-view";
 import { PaymentMethodsView } from "./views/payment-methods-view";
 
@@ -24,6 +25,15 @@ import { PaymentMethodsView } from "./views/payment-methods-view";
 export const PaymentViewMaster: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 
+	// Obtener contexto de transacción
+	const {
+		transactionType,
+		amount,
+		vehicleData,
+		currentState,
+		hasValidState,
+	} = useTransactionContext({ requireValidState: true });
+
 	// Estado simple para navegación entre vistas
 	const [currentView, setCurrentView] = useState<1 | 2>(1);
 
@@ -31,9 +41,10 @@ export const PaymentViewMaster: React.FC = () => {
 	const [isModeLocked, setIsModeLocked] = useState(false);
 
 	// Estado compartido para datos del formulario
+	// Pre-cargar placa si viene desde vehicle-identification
 	const [sharedFormData, setSharedFormData] = useState({
-		mode: "CONTADO" as "CONTADO" | "CREDITO",
-		placa: "",
+		mode: transactionType,
+		placa: vehicleData?.placa || "",
 		idFacturaElectronica: "",
 		idPuntosColombia: "",
 		hasCoupon: false,
@@ -124,6 +135,9 @@ export const PaymentViewMaster: React.FC = () => {
 						onUpdateSharedData={updateSharedData}
 						isModeLocked={isModeLocked}
 						lockMessage="No se puede cambiar el modo una vez iniciada la transacción"
+						totalAmount={amount}
+						transactionType={transactionType}
+						currentGallons={currentState.gallons}
 					/>
 				) : (
 					<PaymentMethodsView

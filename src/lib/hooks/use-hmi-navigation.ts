@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate, type NavigateOptions } from "react-router";
 
 /**
  * Hook personalizado para navegación en el sistema HMI
@@ -11,9 +11,10 @@ export function useHMINavigation() {
 		/**
 		 * Navega a una vista específica del HMI
 		 * @param viewId - ID de la vista (splash, menu, login, etc.)
+		 * @param options - Opciones de navegación (incluye state para transferir datos)
 		 */
-		navigateTo: (viewId: string) => {
-			navigate(`/${viewId}`);
+		navigateTo: (viewId: string, options?: NavigateOptions) => {
+			navigate(`/${viewId}`, options);
 		},
 
 		/**

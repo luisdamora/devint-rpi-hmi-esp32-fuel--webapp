@@ -4,6 +4,7 @@ import { AmountDisplay } from "@/components/shared/sales/amount-display";
 import { Keypad } from "@/components/shared/sales/keypad";
 import { SaleSidebar } from "@/components/shared/sales/sale-sidebar";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
+import { createTransactionState } from "@/lib/hooks/use-transaction-context";
 import { useCashSaleCalculator } from "../cash-sale/hooks/use-cash-sale-calculator";
 
 /**
@@ -20,8 +21,13 @@ import { useCashSaleCalculator } from "../cash-sale/hooks/use-cash-sale-calculat
 export const CreditSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 	const [isAnimating, setIsAnimating] = useState(true);
-	const { displayMoney, handleNumber, handleTripleZero, handleClear } =
-		useCashSaleCalculator();
+	const {
+		value,
+		displayMoney,
+		handleNumber,
+		handleTripleZero,
+		handleClear,
+	} = useCashSaleCalculator();
 
 	useEffect(() => {
 		// Detener la animación después de 5 segundos
@@ -33,16 +39,19 @@ export const CreditSaleViewComponent: React.FC = () => {
 	}, []);
 
 	const handleEnter = () => {
-		// Navegar a payment-view con modo CRÉDITO y monto ingresado
-		navigateTo("payment");
-		// TODO: Pasar datos vía state cuando se implemente navegación con estado
-		// navigateTo("payment", {
-		//   state: {
-		//     totalAmount: displayMoney,
-		//     mode: "CREDITO",
-		//     fromPreset: true
-		//   }
-		// });
+		const numericValue = Number(value || 0);
+
+		if (numericValue > 0) {
+			// Para crédito, primero navegar a identificación de vehículo
+			const transactionState = createTransactionState({
+				transactionType: "CREDITO",
+				amount: numericValue,
+			});
+
+			navigateTo("vehicle-identification", { state: transactionState });
+		} else {
+			console.warn("⚠️ Debe ingresar un monto válido antes de continuar");
+		}
 	};
 
 	return (

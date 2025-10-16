@@ -27,3 +27,5 @@ export type { SaveButtonProps } from "./save-button";
 export { SaveButton } from "./save-button";
 export type { ViewNavigationProps } from "./view-navigation";
 export { ViewNavigation } from "./view-navigation";
+export type { TransactionSummaryHeaderProps } from "./transaction-summary-header";
+export { TransactionSummaryHeader } from "./transaction-summary-header";
