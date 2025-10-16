@@ -46,7 +46,7 @@ export const CashSaleViewComponent: React.FC = () => {
 				paymentMode: "cash", // Por defecto efectivo para contado
 			});
 
-			navigateTo("payment", { state: transactionState });
+			navigateTo("payment/cash", { state: transactionState });
 		} else {
 			console.warn("⚠️ Debe ingresar un monto válido antes de continuar");
 		}

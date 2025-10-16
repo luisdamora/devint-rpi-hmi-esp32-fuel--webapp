@@ -87,7 +87,7 @@ export const VehicleIdentificationView: React.FC = () => {
 	// Continuar a payment con datos del vehículo
 	const handleContinue = () => {
 		if (isIdentified && vehicleData && hasValidState) {
-			navigateTo("payment", {
+			navigateTo("payment/credit", {
 				state: {
 					transactionType,
 					amount,

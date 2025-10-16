@@ -6,6 +6,22 @@ import { PaymentInfoView } from "./views/payment-info-view";
 import { PaymentMethodsView } from "./views/payment-methods-view";
 
 /**
+ * @deprecated ESTE COMPONENTE HA SIDO DEPRECADO
+ * 
+ * Usar en su lugar:
+ * - PaymentCashView (/payment/cash) - Para transacciones de CONTADO
+ * - PaymentCreditView (/payment/credit) - Para transacciones de CRÉDITO
+ * 
+ * Razón de deprecación:
+ * - El selector de modo ha sido eliminado
+ * - Ahora hay rutas separadas por tipo de transacción
+ * - Cada ruta maneja su flujo específico de forma aislada
+ * 
+ * Este archivo se mantiene solo por compatibilidad temporal.
+ * NO USAR EN NUEVAS IMPLEMENTACIONES.
+ * 
+ * ---
+ * 
  * PaymentViewMaster - Componente maestro que gestiona las dos vistas de pago
  *
  * Este componente actúa como orquestador entre las dos vistas especializadas:
@@ -128,8 +144,7 @@ export const PaymentViewMaster: React.FC = () => {
 						onProceedToPayment={handleNext}
 						sharedFormData={sharedFormData}
 						onUpdateSharedData={updateSharedData}
-						isModeLocked={isModeLocked}
-						lockMessage="No se puede cambiar el modo una vez iniciada la transacción"
+						showModeSelector={true}
 						totalAmount={amount}
 						transactionType={transactionType}
 						currentGallons={currentState.gallons}

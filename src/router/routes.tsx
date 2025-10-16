@@ -12,7 +12,8 @@ import { PointsView } from "@/components/modules/loyalty/points-view";
 import { MainMenu } from "@/components/modules/main-menu/main-menu";
 import { CashSaleViewComponent } from "@/components/modules/sales/cash-sale/cash-sale-view";
 import { CreditSaleViewComponent } from "@/components/modules/sales/credit-sale/credit-sale-view";
-import { PaymentViewMaster } from "@/components/modules/sales/payment-view";
+import { PaymentCashView } from "@/components/modules/sales/payment-view/payment-cash-view";
+import { PaymentCreditView } from "@/components/modules/sales/payment-view/payment-credit-view";
 import { TransactionStatusView } from "@/components/modules/sales/transaction-status/transaction-status-view";
 import { VehicleIdentificationView } from "@/components/modules/sales/vehicle-identification/vehicle-identification-view";
 import { UtilitiesView } from "@/components/modules/utilities/utilities-view";
@@ -57,7 +58,16 @@ export const routes: RouteObject[] = [
 			},
 			{
 				path: "payment",
-				element: <PaymentViewMaster />,
+				children: [
+					{
+						path: "cash",
+						element: <PaymentCashView />,
+					},
+					{
+						path: "credit",
+						element: <PaymentCreditView />,
+					},
+				],
 			},
 			{
 				path: "transaction-status",

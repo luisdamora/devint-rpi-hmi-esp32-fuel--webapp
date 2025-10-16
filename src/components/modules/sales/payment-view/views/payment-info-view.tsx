@@ -13,7 +13,7 @@ import {
 import { usePaymentForm } from "../hooks";
 
 /**
- * Props adicionales para integración con PaymentViewMaster
+ * Props para PaymentInfoView - Vista de información del cliente
  */
 export interface PaymentInfoViewProps {
 	/** Callback para proceder a métodos de pago */
@@ -44,10 +44,10 @@ export interface PaymentInfoViewProps {
 	transactionType?: TransactionType;
 	/** Galones actuales calculados */
 	currentGallons?: number;
-	/** Si el modo está bloqueado (no se puede cambiar) */
-	isModeLocked?: boolean;
-	/** Mensaje a mostrar cuando el modo está bloqueado */
-	lockMessage?: string;
+	/** Mostrar selector de modo (CONTADO/CREDITO). Default: false */
+	showModeSelector?: boolean;
+	/** Placa pre-cargada (para crédito desde vehicle-identification) */
+	preloadedPlaca?: string;
 }
 
 /**
@@ -74,8 +74,8 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 	totalAmount = 100000, // $100,000 COP
 	transactionType = "CONTADO",
 	currentGallons = 12.45,
-	isModeLocked = false,
-	lockMessage,
+	showModeSelector = false,
+	preloadedPlaca,
 }) => {
 	const { navigateTo } = useHMINavigation();
 
@@ -90,6 +90,11 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 		setHasCoupon,
 		setIdPromocion,
 	} = usePaymentForm(totalAmount);
+
+	// Pre-cargar placa si viene desde vehicle-identification
+	if (preloadedPlaca && formData.placa !== preloadedPlaca) {
+		setPlaca(preloadedPlaca);
+	}
 
 	// Validar que tenemos información básica antes de continuar
 	const canProceedToPayment = () => {
@@ -145,13 +150,13 @@ export const PaymentInfoView: React.FC<PaymentInfoViewProps> = ({
 							gallons={currentGallons}
 						/>
 
-						{/* Selector de modo de pago - posición prominente */}
-						<PaymentModeSelector
-							mode={formData.mode}
-							onModeChange={setMode}
-							disabled={isModeLocked}
-							lockMessage={lockMessage}
-						/>
+						{/* Selector de modo de pago (solo si showModeSelector es true) */}
+						{showModeSelector && (
+							<PaymentModeSelector
+								mode={formData.mode}
+								onModeChange={setMode}
+							/>
+						)}
 
 						{/* Campos de identificación */}
 						<div className="rounded-lg px-4 py-2 shadow-sm border-2 border-gray-200">
