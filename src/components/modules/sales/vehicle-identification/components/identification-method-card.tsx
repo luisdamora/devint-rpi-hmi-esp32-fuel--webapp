@@ -8,7 +8,7 @@ export interface IdentificationMethodCardProps {
 	isActive: boolean;
 	isIdentified: boolean;
 	isReading?: boolean;
-	vehicleId?: string;
+	placa?: string;
 	onSelect: () => void;
 }
 
@@ -40,7 +40,7 @@ export const IdentificationMethodCard: React.FC<
 	isActive,
 	isIdentified,
 	isReading = false,
-	vehicleId,
+	placa,
 	onSelect,
 }) => {
 	// Determinar ícono según método
@@ -69,11 +69,16 @@ export const IdentificationMethodCard: React.FC<
 
 	// Determinar contenido del status
 	const getStatusContent = () => {
-		if (isIdentified && vehicleId) {
+		if (isIdentified && placa) {
 			return (
-				<div className="flex items-center gap-2 text-green-700 font-bold">
-					<CheckCircle size={20} />
-					<span>VEHICULO IDENTIFICADO</span>
+				<div className="flex items-center gap-3">
+					<div className="flex items-center gap-2 text-green-700 font-bold">
+						<CheckCircle size={20} />
+						<span>IDENTIFICADO</span>
+					</div>
+					<div className="text-gray-800 font-mono text-xl font-bold tracking-wider">
+						{placa}
+					</div>
 				</div>
 			);
 		}

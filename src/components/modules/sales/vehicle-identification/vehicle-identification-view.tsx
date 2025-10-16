@@ -2,7 +2,7 @@ import { ArrowRight, CreditCard, Home } from "lucide-react";
 import { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SideTile } from "@/components/shared/sales/side-tile";
-import { TouchInput } from "@/components/shared/touch-input";
+import { TouchInputModal } from "@/components/shared/touch-input";
 import {
 	getButtonClasses,
 	HMI_COLORS,
@@ -53,8 +53,8 @@ export const VehicleIdentificationView: React.FC = () => {
 		resetIdentification,
 	} = useVehicleIdentification();
 
-	// Estado para mostrar input manual y placa temporal
-	const [showManualInput, setShowManualInput] = useState(false);
+	// Estado para input manual
+	const [isManualModalOpen, setIsManualModalOpen] = useState(false);
 	const [manualPlaca, setManualPlaca] = useState("");
 
 	// Manejar selección de método
@@ -65,11 +65,9 @@ export const VehicleIdentificationView: React.FC = () => {
 		setActiveMethod(method);
 		setManualPlaca(""); // Reset placa
 
-		// Mostrar input si es manual
+		// Si es manual, abrir modal directamente
 		if (method === "MANUAL") {
-			setShowManualInput(true);
-		} else {
-			setShowManualInput(false);
+			setIsManualModalOpen(true);
 		}
 	};
 
@@ -78,13 +76,11 @@ export const VehicleIdentificationView: React.FC = () => {
 		// Convertir a mayúsculas y limitar a 6 caracteres
 		const upperValue = value.toUpperCase();
 		setManualPlaca(upperValue);
-	};
 
-	// Manejar confirmación de placa manual
-	const handleManualConfirm = () => {
-		const success = identifyManual(manualPlaca);
-		if (success) {
-			setShowManualInput(false);
+		// Auto-identificar si el formato es válido
+		if (upperValue.length === 6 && validatePlaca(upperValue)) {
+			identifyManual(upperValue);
+			setIsManualModalOpen(false);
 		}
 	};
 
@@ -151,7 +147,7 @@ export const VehicleIdentificationView: React.FC = () => {
 									isIdentified && vehicleData?.identificationType === "RFID"
 								}
 								isReading={isReading && activeMethod === "RFID"}
-								vehicleId={vehicleData?.vehicleId}
+								placa={vehicleData?.placa}
 								onSelect={() => handleMethodSelect("RFID")}
 							/>
 
@@ -164,7 +160,7 @@ export const VehicleIdentificationView: React.FC = () => {
 									isIdentified && vehicleData?.identificationType === "IBUTTON"
 								}
 								isReading={isReading && activeMethod === "IBUTTON"}
-								vehicleId={vehicleData?.vehicleId}
+								placa={vehicleData?.placa}
 								onSelect={() => handleMethodSelect("IBUTTON")}
 							/>
 
@@ -177,55 +173,25 @@ export const VehicleIdentificationView: React.FC = () => {
 									isIdentified && vehicleData?.identificationType === "MANUAL"
 								}
 								isReading={false}
-								vehicleId={vehicleData?.vehicleId}
+								placa={vehicleData?.placa}
 								onSelect={() => handleMethodSelect("MANUAL")}
 							/>
-
-							{/* Input manual táctil (condicional) */}
-							{showManualInput &&
-								activeMethod === "MANUAL" &&
-								!isIdentified && (
-									<div
-										className="mt-4 p-4 rounded-lg border-2 space-y-4"
-										style={{
-											backgroundColor: HMI_COLORS.info + "20",
-											borderColor: HMI_COLORS.info,
-										}}
-									>
-										<div className="space-y-3">
-											<TouchInput
-												value={manualPlaca}
-												onChange={handlePlacaChange}
-												label="PLACA DEL VEHÍCULO *"
-												placeholder="Ej: ABC123"
-												maxLength={6}
-												keyboardMode="full"
-												useFixedDimensions
-											/>
-
-											{/* Hint de formato */}
-											{manualPlaca.length < 6 && (
-												<p
-													className="text-sm px-2"
-													style={{ color: HMI_COLORS.textSecondary }}
-												>
-													Formato: 3 letras + 3 números (ej: ABC123)
-												</p>
-											)}
-
-											{/* Botón de confirmar */}
-											<button
-												type="button"
-												onClick={handleManualConfirm}
-												disabled={!validatePlaca(manualPlaca)}
-												className={`${getButtonClasses("lg", "primary")} w-full`}
-											>
-												CONFIRMAR PLACA
-											</button>
-										</div>
-									</div>
-								)}
 						</div>
+
+						{/* Modal de TouchInput para ingreso manual */}
+						<TouchInputModal
+							isOpen={isManualModalOpen}
+							value={manualPlaca}
+							title="PLACA DEL VEHÍCULO"
+							placeholder="Ej: ABC123"
+							type="text"
+							maxLength={6}
+							onChange={handlePlacaChange}
+							onClose={() => setIsManualModalOpen(false)}
+							onConfirm={() => setIsManualModalOpen(false)}
+							useFixedDimensions
+							keyboardMode="full"
+						/>
 
 						{/* Error global */}
 						{error && (
@@ -246,7 +212,7 @@ export const VehicleIdentificationView: React.FC = () => {
 						)}
 
 						{/* Información del vehículo identificado */}
-						{isIdentified && vehicleData && (
+						{/* {isIdentified && vehicleData && (
 							<div
 								className="mt-6 p-4 rounded-lg border-2"
 								style={{
@@ -277,7 +243,7 @@ export const VehicleIdentificationView: React.FC = () => {
 									</div>
 								</div>
 							</div>
-						)}
+						)} */}
 
 						{/* Botón continuar */}
 						<div className="mt-6 flex justify-center">
