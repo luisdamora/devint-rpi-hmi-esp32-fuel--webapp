@@ -22,23 +22,21 @@ import { useVehicleIdentification } from "./hooks";
  * - IBUTTON: Lectura automática de llave iButton
  *
  * Flujo:
- * 1. Usuario llega desde credit-sale con monto
+ * 1. Usuario llega desde menú principal (botón CREDITO)
  * 2. Selecciona método de identificación
  * 3. Identifica vehículo
- * 4. Continúa a payment-view con datos del vehículo
+ * 4. Continúa a credit-sale para ingresar monto
  *
  * @example
  * Navegación:
- * credit-sale → vehicle-identification → payment
+ * menu (CREDITO) → vehicle-identification → credit-sale → payment/credit
  */
 export const VehicleIdentificationView: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 
-	// Obtener datos de la transacción desde navegación anterior
-	const { amount, transactionType, hasValidState } = useTransactionContext({
-		requireValidState: true,
-		redirectPath: "/credit-sale",
-	});
+	// Esta es la primera vista del flujo de crédito, no requiere estado previo
+	// Solo verificamos si hay datos opcionales de navegación anterior
+	const transactionType = "CREDITO";
 
 	// Hook de identificación
 	const {
@@ -84,27 +82,20 @@ export const VehicleIdentificationView: React.FC = () => {
 		}
 	};
 
-	// Continuar a payment con datos del vehículo
+	// Continuar a credit-sale para ingresar monto con datos del vehículo
 	const handleContinue = () => {
-		if (isIdentified && vehicleData && hasValidState) {
-			navigateTo("payment/credit", {
+		if (isIdentified && vehicleData) {
+			navigateTo("credit-sale", {
 				state: {
-					transactionType,
-					amount,
+					transactionType: "CREDITO",
 					vehicleData,
 					timestamp: new Date().toISOString(),
-					fuel: {
-						gallons: amount / 8040,
-						pricePerGallon: 8040,
-					},
 				},
 			});
 		}
 	};
 
-	if (!hasValidState) {
-		return null; // El hook redirige automáticamente
-	}
+	// No hay validación de estado previo porque este es el primer paso del flujo
 
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
@@ -253,7 +244,7 @@ export const VehicleIdentificationView: React.FC = () => {
 								disabled={!isIdentified}
 								className={`${getButtonClasses("lg", "primary")} min-w-[300px]`}
 							>
-								<span>CONTINUAR A PAGO</span>
+								<span>CONTINUAR A INGRESO DE MONTO</span>
 								<ArrowRight size={24} className="ml-2" />
 							</button>
 						</div>

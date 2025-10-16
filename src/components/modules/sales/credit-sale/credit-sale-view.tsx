@@ -4,25 +4,36 @@ import { AmountDisplay } from "@/components/shared/sales/amount-display";
 import { Keypad } from "@/components/shared/sales/keypad";
 import { SaleSidebar } from "@/components/shared/sales/sale-sidebar";
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
-import { createTransactionState } from "@/lib/hooks/use-transaction-context";
+import { createTransactionState, useTransactionContext } from "@/lib/hooks/use-transaction-context";
 import { useCashSaleCalculator } from "../cash-sale/hooks/use-cash-sale-calculator";
 
 /**
  * CreditSaleViewComponent - Vista de preset para ventas a crédito
  *
  * Similar a CashSaleView pero específicamente para modo CRÉDITO.
- * Permite ingresar el monto de la venta antes de proceder al flujo de pago.
+ * Permite ingresar el monto de la venta después de identificar el vehículo.
+ *
+ * Flujo:
+ * 1. Usuario llega desde vehicle-identification con datos del vehículo
+ * 2. Ingresa el monto de la venta
+ * 3. Continúa a payment/credit con monto + vehicleData
  *
  * Características:
  * - Teclado numérico para ingreso de monto
  * - Botón "TANQUE LLENO" para preset rápido
- * - Navegación directa a payment-view con modo CRÉDITO pre-configurado
+ * - Validación de vehicleData desde paso anterior
  */
 export const CreditSaleViewComponent: React.FC = () => {
 	const { navigateTo } = useHMINavigation();
 	const [isAnimating, setIsAnimating] = useState(true);
 	const { value, displayMoney, handleNumber, handleTripleZero, handleClear } =
 		useCashSaleCalculator();
+
+	// Obtener datos del vehículo desde vehicle-identification
+	const { vehicleData, hasValidState } = useTransactionContext({
+		requireValidState: true,
+		redirectPath: "/vehicle-identification",
+	});
 
 	useEffect(() => {
 		// Detener la animación después de 5 segundos
@@ -36,23 +47,40 @@ export const CreditSaleViewComponent: React.FC = () => {
 	const handleEnter = () => {
 		const numericValue = Number(value || 0);
 
-		if (numericValue > 0) {
-			// Para crédito, primero navegar a identificación de vehículo
+		if (numericValue > 0 && vehicleData) {
+			// Navegar a payment/credit con monto + vehicleData
 			const transactionState = createTransactionState({
 				transactionType: "CREDITO",
 				amount: numericValue,
+				vehicleData: vehicleData,
 			});
 
-			navigateTo("vehicle-identification", { state: transactionState });
+			navigateTo("payment/credit", { state: transactionState });
+		} else if (!vehicleData) {
+			console.warn("⚠️ No hay datos del vehículo. Redirigiendo...");
+			navigateTo("vehicle-identification");
 		} else {
 			console.warn("⚠️ Debe ingresar un monto válido antes de continuar");
 		}
 	};
 
+	// Mostrar indicador si no hay datos del vehículo
+	if (!hasValidState || !vehicleData) {
+		return null; // El hook redirige automáticamente
+	}
+
 	return (
 		<HMIContainer showHeader={false} showFooter={false}>
 			<div className="w-full h-full flex items-center justify-center px-2">
 				<div className="grid grid-cols-4 gap-4 w-full max-w-6xl">
+					{/* Indicador de vehículo identificado */}
+					<div className="col-span-4 mb-2">
+						<div className="bg-green-500/20 border-2 border-green-500 rounded-lg p-3 text-center">
+							<p className="text-green-700 font-bold text-lg">
+								✅ VEHÍCULO IDENTIFICADO: {vehicleData.placa}
+							</p>
+						</div>
+					</div>
 					{/* Sidebar con crédito e inicio */}
 					<SaleSidebar
 						title="CRÉDITO"

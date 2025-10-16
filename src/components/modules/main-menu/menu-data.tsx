@@ -21,7 +21,7 @@ export const useMenuTilesData = (): MenuTilesData => {
 			key: "credito",
 			title: "CREDITO",
 			icon: <CreditCard size={64} />,
-			action: () => navigateTo("credit-sale"),
+			action: () => navigateTo("vehicle-identification"),
 		},
 		{
 			key: "fidelizacion",
