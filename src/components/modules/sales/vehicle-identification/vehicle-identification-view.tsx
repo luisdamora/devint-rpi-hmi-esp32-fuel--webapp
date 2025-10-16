@@ -185,11 +185,13 @@ export const VehicleIdentificationView: React.FC = () => {
 							{showManualInput &&
 								activeMethod === "MANUAL" &&
 								!isIdentified && (
-									<div className="mt-4 p-4 rounded-lg border-2 space-y-4"
+									<div
+										className="mt-4 p-4 rounded-lg border-2 space-y-4"
 										style={{
 											backgroundColor: HMI_COLORS.info + "20",
 											borderColor: HMI_COLORS.info,
-										}}>
+										}}
+									>
 										<div className="space-y-3">
 											<TouchInput
 												value={manualPlaca}
@@ -200,10 +202,13 @@ export const VehicleIdentificationView: React.FC = () => {
 												keyboardMode="full"
 												useFixedDimensions
 											/>
-											
+
 											{/* Hint de formato */}
 											{manualPlaca.length < 6 && (
-												<p className="text-sm px-2" style={{ color: HMI_COLORS.textSecondary }}>
+												<p
+													className="text-sm px-2"
+													style={{ color: HMI_COLORS.textSecondary }}
+												>
 													Formato: 3 letras + 3 números (ej: ABC123)
 												</p>
 											)}
@@ -220,25 +225,25 @@ export const VehicleIdentificationView: React.FC = () => {
 										</div>
 									</div>
 								)}
-							</div>
+						</div>
 
-							{/* Error global */}
-							{error && (
-								<div
-									className="mt-4 p-3 rounded-lg border-2"
-									style={{
-										backgroundColor: HMI_COLORS.error + "20",
-										borderColor: HMI_COLORS.error,
-									}}
+						{/* Error global */}
+						{error && (
+							<div
+								className="mt-4 p-3 rounded-lg border-2"
+								style={{
+									backgroundColor: HMI_COLORS.error + "20",
+									borderColor: HMI_COLORS.error,
+								}}
+							>
+								<p
+									className="text-center font-semibold"
+									style={{ color: HMI_COLORS.error }}
 								>
-									<p
-										className="text-center font-semibold"
-										style={{ color: HMI_COLORS.error }}
-									>
-										{error}
-									</p>
-								</div>
-							)}
+									{error}
+								</p>
+							</div>
+						)}
 
 						{/* Información del vehículo identificado */}
 						{isIdentified && vehicleData && (
