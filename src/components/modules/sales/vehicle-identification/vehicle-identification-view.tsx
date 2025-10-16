@@ -124,12 +124,12 @@ export const VehicleIdentificationView: React.FC = () => {
 					<div className={HMI_LAYOUT.content}>
 						{/* Header */}
 						<div className="text-center mb-6">
-							<h1 className="text-3xl font-bold text-gray-800">
+							<h1 className="text-3xl font-bold text-white">
 								IDENTIFICACION DE VEHICULO
 							</h1>
-							<p className="text-lg text-gray-600 mt-2">
+							{/* <p className="text-lg text-gray-600 mt-2">
 								Seleccione el método para identificar el vehículo
-							</p>
+							</p> */}
 						</div>
 
 						{/* Métodos de identificación */}
@@ -252,14 +252,14 @@ export const VehicleIdentificationView: React.FC = () => {
 						</div>
 
 						{/* Hint */}
-						{!isIdentified && (
+						{/* {!isIdentified && (
 							<p
 								className="mt-4 text-center text-sm"
 								style={{ color: HMI_COLORS.textSecondary }}
 							>
 								Identifique el vehículo para continuar con la transacción
 							</p>
-						)}
+						)} */}
 					</div>
 				</div>
 			</div>
