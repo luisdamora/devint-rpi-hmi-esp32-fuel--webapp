@@ -2,6 +2,7 @@ import { ArrowRight, CreditCard, Home } from "lucide-react";
 import { useState } from "react";
 import { HMIContainer } from "@/components/layouts/hmi-container";
 import { SideTile } from "@/components/shared/sales/side-tile";
+import { TouchInput } from "@/components/shared/touch-input";
 import {
 	getButtonClasses,
 	HMI_COLORS,
@@ -10,7 +11,6 @@ import {
 import { useHMINavigation } from "@/lib/hooks/use-hmi-navigation";
 import { useTransactionContext } from "@/lib/hooks/use-transaction-context";
 import { IdentificationMethodCard } from "./components/identification-method-card";
-import { ManualPlacaInput } from "./components/manual-placa-input";
 import { useVehicleIdentification } from "./hooks";
 
 /**
@@ -53,8 +53,9 @@ export const VehicleIdentificationView: React.FC = () => {
 		resetIdentification,
 	} = useVehicleIdentification();
 
-	// Estado para mostrar input manual
+	// Estado para mostrar input manual y placa temporal
 	const [showManualInput, setShowManualInput] = useState(false);
+	const [manualPlaca, setManualPlaca] = useState("");
 
 	// Manejar selección de método
 	const handleMethodSelect = (method: typeof activeMethod) => {
@@ -62,6 +63,7 @@ export const VehicleIdentificationView: React.FC = () => {
 
 		resetIdentification();
 		setActiveMethod(method);
+		setManualPlaca(""); // Reset placa
 
 		// Mostrar input si es manual
 		if (method === "MANUAL") {
@@ -71,13 +73,19 @@ export const VehicleIdentificationView: React.FC = () => {
 		}
 	};
 
-	// Manejar identificación manual exitosa
-	const handleManualSubmit = (placa: string): boolean => {
-		const success = identifyManual(placa);
+	// Manejar cambio de placa manual
+	const handlePlacaChange = (value: string) => {
+		// Convertir a mayúsculas y limitar a 6 caracteres
+		const upperValue = value.toUpperCase();
+		setManualPlaca(upperValue);
+	};
+
+	// Manejar confirmación de placa manual
+	const handleManualConfirm = () => {
+		const success = identifyManual(manualPlaca);
 		if (success) {
 			setShowManualInput(false);
 		}
-		return success;
 	};
 
 	// Continuar a payment con datos del vehículo
@@ -173,36 +181,64 @@ export const VehicleIdentificationView: React.FC = () => {
 								onSelect={() => handleMethodSelect("MANUAL")}
 							/>
 
-							{/* Input manual (condicional) */}
+							{/* Input manual táctil (condicional) */}
 							{showManualInput &&
 								activeMethod === "MANUAL" &&
 								!isIdentified && (
-									<div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
-										<ManualPlacaInput
-											onSubmit={handleManualSubmit}
-											onValidate={validatePlaca}
-										/>
+									<div className="mt-4 p-4 rounded-lg border-2 space-y-4"
+										style={{
+											backgroundColor: HMI_COLORS.info + "20",
+											borderColor: HMI_COLORS.info,
+										}}>
+										<div className="space-y-3">
+											<TouchInput
+												value={manualPlaca}
+												onChange={handlePlacaChange}
+												label="PLACA DEL VEHÍCULO *"
+												placeholder="Ej: ABC123"
+												maxLength={6}
+												keyboardMode="full"
+												useFixedDimensions
+											/>
+											
+											{/* Hint de formato */}
+											{manualPlaca.length < 6 && (
+												<p className="text-sm px-2" style={{ color: HMI_COLORS.textSecondary }}>
+													Formato: 3 letras + 3 números (ej: ABC123)
+												</p>
+											)}
+
+											{/* Botón de confirmar */}
+											<button
+												type="button"
+												onClick={handleManualConfirm}
+												disabled={!validatePlaca(manualPlaca)}
+												className={`${getButtonClasses("lg", "primary")} w-full`}
+											>
+												CONFIRMAR PLACA
+											</button>
+										</div>
 									</div>
 								)}
-						</div>
-
-						{/* Error global */}
-						{error && (
-							<div
-								className="mt-4 p-3 rounded-lg border-2"
-								style={{
-									backgroundColor: HMI_COLORS.error + "20",
-									borderColor: HMI_COLORS.error,
-								}}
-							>
-								<p
-									className="text-center font-semibold"
-									style={{ color: HMI_COLORS.error }}
-								>
-									{error}
-								</p>
 							</div>
-						)}
+
+							{/* Error global */}
+							{error && (
+								<div
+									className="mt-4 p-3 rounded-lg border-2"
+									style={{
+										backgroundColor: HMI_COLORS.error + "20",
+										borderColor: HMI_COLORS.error,
+									}}
+								>
+									<p
+										className="text-center font-semibold"
+										style={{ color: HMI_COLORS.error }}
+									>
+										{error}
+									</p>
+								</div>
+							)}
 
 						{/* Información del vehículo identificado */}
 						{isIdentified && vehicleData && (
