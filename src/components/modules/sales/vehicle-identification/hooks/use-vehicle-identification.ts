@@ -58,7 +58,7 @@ export const useVehicleIdentification = (): UseVehicleIdentificationReturn => {
 
 		// Simular lectura exitosa (90% probabilidad)
 		if (Math.random() > 0.1) {
-			const mockPlaca = "ABC" + Math.floor(Math.random() * 900 + 100);
+			const mockPlaca = `ABC${Math.floor(Math.random() * 900 + 100)}`;
 			setVehicleData({
 				placa: mockPlaca,
 				identificationType: "RFID",
@@ -87,7 +87,7 @@ export const useVehicleIdentification = (): UseVehicleIdentificationReturn => {
 
 		// Simular lectura exitosa (90% probabilidad)
 		if (Math.random() > 0.1) {
-			const mockPlaca = "DEF" + Math.floor(Math.random() * 900 + 100);
+			const mockPlaca = `DEF${Math.floor(Math.random() * 900 + 100)}`;
 			setVehicleData({
 				placa: mockPlaca,
 				identificationType: "IBUTTON",

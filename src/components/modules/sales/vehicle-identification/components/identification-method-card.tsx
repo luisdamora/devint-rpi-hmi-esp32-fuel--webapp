@@ -140,9 +140,9 @@ export const IdentificationMethodCard: React.FC<
 					style={{
 						backgroundColor:
 							cardState === "success"
-								? HMI_COLORS.success + "20"
+								? `${HMI_COLORS.success}20`
 								: cardState === "active"
-									? HMI_COLORS.info + "20"
+									? `${HMI_COLORS.info}20`
 									: HMI_COLORS.bg.medium,
 						color:
 							cardState === "success"

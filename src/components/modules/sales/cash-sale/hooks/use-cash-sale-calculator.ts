@@ -45,7 +45,7 @@ export const useCashSaleCalculator = (
 		} else if (mode === "volume") {
 			// Modo volumen: agregar punto decimal si no existe
 			if (!isDecimal && !value.includes(".")) {
-				setValue(value + ".");
+				setValue(`${value}.`);
 				setIsDecimal(true);
 			}
 		}
@@ -53,7 +53,7 @@ export const useCashSaleCalculator = (
 
 	const handleDecimal = (): void => {
 		if (!isDecimal) {
-			setValue(value + ".");
+			setValue(`${value}.`);
 			setIsDecimal(true);
 		}
 	};

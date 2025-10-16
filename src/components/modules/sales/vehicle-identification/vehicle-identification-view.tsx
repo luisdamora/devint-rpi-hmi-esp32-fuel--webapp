@@ -198,7 +198,7 @@ export const VehicleIdentificationView: React.FC = () => {
 							<div
 								className="mt-4 p-3 rounded-lg border-2"
 								style={{
-									backgroundColor: HMI_COLORS.error + "20",
+									backgroundColor: `${HMI_COLORS.error}20`,
 									borderColor: HMI_COLORS.error,
 								}}
 							>
@@ -216,7 +216,7 @@ export const VehicleIdentificationView: React.FC = () => {
 							<div
 								className="mt-6 p-4 rounded-lg border-2"
 								style={{
-									backgroundColor: HMI_COLORS.success + "20",
+									backgroundColor: `${HMI_COLORS.success}20`,
 									borderColor: HMI_COLORS.success,
 								}}
 							>
